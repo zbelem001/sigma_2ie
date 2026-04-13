@@ -1,0 +1,137 @@
+<app-menu></app-menu>
+<main class="ml-[240px] min-h-screen">
+  <header class="fixed top-0 right-0 w-[calc(100%-240px)] h-14 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200/20 dark:border-slate-800 z-40 flex justify-between items-center px-8">
+    <div class="flex items-center gap-4">
+      <span class="font-manrope text-sm text-slate-400">Accueil</span>
+      <span class="material-symbols-outlined text-slate-400 text-sm" data-icon="chevron_right">chevron_right</span>
+      <span class="text-[#1A3F6F] font-bold text-xs">Fournisseurs</span>
+      <div class="h-4 w-px bg-slate-200"></div>
+      <div class="relative">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+        <input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all focus:w-80" placeholder="Rechercher un fournisseur..." type="text" />
+      </div>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-4 text-slate-500">
+        <button class="hover:text-primary transition-colors">
+          <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+        </button>
+        <button class="hover:text-primary transition-colors">
+          <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+        </button>
+      </div>
+      <div class="h-8 w-px bg-slate-200"></div>
+      <h1 class="text-lg font-black text-[#001E40] font-headline">Référentiel Fournisseurs</h1>
+    </div>
+  </header>
+
+  <div class="pt-16 px-8 pb-12">
+    <section class="mb-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+      <div class="max-w-2xl">
+        <h2 class="text-heading-2 text-primary tracking-tight mb-2">Référentiel Fournisseurs</h2>
+        <p class="text-body text-slate-600">Gérez l'annuaire centralisé des prestataires agréés. Assurez le suivi de la conformité et la catégorisation des domaines d'expertise institutionnels.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button class="px-5 py-2.5 rounded-lg border border-outline-variant text-primary font-semibold text-sm hover:bg-surface-container transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">file_download</span>
+          Exporter CSV
+        </button>
+        <button class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary-container text-white font-semibold text-sm shadow-md hover:opacity-90 transition-opacity flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">add_business</span>
+          Nouveau Fournisseur
+        </button>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm">
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Total Fournisseurs</p>
+        <div class="flex items-baseline gap-2">
+          <span class="text-2xl font-black text-primary">1 248</span>
+          <span class="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">+12%</span>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-on-primary-container shadow-sm">
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Domaines</p>
+        <span class="text-2xl font-black text-primary">42</span>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-on-secondary-container shadow-sm">
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Actifs Externes</p>
+        <span class="text-2xl font-black text-primary">315</span>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-surface-tint shadow-sm">
+        <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Dernier Audit</p>
+        <span class="text-2xl font-black text-primary">24 Oct</span>
+      </div>
+    </section>
+
+    <section class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+      <div class="px-6 py-4 flex items-center justify-between bg-surface-container-low/30">
+        <div class="flex gap-2">
+          <button class="px-3 py-1.5 text-xs font-bold bg-white text-primary rounded-lg shadow-sm">Tous</button>
+          <button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:bg-white rounded-lg transition-all">Classique</button>
+          <button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:bg-white rounded-lg transition-all">Externe</button>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-xs text-slate-400 font-medium">Affichage 1-10 sur 1 248</span>
+          <div class="flex gap-1">
+            <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+            <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-surface-container border-b border-outline-variant/10">
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">ID</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Raison Sociale</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Domaine</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Contact</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant text-center">Statut</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-surface-container-low/50 transition-colors group">
+              <td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-001</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">SA</div>
+                  <div>
+                    <p class="text-sm font-bold text-primary">Sotuba Architecture</p>
+                    <p class="text-[10px] text-slate-400">Bamako, Mali</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">Génie Civil</td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">m.traore@sotuba-arch.com</td>
+              <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-500 uppercase tracking-tighter">Classique</span></td>
+              <td class="px-6 py-4 text-right">
+                <button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
+              </td>
+            </tr>
+            <tr class="hover:bg-surface-container-low/50 transition-colors">
+              <td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-002</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded bg-secondary-fixed flex items-center justify-center text-secondary font-bold text-xs">LP</div>
+                  <div>
+                    <p class="text-sm font-bold text-primary">LaboPro Services</p>
+                    <p class="text-[10px] text-slate-400">Ouagadougou, BF</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">Fournitures IT</td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">a.diallo@labopro.com</td>
+              <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-[#144685] uppercase tracking-tighter">À lancer</span></td>
+              <td class="px-6 py-4 text-right">
+                <button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
