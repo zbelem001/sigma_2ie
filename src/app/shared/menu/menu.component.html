@@ -1,0 +1,42 @@
+<aside class="fixed left-0 top-0 h-screen w-[240px] transition-all duration-300 bg-[#1A3F6F] dark:bg-slate-900 shadow-xl dark:shadow-none flex flex-col h-full z-50">
+  <div class="p-6 flex items-center gap-3">
+    <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
+      <span class="material-symbols-outlined text-white" data-icon="account_balance">account_balance</span>
+    </div>
+    <div>
+      <h1 class="text-white text-xl font-bold tracking-tight">2iE</h1>
+      <p class="text-white/60 text-[10px] uppercase tracking-widest font-semibold">Public Procurement</p>
+    </div>
+  </div>
+  <nav class="mt-4 flex-1">
+    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="flex items-center px-6 py-3 text-white/70 hover:bg-white/5 transition-colors transition-transform scale-95 active:scale-90">
+      <span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+      <span class="uppercase tracking-wider text-[10px] font-semibold">Dashboard</span>
+    </a>
+    <a routerLink="/marches" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="flex items-center px-6 py-3 text-white/70 hover:bg-white/5 transition-colors transition-transform scale-95 active:scale-90">
+      <span class="material-symbols-outlined mr-3" data-icon="gavel">gavel</span>
+      <span class="uppercase tracking-wider text-[10px] font-semibold">Marchés</span>
+    </a>
+    <a class="flex items-center px-6 py-3 text-white/70 hover:bg-white/5 transition-colors transition-transform scale-95 active:scale-90" href="#">
+      <span class="material-symbols-outlined mr-3" data-icon="groups">groups</span>
+      <span class="uppercase tracking-wider text-[10px] font-semibold">Fournisseurs</span>
+    </a>
+    <a class="flex items-center px-6 py-3 text-white/70 hover:bg-white/5 transition-colors transition-transform scale-95 active:scale-90" href="#">
+      <span class="material-symbols-outlined mr-3" data-icon="account_tree">account_tree</span>
+      <span class="uppercase tracking-wider text-[10px] font-semibold">Transformer BDD</span>
+    </a>
+    <a class="flex items-center px-6 py-3 text-white/70 hover:bg-white/5 transition-colors transition-transform scale-95 active:scale-90 mt-auto" href="#">
+      <span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+      <span class="uppercase tracking-wider text-[10px] font-semibold">Paramètres</span>
+    </a>
+  </nav>
+  <div class="p-6 border-t border-white/10">
+    <div class="flex items-center gap-3">
+      <img alt="User profile" class="w-8 h-8 rounded-full bg-white/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ00sXzalcHFfrfpxgImN4YsMl76r-uz6kakYcGBhQQ61RcRsKylacGn4DZXVZ8YkzfP4G7xRA-Z8ozKT-5Hez7fmy8t7ir85jT9Cncqw2eL9cJV6qsYM8bvlPGOXcLswwdD-6eUZdI8bGS9P9pOpbdwfQijLZmAdirtXG986WlbQm-Vzu4FxBd70lufzcOPiKMiV6dL7d9PxcM8_EdZBdszjub98GrTtj_wgYIwxCCkVfYiC_NfqdhslBBGPYT2A0BOXmvIQJY1g" />
+      <div class="overflow-hidden">
+        <p class="text-xs font-bold text-white truncate">Admin User</p>
+        <p class="text-[10px] text-white/50 truncate">Direction Générale</p>
+      </div>
+    </div>
+  </div>
+</aside>

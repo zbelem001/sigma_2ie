@@ -1,0 +1,15 @@
+/* Shared navigation menu styles */
+:host {
+  display: block;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-left: 3px solid white;
+  color: white !important;
+  font-weight: 600;
+}
+
+.active span {
+  color: inherit;
+}

@@ -1,16 +1,29 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 
 import { App } from './app';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { MarchesComponent } from './pages/marches/marches.component';
+import { MenuComponent } from './shared/menu/menu.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'marches', component: MarchesComponent },
+  { path: '**', redirectTo: 'dashboard' }
+];
 
 @NgModule({
   declarations: [
     App,
-    DashboardComponent
+    DashboardComponent,
+    MarchesComponent,
+    MenuComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

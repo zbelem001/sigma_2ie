@@ -1,0 +1,260 @@
+<app-menu></app-menu>
+<main class="flex-1 ml-[240px] flex flex-col min-h-screen">
+  <header class="fixed top-0 right-0 w-[calc(100%-240px)] h-14 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200/20 dark:border-slate-800 z-40 flex justify-between items-center px-8">
+    <div class="flex items-center gap-2">
+      <span class="text-slate-400 text-xs font-medium">Accueil</span>
+      <span class="material-symbols-outlined text-slate-400 text-sm" data-icon="chevron_right">chevron_right</span>
+      <span class="text-[#1A3F6F] font-bold text-xs">Marchés</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="relative group">
+        <button class="text-slate-500 hover:text-[#1A3F6F] transition-colors flex items-center">
+          <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+          <span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+        </button>
+      </div>
+      <h2 class="text-[#1A3F6F] font-black tracking-tight text-sm uppercase">Gestion des Marchés Publics</h2>
+    </div>
+  </header>
+  <div class="pt-14 p-8 flex flex-col gap-8 max-w-[1440px] mx-auto w-full">
+    <section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <h1 class="text-[2.75rem] font-bold tracking-tight text-on-surface leading-none mb-2">Marchés Publics</h1>
+        <p class="text-on-surface-variant text-sm font-medium">Consultez et gérez l'ensemble des appels d'offres et marchés en cours.</p>
+      </div>
+      <button class="h-10 px-6 bg-[#1A3F6F] text-white rounded-lg flex items-center gap-2 font-semibold shadow-sm hover:brightness-110 active:scale-95 transition-all">
+        <span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+        <span>Nouveau marché</span>
+      </button>
+    </section>
+    <section class="bg-surface-container-lowest rounded-xl p-4 shadow-[0px_12px_32px_rgba(26,63,111,0.06)] flex flex-col gap-4">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-4 flex-1 min-w-[300px]">
+          <div class="relative flex-1">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+            <input class="w-full h-10 pl-10 pr-4 bg-surface-container-low border-none rounded-md focus:ring-2 focus:ring-[#1A3F6F]/20 text-sm transition-all" placeholder="Rechercher un marché..." type="text" />
+          </div>
+          <button class="h-10 px-4 border border-outline-variant/20 rounded-md flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-low transition-colors font-medium text-sm">
+            <span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+            <span>Filtres</span>
+            <span class="material-symbols-outlined text-sm" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+          </button>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">24 marchés</span>
+          <div class="h-4 w-px bg-outline-variant/30 mx-1"></div>
+          <button class="p-2 hover:bg-surface-container-low rounded-md transition-colors text-outline">
+            <span class="material-symbols-outlined" data-icon="view_list">view_list</span>
+          </button>
+          <button class="p-2 hover:bg-surface-container-low rounded-md transition-colors text-outline">
+            <span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-outline-variant">Filtres actifs:</span>
+        <div class="flex items-center gap-2">
+          <span class="h-6 pl-3 pr-1 bg-secondary-container/20 text-[#1A3F6F] text-[11px] font-bold rounded-full flex items-center gap-1">
+            Statut: En cours
+            <button class="p-0.5 hover:bg-secondary-container/30 rounded-full">
+              <span class="material-symbols-outlined text-xs" data-icon="close">close</span>
+            </button>
+          </span>
+          <button class="text-[10px] font-bold text-error uppercase tracking-wider hover:underline ml-2">Tout effacer</button>
+        </div>
+      </div>
+    </section>
+    <section class="bg-surface-container-lowest rounded-xl shadow-[0px_12px_32px_rgba(26,63,111,0.06)] overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-surface-container-low border-b border-outline-variant/10">
+              <th class="py-4 px-6 w-12">
+                <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
+              </th>
+              <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">N° Marché</th>
+              <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Description</th>
+              <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Demandeur</th>
+              <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-center">Lots</th>
+              <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Statut</th>
+              <th class="py-4 px-6 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-container-low">
+            <tr class="hover:bg-surface-container-low/50 transition-colors group">
+              <td class="py-5 px-6">
+                <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
+              </td>
+              <td class="py-5 px-4">
+                <span class="text-xs font-bold text-[#1A3F6F]">M-2023-0045</span>
+              </td>
+              <td class="py-5 px-4">
+                <p class="text-sm font-medium text-on-surface line-clamp-1 max-w-[300px]" title="Fourniture et installation d'équipements solaires pour le campus principal">Fourniture et installation d'équipements solaires...</p>
+              </td>
+              <td class="py-5 px-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">DG</div>
+                  <span class="text-sm text-on-surface-variant">Dir. Générale</span>
+                </div>
+              </td>
+              <td class="py-5 px-4 text-center">
+                <span class="text-xs font-bold text-on-surface">03</span>
+              </td>
+              <td class="py-5 px-4">
+                <span class="h-6 px-3 bg-green-100 text-[#1E7A4E] text-[10px] font-bold rounded-full inline-flex items-center uppercase tracking-wider">En cours</span>
+              </td>
+              <td class="py-5 px-6 text-right">
+                <div class="flex items-center justify-end gap-2">
+                  <button class="p-2 text-outline hover:text-[#1A3F6F] hover:bg-white rounded-lg shadow-sm transition-all">
+                    <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+                  </button>
+                  <button class="p-2 text-outline hover:text-[#1A3F6F] transition-colors">
+                    <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-surface-container-low/50 transition-colors">
+              <td class="py-5 px-6">
+                <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
+              </td>
+              <td class="py-5 px-4">
+                <span class="text-xs font-bold text-[#1A3F6F]">M-2024-0012</span>
+              </td>
+              <td class="py-5 px-4">
+                <p class="text-sm font-medium text-on-surface line-clamp-1 max-w-[300px]" title="Audit financier et comptable des exercices 2021-2023">Audit financier et comptable des exercices 2021...</p>
+              </td>
+              <td class="py-5 px-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-secondary-fixed flex items-center justify-center text-[10px] font-bold text-secondary">DA</div>
+                  <span class="text-sm text-on-surface-variant">DAF</span>
+                </div>
+              </td>
+              <td class="py-5 px-4 text-center">
+                <span class="text-xs font-bold text-on-surface">01</span>
+              </td>
+              <td class="py-5 px-4">
+                <span class="h-6 px-3 bg-blue-100 text-[#144685] text-[10px] font-bold rounded-full inline-flex items-center uppercase tracking-wider">À lancer</span>
+              </td>
+              <td class="py-5 px-6 text-right">
+                <div class="flex items-center justify-end gap-2">
+                  <button class="p-2 text-outline hover:text-[#1A3F6F] hover:bg-white rounded-lg shadow-sm transition-all">
+                    <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+                  </button>
+                  <button class="p-2 text-outline hover:text-[#1A3F6F] transition-colors">
+                    <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-surface-container-low/50 transition-colors">
+              <td class="py-5 px-6">
+                <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
+              </td>
+              <td class="py-5 px-4">
+                <span class="text-xs font-bold text-[#1A3F6F]">M-2023-0102</span>
+              </td>
+              <td class="py-5 px-4">
+                <p class="text-sm font-medium text-on-surface line-clamp-1 max-w-[300px]" title="Réfection de la toiture du bâtiment administratif bloc B">Réfection de la toiture du bâtiment administr...</p>
+              </td>
+              <td class="py-5 px-4">
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold text-tertiary">ST</div>
+                  <span class="text-sm text-on-surface-variant">Service Tech</span>
+                </div>
+              </td>
+              <td class="py-5 px-4 text-center">
+                <span class="text-xs font-bold text-on-surface">02</span>
+              </td>
+              <td class="py-5 px-4">
+                <span class="h-6 px-3 bg-green-100 text-[#1E7A4E] text-[10px] font-bold rounded-full inline-flex items-center uppercase tracking-wider">En cours</span>
+              </td>
+              <td class="py-5 px-6 text-right">
+                <div class="flex items-center justify-end gap-2">
+                  <button class="p-2 text-outline hover:text-[#1A3F6F] hover:bg-white rounded-lg shadow-sm transition-all">
+                    <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
+                  </button>
+                  <button class="p-2 text-outline hover:text-[#1A3F6F] transition-colors">
+                    <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="py-4 px-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-surface-container-low">
+        <div class="flex items-center gap-4">
+          <span class="text-xs text-on-surface-variant">Affichage <span class="font-bold text-on-surface">1–20</span> sur <span class="font-bold text-on-surface">87</span></span>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-bold uppercase text-outline-variant">Par page:</span>
+            <select class="h-8 pl-2 pr-8 bg-surface-container-low border-none rounded text-xs font-bold focus:ring-1 focus:ring-[#1A3F6F]">
+              <option>20</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button class="p-2 rounded hover:bg-surface-container-low text-outline disabled:opacity-30" disabled>
+            <span class="material-symbols-outlined text-lg" data-icon="first_page">first_page</span>
+          </button>
+          <button class="p-2 rounded hover:bg-surface-container-low text-outline disabled:opacity-30" disabled>
+            <span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+          </button>
+          <div class="flex items-center gap-1 px-2">
+            <button class="w-8 h-8 rounded bg-[#1A3F6F] text-white text-xs font-bold">1</button>
+            <button class="w-8 h-8 rounded hover:bg-surface-container-low text-on-surface text-xs font-bold">2</button>
+            <button class="w-8 h-8 rounded hover:bg-surface-container-low text-on-surface text-xs font-bold">3</button>
+            <span class="text-on-surface-variant px-1">...</span>
+            <button class="w-8 h-8 rounded hover:bg-surface-container-low text-on-surface text-xs font-bold">5</button>
+          </div>
+          <button class="p-2 rounded hover:bg-surface-container-low text-on-surface">
+            <span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+          </button>
+          <button class="p-2 rounded hover:bg-surface-container-low text-on-surface">
+            <span class="material-symbols-outlined text-lg" data-icon="last_page">last_page</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="p-6 bg-white rounded-xl shadow-[0px_12px_32px_rgba(26,63,111,0.04)] border border-slate-100 flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-outline-variant mb-1">Budget Total</p>
+          <h3 class="text-2xl font-black text-[#1A3F6F]">1.4B FCFA</h3>
+          <p class="text-[10px] text-green-600 font-bold mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span> +12% vs 2023
+          </p>
+        </div>
+        <div class="w-12 h-12 rounded-full bg-primary-fixed/30 flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined" data-icon="payments">payments</span>
+        </div>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow-[0px_12px_32px_rgba(26,63,111,0.04)] border border-slate-100 flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-outline-variant mb-1">Délai Moyen</p>
+          <h3 class="text-2xl font-black text-[#1A3F6F]">45 Jours</h3>
+          <p class="text-[10px] text-error font-bold mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs" data-icon="trending_down">trending_down</span> -2% d'efficacité
+          </p>
+        </div>
+        <div class="w-12 h-12 rounded-full bg-tertiary-fixed/30 flex items-center justify-center text-tertiary">
+          <span class="material-symbols-outlined" data-icon="timer">timer</span>
+        </div>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow-[0px_12px_32px_rgba(26,63,111,0.04)] border border-slate-100 flex items-center justify-between">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-widest text-outline-variant mb-1">Taux de Conclusion</p>
+          <h3 class="text-2xl font-black text-[#1A3F6F]">94.2%</h3>
+          <div class="w-32 h-1.5 bg-surface-container-low rounded-full mt-3 overflow-hidden">
+            <div class="w-[94%] h-full bg-[#1A3F6F] rounded-full"></div>
+          </div>
+        </div>
+        <div class="w-12 h-12 rounded-full bg-secondary-fixed/30 flex items-center justify-center text-secondary">
+          <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
