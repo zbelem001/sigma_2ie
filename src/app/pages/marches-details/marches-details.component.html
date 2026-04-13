@@ -1,0 +1,177 @@
+<app-menu></app-menu>
+<app-header [breadcrumb]="['Accueil', 'Marchés', 'Détails']" searchPlaceholder="Rechercher un dossier..."></app-header>
+<main class="ml-[240px] w-[calc(100%-240px)] pt-20 min-h-[calc(100vh-80px)] bg-surface px-6 pb-8">
+  <div class="w-full p-8 space-y-12">
+    <section class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="space-y-2">
+        <div class="flex items-center gap-3">
+          <span class="text-[13px] font-bold text-slate-400 bg-surface-container-low px-2 py-0.5 rounded tracking-tight">N° Marché #2024-042</span>
+          <div class="bg-blue-100 px-3 py-0.5 rounded-full">
+            <span class="text-[10px] font-bold text-[#1A3F6F] uppercase tracking-wider">En analyse</span>
+          </div>
+        </div>
+        <h2 class="text-[22px] md:text-[32px] font-black text-primary tracking-tight leading-tight">Acquisition de serveurs de calcul haute performance</h2>
+        <div class="flex items-center gap-4 text-slate-500 text-[13px]">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">corporate_fare</span>
+            <span>DSI</span>
+          </div>
+          <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">description</span>
+            <span>Appel d'offres ouvert</span>
+          </div>
+          <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[18px]">calendar_today</span>
+            <span>14/03/2024</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="h-10 px-5 flex items-center gap-2 border border-primary/20 text-primary font-bold text-[13px] rounded-lg hover:bg-primary/5 transition-all active:scale-95">
+          <span class="material-symbols-outlined text-[18px]">edit</span>
+          Modifier
+        </button>
+        <button class="h-10 px-5 flex items-center gap-2 bg-[#1A3F6F] text-white font-bold text-[13px] rounded-lg shadow-lg shadow-blue-900/10 hover:brightness-110 transition-all active:scale-95">
+          <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+          Exporter PDF
+        </button>
+      </div>
+    </section>
+
+    <div class="border-b-2 border-surface-container flex items-center gap-8 pb-4">
+      <button class="pb-4 text-[13px] font-bold text-primary border-b-2 border-primary -mb-[2px] transition-all">Lots &amp; Consultations</button>
+      <button class="pb-4 text-[13px] font-semibold text-slate-400 hover:text-slate-600 transition-all">Soumissions</button>
+      <button class="pb-4 text-[13px] font-semibold text-slate-400 hover:text-slate-600 transition-all">Suivi documentaire</button>
+      <button class="pb-4 text-[13px] font-semibold text-slate-400 hover:text-slate-600 transition-all">Attributions &amp; Avenants</button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl p-8 shadow-[0px_12px_32px_rgba(26,63,111,0.06)] border border-slate-100 transition-all hover:-translate-y-1">
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Détails du Lot</p>
+            <h3 class="text-xl font-extrabold text-primary">Lot 1: Infrastructure Serveur &amp; Stockage</h3>
+          </div>
+          <div class="bg-surface-container-low p-2 rounded-lg">
+            <span class="text-primary font-black text-lg leading-none">01</span>
+          </div>
+        </div>
+        <p class="text-slate-600 text-[14px] leading-relaxed mb-8 max-w-2xl">
+          Acquisition et installation de 4 châssis de calcul haute densité incluant le stockage Flash NVMe. Intégration complète dans la baie 04 du centre de données principal.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Fournisseurs consultés</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-blue-50 text-[#1A3F6F] px-3 py-1.5 rounded-lg text-[12px] font-bold flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                NextGen Systems
+              </span>
+              <span class="bg-blue-50 text-[#1A3F6F] px-3 py-1.5 rounded-lg text-[12px] font-bold flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                DataCenter Solutions
+              </span>
+              <span class="bg-slate-100 text-slate-500 px-3 py-1.5 rounded-lg text-[12px] font-bold flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-slate-300 rounded-full"></span>
+                Global Cloud SAS
+              </span>
+            </div>
+          </div>
+          <div class="bg-surface-container-low rounded-xl p-4 flex flex-col justify-between">
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Budget Estimatif</p>
+            <p class="text-2xl font-black text-[#1A3F6F] mt-2">145.000.000 <span class="text-sm font-medium">FCFA</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-4 space-y-6">
+        <div class="bg-[#1A3F6F] rounded-xl p-6 text-white overflow-hidden relative group">
+          <div class="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform duration-500">
+            <span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+          </div>
+          <p class="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-4">Résumé de l'offre</p>
+          <div class="space-y-6">
+            <div>
+              <h4 class="text-3xl font-black">03</h4>
+              <p class="text-white/70 text-xs mt-1">Soumissions reçues</p>
+            </div>
+            <div class="h-[1px] bg-white/10 w-full"></div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-white/70">Date limite</span>
+              <span class="text-sm font-bold">28 Avr 2024</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-[0px_4px_12px_rgba(0,0,0,0.03)] border border-slate-100">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+              <span class="material-symbols-outlined">verified</span>
+            </div>
+            <div>
+              <p class="text-[13px] font-bold text-primary">Conformité</p>
+              <p class="text-[11px] text-slate-400">Dernière vérification à 09:42</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 text-[12px]">
+              <span class="material-symbols-outlined text-green-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              <span class="text-slate-600">Critères techniques validés</span>
+            </div>
+            <div class="flex items-center gap-3 text-[12px]">
+              <span class="material-symbols-outlined text-green-500 text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+              <span class="text-slate-600">Garantie financière ok</span>
+            </div>
+            <div class="flex items-center gap-3 text-[12px]">
+              <span class="material-symbols-outlined text-amber-500 text-[16px]">pending</span>
+              <span class="text-slate-600">Attestation fiscale en attente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h4 class="text-[14px] font-black text-primary uppercase tracking-widest">Derniers Documents</h4>
+        <button class="text-[12px] font-bold text-secondary flex items-center gap-1 hover:underline">
+          Tout voir
+          <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+        </button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-lg border border-slate-200/60 flex items-center gap-4 hover:border-[#1A3F6F]/20 transition-all cursor-pointer">
+          <div class="w-10 h-10 rounded bg-red-50 flex items-center justify-center text-red-500">
+            <span class="material-symbols-outlined">description</span>
+          </div>
+          <div>
+            <p class="text-[12px] font-bold text-slate-700 truncate">Cahier_Charges_Techniques.pdf</p>
+            <p class="text-[10px] text-slate-400">1.2 MB · Hier</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-slate-200/60 flex items-center gap-4 hover:border-[#1A3F6F]/20 transition-all cursor-pointer">
+          <div class="w-10 h-10 rounded bg-blue-50 flex items-center justify-center text-blue-500">
+            <span class="material-symbols-outlined">table_chart</span>
+          </div>
+          <div>
+            <p class="text-[12px] font-bold text-slate-700 truncate">Grille_Evaluation.xlsx</p>
+            <p class="text-[10px] text-slate-400">85 KB · 12/03</p>
+          </div>
+        </div>
+        <div class="bg-white p-4 rounded-lg border border-slate-200/60 flex items-center gap-4 hover:border-[#1A3F6F]/20 transition-all cursor-pointer">
+          <div class="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-slate-400">
+            <span class="material-symbols-outlined">image</span>
+          </div>
+          <div>
+            <p class="text-[12px] font-bold text-slate-700 truncate">Schema_Baie_04.png</p>
+            <p class="text-[10px] text-slate-400">4.5 MB · 10/03</p>
+          </div>
+        </div>
+        <div class="bg-white/40 p-4 rounded-lg border border-dashed border-slate-300 flex items-center justify-center gap-2 text-slate-400 text-[12px] font-semibold hover:bg-slate-50 transition-all cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]">add_circle</span>
+          Ajouter un fichier
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
