@@ -1,22 +1,7 @@
 <app-menu></app-menu>
-<main class="ml-[240px] pt-14 px-8 pb-12">
-  <header class="fixed top-0 right-0 w-[calc(100%-240px)] h-14 bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200/20 dark:border-slate-800 z-40 flex justify-between items-center px-8">
-    <div class="flex items-center gap-2">
-      <span class="text-slate-400 text-xs font-medium">Accueil</span>
-      <span class="material-symbols-outlined text-slate-400 text-sm" data-icon="chevron_right">chevron_right</span>
-      <span class="text-[#1A3F6F] font-bold text-xs">Marchés</span>
-    </div>
-    <div class="flex items-center gap-6">
-      <div class="relative group">
-        <button class="text-slate-500 hover:text-[#1A3F6F] transition-colors flex items-center">
-          <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-          <span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
-        </button>
-      </div>
-      <h2 class="text-[#1A3F6F] font-black tracking-tight text-sm uppercase">Gestion des Marchés Publics</h2>
-    </div>
-  </header>
-  <div class="pt-14 p-8 flex flex-col gap-8">
+<app-header [breadcrumb]="['Accueil', 'Marchés']" searchPlaceholder="Rechercher un marché..."></app-header>
+<main class="ml-[240px] w-[calc(100%-240px)] min-h-screen pt-20 px-4 pb-8">
+  <div class="w-full p-6 flex flex-col gap-8">
     <section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
       <div>
         <h1 class="text-heading-2 tracking-tight text-on-surface leading-none mb-2">Marchés Publics</h1>

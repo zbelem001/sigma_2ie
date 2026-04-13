@@ -1,31 +1,7 @@
 <app-menu></app-menu>
-<main class="ml-[240px] min-h-screen">
-  <header class="fixed top-0 right-0 w-[calc(100%-240px)] h-14 bg-white/80 dark:bg-slate-900/70 backdrop-blur-md border-b border-slate-200/20 dark:border-slate-800 z-40 flex justify-between items-center px-8">
-    <div class="flex items-center gap-4">
-      <span class="font-manrope text-sm text-slate-400">Accueil</span>
-      <span class="material-symbols-outlined text-slate-400 text-sm" data-icon="chevron_right">chevron_right</span>
-      <span class="text-[#1A3F6F] font-bold text-xs">Fournisseurs</span>
-      <div class="h-4 w-px bg-slate-200"></div>
-      <div class="relative">
-        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-        <input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all focus:w-80" placeholder="Rechercher un fournisseur..." type="text" />
-      </div>
-    </div>
-    <div class="flex items-center gap-6">
-      <div class="flex items-center gap-4 text-slate-500">
-        <button class="hover:text-primary transition-colors">
-          <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-        </button>
-        <button class="hover:text-primary transition-colors">
-          <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
-        </button>
-      </div>
-      <div class="h-8 w-px bg-slate-200"></div>
-      <h1 class="text-lg font-black text-[#001E40] font-headline">Référentiel Fournisseurs</h1>
-    </div>
-  </header>
-
-  <div class="pt-16 px-8 pb-12">
+<app-header [breadcrumb]="['Accueil', 'Fournisseurs']" searchPlaceholder="Rechercher un fournisseur..."></app-header>
+<main class="ml-[240px] min-h-screen pt-24 px-8 pb-12">
+  <div>
     <section class="mb-10 flex flex-col lg:flex-row lg:items-end justify-between gap-6">
       <div class="max-w-2xl">
         <h2 class="text-heading-2 text-primary tracking-tight mb-2">Référentiel Fournisseurs</h2>

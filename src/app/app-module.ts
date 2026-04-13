@@ -7,6 +7,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MarchesComponent } from './pages/marches/marches.component';
 import { FournisseursComponent } from './pages/fournisseurs/fournisseurs.component';
 import { MenuComponent } from './shared/menu/menu.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HeaderComponent
   ],
   providers: [
     provideBrowserGlobalErrorListeners()
