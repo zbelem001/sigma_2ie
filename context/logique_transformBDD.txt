@@ -1,0 +1,121 @@
+Phase 1 : Initialisation (Avant la mise en concurrence)
+1. Action : "Ajouter un Marché"
+
+    Table cible : Marche
+
+    Champs à saisir : numbMarche, Description, NombreLot, NatureOuverture, Financement, ModePassation, Demandeur, ResponsableSuivi, SCT_person1 (et 2, 3, 4 optionnels), DatePrevReception.
+
+    Logique BDD : * Vérifier que numbMarche n'existe pas déjà.
+
+        Insérer avec Statut = 'À lancer'.
+
+2. Action : "Ajouter un Lot"
+
+    Table cible : Lot
+
+    Champs à saisir : numbMarche (Liste déroulante des marchés existants), numbLot (Saisie manuelle ou auto : numbMarche_LOTx), Description.
+
+    Logique BDD : * Vérifier que le marché parent existe.
+
+        Initialiser une ligne correspondante dans la table Document avec tous les champs à 'Non'.
+
+3. Action : "Enregistrer une Consultation"
+
+    Table cible : Consultation
+
+    Champs à saisir : numbLot (Liste déroulante), idFournisseur (Saisie multiple par virgule ou sélection multiple), DateConsultation.
+
+    Logique BDD : * Si un nom de fournisseur saisi n'existe pas dans la table Fournisseur, ouvrir une fenêtre pour créer un fournisseur avec Statut = 'Externe'.
+
+Phase 2 : Réception et Ouverture (Le Verrou)
+4. Action : "Ouvrir la Réception"
+
+    Table cible : Marche
+
+    Champs à modifier : numbMarche.
+
+    Logique BDD : * Passer le Statut à 'Réception'. Cela débloque visuellement l'accès aux étapes suivantes.
+
+5. Action : "Valider le PV d'Ouverture"
+
+    Table cible : Document
+
+    Champs à modifier : numbLot.
+
+    Logique BDD : * Passer PV_ouverture à 'Oui'.
+
+        CRITIQUE : Sans cette valeur à 'Oui', l'action suivante (Soumission) doit être bloquée par une erreur : "Ouverture des plis non effectuée".
+
+6. Action : "Ajouter une Soumission"
+
+    Table cible : Soumission
+
+    Champs à saisir : numbLot, idFournisseur, DateDepot, Heure, MontantPrev, DelaiExecutionPrev, nbExemplaire, Observation.
+
+    Logique BDD : * Générer idSoumission : [numbLot]_Fourn_[idFournisseur].
+
+        Vérifier que le fournisseur a bien été consulté (présent dans la table Consultation).
+
+Phase 3 : Analyse et Attribution
+7. Action : "Lancer l'Analyse"
+
+    Table cible : Marche
+
+    Logique BDD : Passer le Statut à 'Analyse'.
+
+8. Action : "Enregistrer l'Analyse Technique"
+
+    Table cible : Analyse ET Soumission (Mise à jour).
+
+    Champs à saisir : numbLot, idAttributairePrev (Liste des fournisseurs ayant fait une soumission), DateEffecReception, Observation.
+
+    Logique BDD : * Insérer dans Analyse.
+
+        Mettre à jour la colonne rang_classement dans la table Soumission pour le lot concerné.
+
+9. Action : "Valider le Rapport d'Analyse"
+
+    Table cible : Document
+
+    Champs à modifier : RapportAnalyse → 'Oui'.
+
+10. Action : "Valider les Documents Administratifs"
+
+    Table cible : Document
+
+    Champs à cocher : Notification, Contrat, FED, BonCommande, OrdreService.
+
+    Logique BDD : Passer les valeurs sélectionnées à 'Oui'.
+
+Phase 4 : Exécution et Clôture
+11. Action : "Enregistrer l'Attribution"
+
+    Table cible : Attributaire
+
+    Champs à saisir : idSoumissionAttribuee (Sélection de la soumission gagnante), MontantEffec, DelaiExecutionEffec, DateDemarage, DatePrevFin.
+
+    Logique BDD : Insérer la ligne avec Statut = 'En cours'.
+
+12. Action : "Démarrer l'Exécution"
+
+    Table cible : Marche
+
+    Logique BDD : Passer le Statut à 'En cours'.
+
+13. Action : "Ajouter un Avenant"
+
+    Table cible : Avenant
+
+    Champs à saisir : idSoumissionAttribuee, numbAvenant, MontantAvenant, DateProrogation.
+
+    Logique BDD : Permettre plusieurs avenants pour un même contrat.
+
+14. Action : "Clôture Finale"
+
+    Tables cibles : Marche ET Attributaire ET Document.
+
+    Logique BDD : * Marche.Statut = 'Exécuté'.
+
+        Attributaire.Statut = 'Terminé'.
+
+        Document.PV_reception_tech = 'Oui'.

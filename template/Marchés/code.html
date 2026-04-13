@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Liste des Marchés - 2iE Procurement</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#191c1d",
+                    "surface-dim": "#d9dadb",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#58657c",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary-container": "#799dd6",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#001b3c",
+                    "on-secondary-fixed": "#0f1c2f",
+                    "on-tertiary-fixed": "#341100",
+                    "primary": "#001e40",
+                    "surface-container-low": "#f3f4f5",
+                    "secondary": "#525f75",
+                    "tertiary": "#381300",
+                    "inverse-primary": "#a7c8ff",
+                    "primary-fixed": "#d5e3ff",
+                    "secondary-container": "#d6e3fe",
+                    "primary-container": "#003366",
+                    "on-primary-fixed-variant": "#1f477b",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-fixed-dim": "#ffb690",
+                    "on-surface": "#191c1d",
+                    "on-tertiary-fixed-variant": "#723610",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f8f9fa",
+                    "tertiary-fixed": "#ffdbca",
+                    "background": "#f8f9fa",
+                    "on-tertiary-container": "#d8885c",
+                    "surface-container-high": "#e7e8e9",
+                    "surface-bright": "#f8f9fa",
+                    "tertiary-container": "#592300",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "secondary-fixed": "#d6e3fe",
+                    "surface-tint": "#3a5f94",
+                    "on-surface-variant": "#43474f",
+                    "surface-container-highest": "#e1e3e4",
+                    "secondary-fixed-dim": "#bac7e1",
+                    "on-secondary-fixed-variant": "#3b475d",
+                    "outline": "#737780",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c3c6d1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar Shell -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-900 flex flex-col h-full p-4 z-50">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<img alt="2iE Logo" class="w-8 h-8 invert" data-alt="Official 2iE academic institute logo with professional architectural blue aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0tZ2OZ9KUA2B5MUG80iOthOFIdJ_YmUqz7iJS2JKts14gmc_0RYL4XhgojTPv3IquyOh8i6lCETFJmFJFQwGAtXETjmq_oua1V932b8-07imsG8BwuPjndgpIsVfBCJxohDeajK-defUO7DaAQPwbs6lRUNOedDF5N2anG8uGrg94YD_FjMYQia7e1ODblftRUy327cD5gECwvSrb102RAvbIX_4L0Rt1YOOm1HO7aVLKDmppWub58hNkFXjZ7calvF7-F2mG_uw"/>
+</div>
+<div>
+<p class="text-xl font-bold text-[#001E40] dark:text-white leading-none">Procurement Management</p>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold mt-1">Institutional Authority</p>
+</div>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 font-manrope tracking-tight font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#001E40] dark:text-white font-semibold bg-slate-200 dark:bg-slate-800 rounded-lg scale-95 duration-150 font-manrope tracking-tight" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span>Marchés</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 font-manrope tracking-tight font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="business">business</span>
+<span>Fournisseurs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 font-manrope tracking-tight font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span>Transformer BDD</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 font-manrope tracking-tight font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Paramètres</span>
+</a>
+</div>
+<div class="mt-auto p-4 bg-primary-container/10 rounded-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img alt="Agent des marchés" class="w-full h-full object-cover" data-alt="Professional portrait of a male procurement officer in business attire, clean corporate lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8JtCQkoAIr8ikCfKtjoQra9kd1lyYIM-WBm6J8BhIzFV8Go_1K15EkF6WSftnJ2nBh8zdsJANs7Hdfpjk6GGwiD1qwBOtF-Asib6vt4Jid2WpDW7rz1IQeAPlMV6HuaEjMpdwz1OPqiu2GIa-SNVBo7VNVHY7mkk_rjkX34axRx3eufoQlmuPFiqsQIeZ4Q1qB2PKXb6FPhDA_08mnAJwbLSQeRr77ELC-gbw0m8CBs91NUacwgpEix3HIGGhOV8lKB8cOv2VvcA"/>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-primary truncate">Agent des marchés</p>
+<p class="text-[10px] text-slate-500">2iE Administration</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] flex justify-between items-center px-8 h-16 z-40 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm dark:shadow-none font-manrope text-sm transition-all duration-300">
+<div class="flex items-center gap-6">
+<div class="text-slate-400">
+                    Breadcrumbs / Public / <span class="text-[#001E40] font-bold border-b-2 border-[#001E40] pb-1">Marchés</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-[#001E40] transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-[#001E40] transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<div class="flex items-center gap-2">
+<span class="font-medium text-primary">2iE Procurement</span>
+<span class="material-symbols-outlined text-xs" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="pt-24 px-8 pb-12">
+<!-- Header Section -->
+<div class="mb-10">
+<h1 class="text-4xl font-extrabold text-primary tracking-tight mb-2">Gestion des Marchés</h1>
+<p class="text-on-surface-variant max-w-2xl">Visualisez et gérez l'ensemble des processus de passation de marchés publics. Une vue d'ensemble sur l'autorité institutionnelle de 2iE.</p>
+</div>
+<!-- Search & Filters Bento Grid -->
+<div class="grid grid-cols-12 gap-6 mb-8">
+<!-- Search Bar -->
+<div class="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Recherche globale</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border-none focus:ring-0 focus:border-b-2 focus:border-primary rounded-lg pl-12 pr-4 py-3 text-sm transition-all duration-300" placeholder="Référence, intitulé ou demandeur..." type="text"/>
+</div>
+</div>
+<!-- Filters -->
+<div class="col-span-12 lg:col-span-6 bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-wrap gap-4 items-end">
+<div class="flex-1 min-w-[140px]">
+<label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Statut</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg text-sm focus:ring-primary focus:border-primary py-3">
+<option>Tous les statuts</option>
+<option>À lancer</option>
+<option>Réception/Analyse</option>
+<option>Exécuté</option>
+</select>
+</div>
+<div class="flex-1 min-w-[140px]">
+<label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Mode</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg text-sm focus:ring-primary focus:border-primary py-3">
+<option>Tous les modes</option>
+<option>Appel d'offres ouvert</option>
+<option>Consultation restreinte</option>
+<option>Gré à gré</option>
+</select>
+</div>
+<div class="flex-1 min-w-[140px]">
+<label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Année</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg text-sm focus:ring-primary focus:border-primary py-3">
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+</select>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg flex items-center gap-2 font-semibold hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+<span>Filtrer</span>
+</button>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-slate-100/50">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-slate-200/20">
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.1em]">N° Marché</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.1em]">Description</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.1em]">Demandeur</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.1em] text-center">Lots</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.1em]">Statut</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-500 uppercase tracking-[0.1em] text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5 font-mono text-xs text-primary-container font-semibold">2024-F-001</td>
+<td class="px-6 py-5">
+<div class="max-w-xs">
+<p class="text-sm font-medium text-on-surface">Acquisition de matériel informatique</p>
+<p class="text-[10px] text-slate-400">Mode: Appel d'offres ouvert</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Direction des Systèmes d'Information</td>
+<td class="px-6 py-5 text-center">
+<span class="text-sm font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded">03</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary-container"></span>
+                                        À lancer
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-white rounded-full transition-shadow shadow-none hover:shadow-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5 font-mono text-xs text-primary-container font-semibold">2024-S-012</td>
+<td class="px-6 py-5">
+<div class="max-w-xs">
+<p class="text-sm font-medium text-on-surface">Entretien des espaces verts Campus Ouaga</p>
+<p class="text-[10px] text-slate-400">Mode: Consultation restreinte</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Direction Patrimoine et Logistique</td>
+<td class="px-6 py-5 text-center">
+<span class="text-sm font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded">01</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-container"></span>
+                                        Réception/Analyse
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-white rounded-full transition-shadow shadow-none hover:shadow-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5 font-mono text-xs text-primary-container font-semibold">2023-T-045</td>
+<td class="px-6 py-5">
+<div class="max-w-xs">
+<p class="text-sm font-medium text-on-surface">Travaux de réhabilitation Amphi 500</p>
+<p class="text-[10px] text-slate-400">Mode: Appel d'offres international</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Direction de la Recherche</td>
+<td class="px-6 py-5 text-center">
+<span class="text-sm font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded">05</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Exécuté
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-white rounded-full transition-shadow shadow-none hover:shadow-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high transition-colors group">
+<td class="px-6 py-5 font-mono text-xs text-primary-container font-semibold">2024-F-008</td>
+<td class="px-6 py-5">
+<div class="max-w-xs">
+<p class="text-sm font-medium text-on-surface">Mobilier de bureau pour extension Labo</p>
+<p class="text-[10px] text-slate-400">Mode: Consultation ouverte</p>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">Secrétariat Général</td>
+<td class="px-6 py-5 text-center">
+<span class="text-sm font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded">02</span>
+</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[11px] font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary-container"></span>
+                                        À lancer
+                                    </span>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-white rounded-full transition-shadow shadow-none hover:shadow-sm">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 bg-surface-container border-t border-slate-200/50 flex items-center justify-between text-xs font-medium text-slate-500">
+<div>Affichage de 1 à 10 sur 42 marchés</div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-200">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary shadow-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-200">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-200">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-slate-200">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Action (As described for Main Dashboard context) -->
+<button class="fixed bottom-8 right-8 bg-gradient-to-br from-primary to-primary-container text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="add" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+</body></html>

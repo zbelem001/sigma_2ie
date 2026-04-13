@@ -1,0 +1,63 @@
+Agis comme un UX/UI Designer Senior et un Développeur Front-end.
+Ton objectif est de concevoir l'interface d'une application web B2B de "Gestion des Marchés Publics" pour l'institut 2iE. 
+Le design doit être moderne, épuré, professionnel (style SaaS data-centric) et optimisé pour une utilisation sur ordinateur de bureau (Desktop).
+
+[CHARTE GRAPHIQUE ET THÈME]
+Utilise la charte graphique de 2iE de manière subtile et professionnelle :
+- Fond de l'application : Blanc cassé ou Gris très clair (ex: #F8F9FA) pour un aspect épuré.
+- Couleur Primaire : Bleu profond (Corporate, confiance) pour la barre de navigation, les titres principaux et les boutons d'action primaires.
+- Couleur de Succès / Validation : Vert (pour les statuts "Exécuté", "Terminé", et les documents validés "Oui").
+- Couleur d'Alerte / Blocage : Rouge (pour les messages d'erreur, les rejets de la SCT, ou les documents manquants "Non").
+- Couleur d'Attente / Avertissement : Jaune/Moutarde (pour les statuts "En cours", "En analyse" ou les étapes en attente).
+- Typographie : Sans-serif, lisible et moderne (ex: Inter, Roboto ou Segoe UI).
+
+[STRUCTURE GLOBALE (LAYOUT)]
+- Une barre de navigation latérale (Sidebar) rétractable contenant les menus : Tableau de bord, Marchés, Fournisseurs, Transformer BDD, Paramètres.
+- Une barre supérieure (Topbar) avec le profil utilisateur (Agent des marchés), les notifications et un fil d'Ariane (Breadcrumb) pour la navigation.
+- La zone centrale pour le contenu, avec une utilisation intensive de "Cards" (cartes) blanches avec de légères ombres portées pour séparer les informations.
+
+[PAGES À CRÉER ET CHAMPS ASSOCIÉS]
+
+1. Page "Tableau de Bord" (Dashboard)
+- Logique : Vue d'ensemble de l'activité.
+- Composants : 
+  - 4 KPI Cards (Chiffres clés) : Marchés à lancer, Marchés en analyse, Marchés en cours, Total Fournisseurs.
+  - Un graphique en barres ou courbe montrant l'évolution des marchés sur l'année.
+  - Un tableau "Dernières actions" (Liste des 5 derniers marchés modifiés avec leur statut coloré).
+
+2. Page "Liste des Marchés"
+- Logique : Répertoire consultable et filtrable.
+- Composants :
+  - Barre de recherche et filtres (par Statut, Mode de passation, Année).
+  - Un Data Table moderne avec les colonnes : N° Marché, Description, Demandeur, Nombre de lots, Statut (Badge coloré : Bleu=À lancer, Jaune=Réception/Analyse, Vert=Exécuté), Actions (icône œil pour voir).
+
+3. Page "Fiche Détail du Marché"
+- Logique : Vue 360 degrés d'un marché spécifique.
+- Composants :
+  - En-tête : N° Marché, Description, Statut actuel, Bouton "Modifier".
+  - Système d'onglets (Tabs) :
+    - Onglet 1 "Lots & Consultations" : Liste des lots et des fournisseurs consultés (Tags).
+    - Onglet 2 "Soumissions" : Tableau des offres reçues (ID, Fournisseur, Montant, Délai, Rang de classement).
+    - Onglet 3 "Suivi Documentaire" : Checklist avec des toggles ou badges (PV d'ouverture, Rapport d'analyse, Contrat, FED, etc.) Vert=Oui, Rouge=Non.
+    - Onglet 4 "Attributions & Avenants" : Détails du contrat final signé.
+
+4. Page "Transformer BDD" (Le cœur de l'application)
+- Logique : C'est un "Wizard" (Formulaire par étapes) qui guide l'utilisateur à travers les 14 étapes du processus.
+- Composants :
+  - Un menu vertical ou horizontal listant les actions possibles (Ajouter marché, Ajouter lot, Consulter, Réception, Soumission, Analyse, etc.).
+  - Une zone de formulaire dynamique selon l'action choisie.
+  - Exemple Champs pour "Ajouter Soumission" : Select (NumbLot), Select (Fournisseur), Input Number (Montant), Input Number (Délai), Input Number (Nb Exemplaires).
+  - Bouton "Confirmer et Enregistrer".
+
+5. Page "Référentiel Fournisseurs"
+- Logique : Gestion de la base de données entreprises.
+- Composants : 
+  - Tableau listant les fournisseurs. Colonnes : ID, Raison Sociale, Domaine, Contact.
+  - Un badge visuel distinctif pour la colonne "Statut" : "Classique" (gris) vs "Externe" (Bleu ou contour bleu).
+
+[LOGIQUE DE FONCTIONNEMENT ET UX (À SIMULER)]
+- Affichage conditionnel : Dans le module "Transformer BDD", montre une maquette d'état bloqué (Disabled state). Par exemple, si l'utilisateur veut saisir une "Soumission" mais que le "PV_ouverture" n'est pas validé, le formulaire est grisé avec un message d'alerte rouge : "Action impossible : Veuillez d'abord valider le PV d'ouverture."
+- Aide à la saisie : Prévois des placeholders clairs dans les champs (ex: "Séparez les fournisseurs par des virgules").
+- Feedbacks : Prévois des "Toast notifications" (petites alertes en haut à droite) vertes pour confirmer un enregistrement réussi.
+
+Génère le code et les composants UI pour ces écrans en respectant strictement ces consignes visuelles et fonctionnelles.

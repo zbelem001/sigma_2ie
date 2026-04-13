@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Référentiel Fournisseurs | 2iE Procurement</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#191c1d",
+                      "surface-dim": "#d9dadb",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-container": "#58657c",
+                      "surface-variant": "#e1e3e4",
+                      "on-primary-container": "#799dd6",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed": "#001b3c",
+                      "on-secondary-fixed": "#0f1c2f",
+                      "on-tertiary-fixed": "#341100",
+                      "primary": "#001e40",
+                      "surface-container-low": "#f3f4f5",
+                      "secondary": "#525f75",
+                      "tertiary": "#381300",
+                      "inverse-primary": "#a7c8ff",
+                      "primary-fixed": "#d5e3ff",
+                      "secondary-container": "#d6e3fe",
+                      "primary-container": "#003366",
+                      "on-primary-fixed-variant": "#1f477b",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#f0f1f2",
+                      "inverse-surface": "#2e3132",
+                      "tertiary-fixed-dim": "#ffb690",
+                      "on-surface": "#191c1d",
+                      "on-tertiary-fixed-variant": "#723610",
+                      "on-primary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#edeeef",
+                      "on-tertiary": "#ffffff",
+                      "surface": "#f8f9fa",
+                      "tertiary-fixed": "#ffdbca",
+                      "background": "#f8f9fa",
+                      "on-tertiary-container": "#d8885c",
+                      "surface-container-high": "#e7e8e9",
+                      "surface-bright": "#f8f9fa",
+                      "tertiary-container": "#592300",
+                      "primary-fixed-dim": "#a7c8ff",
+                      "secondary-fixed": "#d6e3fe",
+                      "surface-tint": "#3a5f94",
+                      "on-surface-variant": "#43474f",
+                      "surface-container-highest": "#e1e3e4",
+                      "secondary-fixed-dim": "#bac7e1",
+                      "on-secondary-fixed-variant": "#3b475d",
+                      "outline": "#737780",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#c3c6d1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Manrope"],
+                      "body": ["Inter"],
+                      "label": ["Inter"]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-900 flex flex-col p-4 z-50 overflow-y-auto">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<h2 class="text-xl font-bold text-[#001E40] dark:text-white leading-none">2iE</h2>
+<p class="text-[10px] text-slate-500 font-medium tracking-widest uppercase">Procurement</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 font-manrope tracking-tight font-medium hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Tableau de bord</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 font-manrope tracking-tight font-medium hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span>Marchés</span>
+</a>
+<!-- Active Tab: Fournisseurs -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#001E40] dark:text-white font-semibold bg-slate-200 dark:bg-slate-800 rounded-lg font-manrope tracking-tight scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="business" style="font-variation-settings: 'FILL' 1;">business</span>
+<span>Fournisseurs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 font-manrope tracking-tight font-medium hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span>Transformer BDD</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-500 dark:text-slate-400 font-manrope tracking-tight font-medium hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors scale-95 duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Paramètres</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200/50">
+<div class="flex items-center gap-3 px-3">
+<img alt="Agent des marchés" class="w-8 h-8 rounded-full bg-slate-300" data-alt="professional portrait of an administrative agent for a modern institutional office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZRBVTaTR6-cgirUbyR3h2B0VGzpIlOJ-psnarnfImL29ATQ3DMP6hLURsWVNATqFRMv6bB_ef87RzJgrWNEqA-u5LOaBfCsfF7PBUO3cJT6AnAqED2b4fD7_NnnA0G5qAyaERjKJWXcy7lgIf3crkfdgE5sUXJaSVP_euhzZV32JeRxPwXCpVORhvwRr56c2gTyYYdqXI__ADm9KIqetJtjypxnxBF31uMpbKVq-HokzsYX1XwTlDvyXYCeEINUX7F6d9iKE2f-c"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-primary truncate">Agent des marchés</p>
+<p class="text-[10px] text-slate-500 truncate">agent.procurement@2ie-edu.org</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] bg-white/80 dark:bg-slate-950/80 backdrop-blur-md flex justify-between items-center px-8 h-16 z-40 border-b border-slate-200/50 dark:border-slate-800/50 shadow-sm dark:shadow-none transition-all duration-300">
+<div class="flex items-center gap-4">
+<span class="font-manrope text-sm text-slate-400">Breadcrumbs / Public / Marchés</span>
+<div class="h-4 w-[1px] bg-slate-200"></div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all focus:w-80 font-body" placeholder="Rechercher un fournisseur..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-slate-200"></div>
+<h1 class="text-lg font-black text-[#001E40] dark:text-white font-headline">2iE Procurement</h1>
+</div>
+</header>
+<!-- Page Content -->
+<div class="pt-24 px-8 pb-12">
+<!-- Hero Header -->
+<div class="mb-10 flex justify-between items-end">
+<div class="max-w-2xl">
+<h2 class="text-4xl font-extrabold text-primary font-headline tracking-tight mb-2">Référentiel Fournisseurs</h2>
+<p class="text-secondary font-body leading-relaxed">Gérez l'annuaire centralisé des prestataires agréés. Assurez le suivi de la conformité et la catégorisation des domaines d'expertise institutionnels.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-lg border border-outline-variant text-primary font-semibold text-sm hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">file_download</span>
+                        Exporter CSV
+                    </button>
+<button class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary-container text-on-primary font-semibold text-sm shadow-md hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add_business</span>
+                        Nouveau Fournisseur
+                    </button>
+</div>
+</div>
+<!-- Dashboard Style Metrics -->
+<div class="grid grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm">
+<p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Total Fournisseurs</p>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-black text-primary font-headline">1,248</span>
+<span class="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">+12%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-on-primary-container shadow-sm">
+<p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Domaines d'activité</p>
+<span class="text-2xl font-black text-primary font-headline">42</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-on-secondary-container shadow-sm">
+<p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Externes Actifs</p>
+<span class="text-2xl font-black text-primary font-headline">315</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-surface-tint shadow-sm">
+<p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Dernier Audit</p>
+<span class="text-2xl font-black text-primary font-headline">24 Oct</span>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<!-- Table Controls -->
+<div class="px-6 py-4 flex items-center justify-between bg-surface-container-low/30">
+<div class="flex gap-2">
+<button class="px-3 py-1.5 text-xs font-bold bg-white text-primary rounded-lg shadow-sm">Tous</button>
+<button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:bg-white rounded-lg transition-all">Classique</button>
+<button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:bg-white rounded-lg transition-all">Externe</button>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-xs text-slate-400 font-medium">Affichage 1-10 sur 1,248</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+<!-- The Architectural Ledger Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container">
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant font-label">ID</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant font-label">Raison Sociale</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant font-label">Domaine</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant font-label">Contact Principal</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant font-label text-center">Statut</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant font-label text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-001</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">SA</div>
+<div>
+<p class="text-sm font-bold text-primary">Sotuba Architecture</p>
+<p class="text-[10px] text-slate-400">BAMAKO, MALI</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-on-surface-variant">Génie Civil &amp; Urbanisme</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-on-surface">Moussa Traoré</span>
+<span class="text-[11px] text-slate-400">m.traore@sotuba-arch.com</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-500 uppercase tracking-tighter">Classique</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface/30 hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-042</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container flex items-center justify-center text-primary font-bold text-xs">TC</div>
+<div>
+<p class="text-sm font-bold text-primary">TechConnect International</p>
+<p class="text-[10px] text-slate-400">DAKAR, SÉNÉGAL</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-on-surface-variant">Systèmes d'Information</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-on-surface">Awa Diop</span>
+<span class="text-[11px] text-slate-400">contact@techconnect.sn</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold border-2 border-primary-container text-primary-container uppercase tracking-tighter">Externe</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-109</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold text-xs">HL</div>
+<div>
+<p class="text-sm font-bold text-primary">HydraLog Solutions</p>
+<p class="text-[10px] text-slate-400">OUAGADOUGOU, BF</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-on-surface-variant">Gestion de l'Eau</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-on-surface">Jean-Marc Kaboré</span>
+<span class="text-[11px] text-slate-400">jmk@hydralog.bf</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-500 uppercase tracking-tighter">Classique</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface/30 hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-215</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-on-primary-container flex items-center justify-center text-white font-bold text-xs">GE</div>
+<div>
+<p class="text-sm font-bold text-primary">Green Energy Lab</p>
+<p class="text-[10px] text-slate-400">ABIDJAN, CI</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-on-surface-variant">Énergies Renouvelables</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-on-surface">Koffi Kouassi</span>
+<span class="text-[11px] text-slate-400">k.kouassi@greenlab.ci</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold border-2 border-primary-container text-primary-container uppercase tracking-tighter">Externe</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer -->
+<div class="px-6 py-4 border-t border-slate-100 flex items-center justify-center gap-1 bg-surface">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white text-sm font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-high text-slate-500 text-sm font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-high text-slate-500 text-sm font-medium">3</button>
+<span class="px-2 text-slate-300">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-high text-slate-500 text-sm font-medium">125</button>
+</div>
+</div>
+<!-- Contextual Info Cards (Bento) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+<div class="col-span-1 md:col-span-2 glass-panel p-8 rounded-2xl border border-outline-variant/15 flex gap-8 items-center overflow-hidden relative">
+<div class="relative z-10 flex-1">
+<h3 class="text-xl font-bold text-primary mb-3">Guide de Conformité 2024</h3>
+<p class="text-on-surface-variant text-sm mb-6 leading-relaxed">Les nouveaux standards d'audit environnemental sont applicables pour tous les fournisseurs de catégorie "BTP" et "Énergie". Consultez le protocole mis à jour.</p>
+<a class="inline-flex items-center text-primary font-bold text-sm gap-1 hover:gap-2 transition-all" href="#">
+                            Voir le protocole <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="w-48 h-48 rounded-xl overflow-hidden shadow-xl rotate-3 shrink-0">
+<img alt="Audit standards" class="w-full h-full object-cover" data-alt="Close-up of organized architectural blue prints and engineering documents on a minimalist desk with soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsfkI_YOaC7W2wQM9agm8K2FmFokmXAmGtcmP2R_9tTedvRqrDv2bhsAwAkFc08sIB0iK-ns6poCCVVvo9LW4OczqGHQjFggagvgeawchnS9qQWLY8iWRUgw8zH6VWx_0B2O2tBARTDGwrLuoJjy5lmCKmJjvTCmb6h6Knvmx7gcEkpGQFb7j7Eb9FPI9peJYkYwofV0JYCLv5ehhFFDQgarJSWzIpTS3Z2BaQahuj1xRhvXCgMbyqonIYHWgcdIL32I4ixgD7zYw"/>
+</div>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-3xl"></div>
+</div>
+<div class="bg-primary text-on-primary p-8 rounded-2xl relative overflow-hidden flex flex-col justify-between">
+<span class="material-symbols-outlined text-5xl opacity-20 absolute top-4 right-4">shield_with_heart</span>
+<div>
+<h3 class="text-xl font-bold mb-2">Support Dédié</h3>
+<p class="text-primary-fixed-dim text-sm leading-relaxed">Une question sur l'agrément ? Notre équipe juridique vous assiste dans la validation des dossiers prestataires.</p>
+</div>
+<button class="mt-6 w-full py-3 bg-white text-primary font-bold rounded-lg hover:bg-blue-50 transition-colors">Contact Support</button>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression Rule Active: Not rendering FAB on this details/registry screen -->
+</body></html>
