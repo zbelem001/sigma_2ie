@@ -1,0 +1,120 @@
+<app-menu></app-menu>
+<app-header [breadcrumb]="['Accueil', 'Transformer BDD']" searchPlaceholder="Rechercher un dossier..."></app-header>
+<main class="ml-[240px] w-[calc(100%-240px)] pt-20 min-h-screen bg-surface px-4 pb-8">
+  <div class="w-full p-8">
+    <div class="mb-10">
+      <h1 class="text-4xl font-extrabold text-primary tracking-tight mb-2">Transformer BDD</h1>
+      <p class="text-on-surface-variant max-w-2xl">Module d'orchestration des données de passation des marchés. Suivez les étapes séquentielles pour la mise à jour du registre institutionnel.</p>
+    </div>
+
+    <div class="grid grid-cols-12 gap-8">
+      <div class="col-span-12 lg:col-span-3">
+        <div class="bg-surface-container-low rounded-xl p-2 sticky top-24">
+          <div class="space-y-1">
+            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+              <span class="material-symbols-outlined text-lg">add_circle</span>
+              Ajouter marché
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+              <span class="material-symbols-outlined text-lg">view_module</span>
+              Ajouter lot
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+              <span class="material-symbols-outlined text-lg">visibility</span>
+              Consulter
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+              <span class="material-symbols-outlined text-lg">inventory_2</span>
+              Réception
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-4 bg-white shadow-sm text-primary step-active rounded-lg text-left text-sm font-semibold">
+              <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">send</span>
+              Soumission
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-400 cursor-not-allowed text-left text-sm font-medium">
+              <span class="material-symbols-outlined text-lg">analytics</span>
+              Analyse
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-400 cursor-not-allowed text-left text-sm font-medium">
+              <span class="material-symbols-outlined text-lg">verified_user</span>
+              Attribution
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 lg:col-span-9 space-y-8">
+        <section class="bg-error-container/30 border-l-4 border-error p-6 rounded-r-xl flex items-start gap-5">
+          <div class="bg-error-container text-on-error-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined">warning</span>
+          </div>
+          <div>
+            <h3 class="text-on-error-container font-bold text-lg">Action impossible</h3>
+            <p class="text-on-error-container/80 text-sm mt-1">Veuillez d'abord valider le PV d'ouverture avant de procéder à l'enregistrement de nouvelles soumissions pour ce marché.</p>
+            <button class="mt-4 text-sm font-bold text-error flex items-center gap-2 hover:underline">
+              Voir le statut du PV d'ouverture
+              <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-8 border-b border-surface-container pb-6">
+            <h2 class="text-2xl font-bold text-primary">Ajouter Soumission</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Saisissez les détails de l'offre technique et financière du soumissionnaire.</p>
+          </div>
+          <form class="space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Sélectionner le Lot</label>
+                <div class="relative">
+                  <select class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary appearance-none transition-all">
+                    <option value="">Choisir un lot...</option>
+                    <option value="1">Lot 01 - Acquisition de matériel informatique</option>
+                    <option value="2">Lot 02 - Mobilier de bureau et accessoires</option>
+                  </select>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Référence marché</label>
+                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="text" placeholder="M-2024-0012" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Montant retenu</label>
+                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="text" placeholder="1 245 000 F CFA" />
+              </div>
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Date de soumission</label>
+                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="date" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Statut</label>
+                <select class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary appearance-none transition-all">
+                  <option>Soumis</option>
+                  <option>En attente</option>
+                  <option>Rejeté</option>
+                </select>
+              </div>
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Offrant</label>
+                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="text" placeholder="Nom du fournisseur" />
+              </div>
+              <div class="space-y-2">
+                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Score technique</label>
+                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="number" placeholder="0–100" />
+              </div>
+            </div>
+            <div class="flex justify-end gap-3">
+              <button class="px-6 py-3 rounded-lg border border-outline-variant text-on-surface-variant text-sm font-semibold hover:bg-surface-container transition-colors">Annuler</button>
+              <button class="px-6 py-3 rounded-lg bg-primary text-white text-sm font-semibold hover:opacity-90 transition-opacity">Enregistrer</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
