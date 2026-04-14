@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { App } from './app';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MarchesComponent } from './pages/marches/marches.component';
+import { MarchesDetailsComponent } from './pages/marches-details/marches-details.component';
 import { FournisseursComponent } from './pages/fournisseurs/fournisseurs.component';
 import { TransformationComponent } from './pages/transformation/transformation.component';
 import { MenuComponent } from './shared/menu/menu.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'marches', component: MarchesComponent },
+  { path: 'marches/details', component: MarchesDetailsComponent },
   { path: 'fournisseurs', component: FournisseursComponent },
   { path: 'transformation', component: TransformationComponent },
   { path: '**', redirectTo: 'dashboard' }
@@ -24,6 +26,7 @@ const routes: Routes = [
     App,
     DashboardComponent,
     MarchesComponent,
+    MarchesDetailsComponent,
     FournisseursComponent,
     TransformationComponent,
     MenuComponent
