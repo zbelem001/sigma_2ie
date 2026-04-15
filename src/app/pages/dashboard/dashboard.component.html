@@ -23,7 +23,7 @@
       </div>
       <h3 class="text-on-surface-variant text-sm font-medium mb-1">Marchés à lancer</h3>
       <div class="flex items-baseline gap-2">
-        <span class="text-3xl font-extrabold text-primary font-headline">12</span>
+        <span class="text-3xl font-extrabold text-primary font-headline">{{ marketsToLaunch }}</span>
         <span class="text-xs font-semibold text-error flex items-center"><span class="material-symbols-outlined text-xs">arrow_downward</span> 4%</span>
       </div>
     </div>
@@ -36,7 +36,7 @@
       </div>
       <h3 class="text-on-surface-variant text-sm font-medium mb-1">Marchés en analyse</h3>
       <div class="flex items-baseline gap-2">
-        <span class="text-3xl font-extrabold text-primary font-headline">08</span>
+        <span class="text-3xl font-extrabold text-primary font-headline">{{ marketsInAnalysis }}</span>
         <span class="text-xs font-semibold text-emerald-600 flex items-center"><span class="material-symbols-outlined text-xs">arrow_upward</span> 12%</span>
       </div>
     </div>
@@ -49,7 +49,7 @@
       </div>
       <h3 class="text-on-surface-variant text-sm font-medium mb-1">Marchés en cours</h3>
       <div class="flex items-baseline gap-2">
-        <span class="text-3xl font-extrabold text-primary font-headline">24</span>
+        <span class="text-3xl font-extrabold text-primary font-headline">{{ marketsInProgress }}</span>
         <span class="text-xs font-semibold text-emerald-600 flex items-center"><span class="material-symbols-outlined text-xs">arrow_upward</span> 8%</span>
       </div>
     </div>
@@ -62,7 +62,7 @@
       </div>
       <h3 class="text-on-surface-variant text-sm font-medium mb-1">Total Fournisseurs</h3>
       <div class="flex items-baseline gap-2">
-        <span class="text-3xl font-extrabold text-primary font-headline">142</span>
+        <span class="text-3xl font-extrabold text-primary font-headline">{{ totalSuppliers }}</span>
         <span class="text-xs font-semibold text-on-surface-variant/60 flex items-center">Stable</span>
       </div>
     </div>
@@ -121,40 +121,13 @@
       <h4 class="text-lg font-bold font-headline mb-2">Répartition Sectorielle</h4>
       <p class="text-white/70 text-sm mb-8">Concentration des budgets par type de prestation.</p>
       <div class="space-y-6">
-        <div class="space-y-2">
+        <div *ngFor="let item of sectorDistribution" class="space-y-2">
           <div class="flex justify-between text-xs font-semibold uppercase tracking-wider">
-            <span>Travaux BTP</span>
-            <span>42%</span>
+            <span>{{ item.category }}</span>
+            <span>{{ item.percent }}%</span>
           </div>
           <div class="h-1.5 w-full bg-white/10 rounded-full">
-            <div class="h-full w-[42%] bg-white rounded-full"></div>
-          </div>
-        </div>
-        <div class="space-y-2">
-          <div class="flex justify-between text-xs font-semibold uppercase tracking-wider">
-            <span>Fournitures IT</span>
-            <span>28%</span>
-          </div>
-          <div class="h-1.5 w-full bg-white/10 rounded-full">
-            <div class="h-full w-[28%] bg-secondary-container rounded-full"></div>
-          </div>
-        </div>
-        <div class="space-y-2">
-          <div class="flex justify-between text-xs font-semibold uppercase tracking-wider">
-            <span>Services Labo</span>
-            <span>15%</span>
-          </div>
-          <div class="h-1.5 w-full bg-white/10 rounded-full">
-            <div class="h-full w-[15%] bg-tertiary-fixed rounded-full"></div>
-          </div>
-        </div>
-        <div class="space-y-2">
-          <div class="flex justify-between text-xs font-semibold uppercase tracking-wider">
-            <span>Consultance</span>
-            <span>15%</span>
-          </div>
-          <div class="h-1.5 w-full bg-white/10 rounded-full">
-            <div class="h-full w-[15%] bg-slate-400 rounded-full"></div>
+            <div class="h-full rounded-full" [ngStyle]="{ width: item.percent + '%', backgroundColor: item.category === 'Travaux BTP' ? '#ffffff' : item.category === 'Fournitures IT' ? '#7C3AED' : item.category === 'Services Labo' ? '#0EA5E9' : item.category === 'Consultance' ? '#94A3B8' : '#C4B5FD' }"></div>
           </div>
         </div>
       </div>
@@ -183,71 +156,14 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-slate-100">
-          <tr class="hover:bg-surface-container-high transition-colors">
-            <td class="px-6 py-4 font-mono text-xs text-primary font-semibold">2024-F-001</td>
+          <tr *ngFor="let action of recentActions" class="hover:bg-surface-container-high transition-colors">
+            <td class="px-6 py-4 font-mono text-xs text-primary font-semibold">{{ action.reference }}</td>
             <td class="px-6 py-4">
-              <div class="font-medium text-sm">Fourniture de matériel de laboratoire hydraulique</div>
-              <div class="text-[10px] text-slate-400">Lot unique - Budget : 45.000.000 FCFA</div>
+              <div class="font-medium text-sm">{{ action.description }}</div>
+              <div class="text-[10px] text-slate-400">{{ action.date }}</div>
             </td>
-            <td class="px-6 py-4 text-xs text-on-surface-variant">Il y a 2 heures</td>
             <td class="px-6 py-4">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary-container text-on-secondary-container"><span class="w-1.5 h-1.5 rounded-full bg-on-secondary-container"></span> En Analyse</span>
-            </td>
-            <td class="px-6 py-4 text-right">
-              <button class="p-2 hover:bg-surface-container-highest rounded transition-colors"><span class="material-symbols-outlined text-lg text-slate-400">more_vert</span></button>
-            </td>
-          </tr>
-          <tr class="hover:bg-surface-container-high transition-colors">
-            <td class="px-6 py-4 font-mono text-xs text-primary font-semibold">2024-S-012</td>
-            <td class="px-6 py-4">
-              <div class="font-medium text-sm">Gardiennage et surveillance des sites 2iE</div>
-              <div class="text-[10px] text-slate-400">Renouvellement annuel - Prestation continue</div>
-            </td>
-            <td class="px-6 py-4 text-xs text-on-surface-variant">Hier, 16:45</td>
-            <td class="px-6 py-4">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Attribué</span>
-            </td>
-            <td class="px-6 py-4 text-right">
-              <button class="p-2 hover:bg-surface-container-highest rounded transition-colors"><span class="material-symbols-outlined text-lg text-slate-400">more_vert</span></button>
-            </td>
-          </tr>
-          <tr class="hover:bg-surface-container-high transition-colors">
-            <td class="px-6 py-4 font-mono text-xs text-primary font-semibold">2024-T-005</td>
-            <td class="px-6 py-4">
-              <div class="font-medium text-sm">Réhabilitation du bâtiment pédagogique C</div>
-              <div class="text-[10px] text-slate-400">Travaux de gros oeuvre - Financement Interne</div>
-            </td>
-            <td class="px-6 py-4 text-xs text-on-surface-variant">05 Juin 2024</td>
-            <td class="px-6 py-4">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary-fixed text-primary"><span class="w-1.5 h-1.5 rounded-full bg-primary"></span> En Cours</span>
-            </td>
-            <td class="px-6 py-4 text-right">
-              <button class="p-2 hover:bg-surface-container-highest rounded transition-colors"><span class="material-symbols-outlined text-lg text-slate-400">more_vert</span></button>
-            </td>
-          </tr>
-          <tr class="hover:bg-surface-container-high transition-colors">
-            <td class="px-6 py-4 font-mono text-xs text-primary font-semibold">2024-F-021</td>
-            <td class="px-6 py-4">
-              <div class="font-medium text-sm">Acquisition de serveurs haute performance</div>
-              <div class="text-[10px] text-slate-400">Infrastructures IT - Planification Q3</div>
-            </td>
-            <td class="px-6 py-4 text-xs text-on-surface-variant">04 Juin 2024</td>
-            <td class="px-6 py-4">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-surface-container-highest text-slate-600"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Planifié</span>
-            </td>
-            <td class="px-6 py-4 text-right">
-              <button class="p-2 hover:bg-surface-container-highest rounded transition-colors"><span class="material-symbols-outlined text-lg text-slate-400">more_vert</span></button>
-            </td>
-          </tr>
-          <tr class="hover:bg-surface-container-high transition-colors">
-            <td class="px-6 py-4 font-mono text-xs text-primary font-semibold">2024-C-003</td>
-            <td class="px-6 py-4">
-              <div class="font-medium text-sm">Audit énergétique des campus Kamboinsé</div>
-              <div class="text-[10px] text-slate-400">Appel d'offres restreint</div>
-            </td>
-            <td class="px-6 py-4 text-xs text-on-surface-variant">02 Juin 2024</td>
-            <td class="px-6 py-4">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-error-container text-on-error-container"><span class="w-1.5 h-1.5 rounded-full bg-error"></span> Rejeté</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-surface-container-highest text-slate-600">{{ action.statut }}</span>
             </td>
             <td class="px-6 py-4 text-right">
               <button class="p-2 hover:bg-surface-container-highest rounded transition-colors"><span class="material-symbols-outlined text-lg text-slate-400">more_vert</span></button>
