@@ -1,1 +1,20 @@
-/* Styles for the Transformation BDD page can be extended here if needed. */
+.transformation-header {
+  position: sticky;
+  top: 6rem;
+  z-index: 10;
+}
+
+.transformation-scroll-area {
+  max-height: calc(100vh - 14rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.transformation-scroll-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.transformation-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.4);
+  border-radius: 9999px;
+}

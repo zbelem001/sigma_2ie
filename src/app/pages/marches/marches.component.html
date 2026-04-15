@@ -26,7 +26,7 @@
           </button>
         </div>
         <div class="flex items-center gap-3">
-          <span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">24 marchés</span>
+          <span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">{{ markets.length }} marchés</span>
           <div class="h-4 w-px bg-outline-variant/30 mx-1"></div>
           <button class="p-2 hover:bg-surface-container-low rounded-md transition-colors text-outline">
             <span class="material-symbols-outlined" data-icon="view_list">view_list</span>
@@ -58,101 +58,48 @@
                 <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
               </th>
               <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">N° Marché</th>
+              <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Date création</th>
               <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Description</th>
               <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Demandeur</th>
+              <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Mode</th>
               <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-center">Lots</th>
               <th class="py-4 px-4 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">Statut</th>
               <th class="py-4 px-6 text-[10px] font-bold uppercase tracking-wider text-on-surface-variant text-right">Actions</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-surface-container-low">
-            <tr class="hover:bg-surface-container-low/50 transition-colors group">
+            <tr *ngFor="let marche of markets" class="hover:bg-surface-container-low/50 transition-colors group">
               <td class="py-5 px-6">
                 <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
               </td>
               <td class="py-5 px-4">
-                <span class="text-xs font-bold text-[#1A3F6F]">M-2023-0045</span>
+                <span class="text-xs font-bold text-[#1A3F6F]">{{ marche.numbMarche }}</span>
               </td>
+              <td class="py-5 px-4 text-sm text-slate-500">{{ marche.dateEnregistrement }}</td>
               <td class="py-5 px-4">
-                <p class="text-sm font-medium text-on-surface line-clamp-1 max-w-[300px]" title="Fourniture et installation d'équipements solaires pour le campus principal">Fourniture et installation d'équipements solaires...</p>
-              </td>
-              <td class="py-5 px-4">
-                <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">DG</div>
-                  <span class="text-sm text-on-surface-variant">Dir. Générale</span>
-                </div>
-              </td>
-              <td class="py-5 px-4 text-center">
-                <span class="text-xs font-bold text-on-surface">03</span>
-              </td>
-              <td class="py-5 px-4">
-                <span class="h-6 px-3 bg-green-100 text-[#1E7A4E] text-[10px] font-bold rounded-full inline-flex items-center uppercase tracking-wider">En cours</span>
-              </td>
-              <td class="py-5 px-6 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <button type="button" routerLink="/marches/details" class="p-2 text-outline hover:text-[#1A3F6F] hover:bg-white rounded-lg shadow-sm transition-all">
-                    <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
-                  </button>
-                  <button class="p-2 text-outline hover:text-[#1A3F6F] transition-colors">
-                    <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr class="hover:bg-surface-container-low/50 transition-colors">
-              <td class="py-5 px-6">
-                <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
-              </td>
-              <td class="py-5 px-4">
-                <span class="text-xs font-bold text-[#1A3F6F]">M-2024-0012</span>
-              </td>
-              <td class="py-5 px-4">
-                <p class="text-sm font-medium text-on-surface line-clamp-1 max-w-[300px]" title="Audit financier et comptable des exercices 2021-2023">Audit financier et comptable des exercices 2021...</p>
+                <p class="text-sm font-medium text-on-surface line-clamp-1 max-w-[300px]" [title]="marche.description">{{ marche.description }}</p>
+                <p class="text-[10px] text-slate-400 mt-1">{{ marche.financement }}</p>
               </td>
               <td class="py-5 px-4">
                 <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full bg-secondary-fixed flex items-center justify-center text-[10px] font-bold text-secondary">DA</div>
-                  <span class="text-sm text-on-surface-variant">DAF</span>
+                  <div class="w-6 h-6 rounded-full bg-primary-fixed flex items-center justify-center text-[10px] font-bold text-primary">{{ marche.demandeur.split(' ').map(w => w[0]).join('') }}</div>
+                  <span class="text-sm text-on-surface-variant">{{ marche.demandeur }}</span>
                 </div>
               </td>
+              <td class="py-5 px-4 text-sm text-on-surface-variant">{{ marche.modePassation }}</td>
               <td class="py-5 px-4 text-center">
-                <span class="text-xs font-bold text-on-surface">01</span>
+                <span class="text-xs font-bold text-on-surface">{{ lotCount(marche) }}</span>
               </td>
               <td class="py-5 px-4">
-                <span class="h-6 px-3 bg-blue-100 text-[#144685] text-[10px] font-bold rounded-full inline-flex items-center uppercase tracking-wider">À lancer</span>
-              </td>
-              <td class="py-5 px-6 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <button type="button" routerLink="/marches/details" class="p-2 text-outline hover:text-[#1A3F6F] hover:bg-white rounded-lg shadow-sm transition-all">
-                    <span class="material-symbols-outlined text-lg" data-icon="visibility">visibility</span>
-                  </button>
-                  <button class="p-2 text-outline hover:text-[#1A3F6F] transition-colors">
-                    <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr class="hover:bg-surface-container-low/50 transition-colors">
-              <td class="py-5 px-6">
-                <input class="rounded text-[#1A3F6F] border-outline-variant focus:ring-[#1A3F6F]" type="checkbox" />
-              </td>
-              <td class="py-5 px-4">
-                <span class="text-xs font-bold text-[#1A3F6F]">M-2023-0102</span>
-              </td>
-              <td class="py-5 px-4">
-                <p class="text-sm font-medium text-on-surface line-clamp-1 max-w-[300px]" title="Réfection de la toiture du bâtiment administratif bloc B">Réfection de la toiture du bâtiment administr...</p>
-              </td>
-              <td class="py-5 px-4">
-                <div class="flex items-center gap-2">
-                  <div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold text-tertiary">ST</div>
-                  <span class="text-sm text-on-surface-variant">Service Tech</span>
-                </div>
-              </td>
-              <td class="py-5 px-4 text-center">
-                <span class="text-xs font-bold text-on-surface">02</span>
-              </td>
-              <td class="py-5 px-4">
-                <span class="h-6 px-3 bg-green-100 text-[#1E7A4E] text-[10px] font-bold rounded-full inline-flex items-center uppercase tracking-wider">En cours</span>
+                <span class="h-6 px-3 text-[10px] font-bold rounded-full inline-flex items-center uppercase tracking-wider"
+                  [ngClass]="{
+                    'bg-blue-100 text-[#144685]': marche.statut === 'À lancer',
+                    'bg-yellow-100 text-[#A56A00]': marche.statut === 'Réception',
+                    'bg-violet-100 text-[#5B21B6]': marche.statut === 'Analyse',
+                    'bg-green-100 text-[#1E7A4E]': marche.statut === 'En cours' || marche.statut === 'Exécuté'
+                  }">
+                  {{ marche.statut }}
+                </span>
               </td>
               <td class="py-5 px-6 text-right">
                 <div class="flex items-center justify-end gap-2">
@@ -170,7 +117,7 @@
       </div>
       <div class="py-4 px-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-surface-container-low">
         <div class="flex items-center gap-4">
-          <span class="text-xs text-on-surface-variant">Affichage <span class="font-bold text-on-surface">1–20</span> sur <span class="font-bold text-on-surface">87</span></span>
+          <span class="text-xs text-on-surface-variant">Affichage <span class="font-bold text-on-surface">1–{{ markets.length }}</span> sur <span class="font-bold text-on-surface">{{ markets.length }}</span></span>
           <div class="flex items-center gap-2">
             <span class="text-[10px] font-bold uppercase text-outline-variant">Par page:</span>
             <select class="h-8 pl-2 pr-8 bg-surface-container-low border-none rounded text-xs font-bold focus:ring-1 focus:ring-[#1A3F6F]">

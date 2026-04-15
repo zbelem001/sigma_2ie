@@ -19,7 +19,7 @@ import {
   standalone: false
 })
 export class TransformationComponent {
-  activeStep: 'ajouterMarche' | 'ajouterLot' | 'consultation' | 'reception' | 'soumission' | 'analyse' | 'attribution' = 'ajouterMarche';
+  activeStep: 'ajouterMarche' | 'ajouterLot' | 'consultation' | 'reception' | 'soumission' | 'analyse' | 'attribution' | 'avenant' = 'ajouterMarche';
   message = '';
 
   newMarche: Omit<Marche, 'statut'> = {
@@ -27,15 +27,16 @@ export class TransformationComponent {
     description: '',
     nombreLot: 1,
     natureOuverture: '',
+    dateEnregistrement: '',
     financement: '',
     modePassation: '',
     demandeur: '',
     responsableSuivi: '',
-    sctPersons: [],
+    sctPersons: ['', '', '', ''],
     datePrevReception: ''
   };
 
-  newLot: Partial<Lot> = { numbMarche: '', numbLot: '', description: '' };
+  newLot: Partial<Lot> = { numbMarche: '', numbLot: '', description: '', numbContrat: '' };
 
   newConsultation: Partial<Consultation> = { numbLot: '', idFournisseurs: [], dateConsultation: '' };
   consultationFournisseurs = '';
@@ -54,16 +55,17 @@ export class TransformationComponent {
     observation: ''
   };
 
-  analyseInput: Partial<Analyse> = { numbLot: '', idAttributairePrev: '', dateEffecReception: '', observation: '' };
+  analyseInput: Partial<Analyse> = { numbLot: '', idAttributairePrev: '', dateEffecReception: '', datePresentationRapport: '', observation: '' };
   rapportLot = '';
 
-  docValidation: { numbLot: string; notification: boolean; contrat: boolean; fed: boolean; bonCommande: boolean; ordreService: boolean } = {
+  docValidation: { numbLot: string; notification: boolean; contrat: boolean; fed: boolean; bonCommande: boolean; ordreService: boolean; liasseContractuelle: boolean } = {
     numbLot: '',
     notification: false,
     contrat: false,
     fed: false,
     bonCommande: false,
-    ordreService: false
+    ordreService: false,
+    liasseContractuelle: false
   };
 
   attributionInput: Partial<Attributaire> = {
@@ -102,11 +104,12 @@ export class TransformationComponent {
         description: '',
         nombreLot: 1,
         natureOuverture: '',
+        dateEnregistrement: '',
         financement: '',
         modePassation: '',
         demandeur: '',
         responsableSuivi: '',
-        sctPersons: [],
+        sctPersons: ['', '', '', ''],
         datePrevReception: ''
       };
     } catch (error) {
@@ -120,10 +123,11 @@ export class TransformationComponent {
       this.transformation.addLot({
         numbMarche: this.newLot.numbMarche || '',
         numbLot: this.newLot.numbLot || undefined,
-        description: this.newLot.description || ''
+        description: this.newLot.description || '',
+        numbContrat: this.newLot.numbContrat || undefined
       });
       this.message = `Lot ajouté pour le marché ${this.newLot.numbMarche}.`;
-      this.newLot = { numbMarche: '', numbLot: '', description: '' };
+      this.newLot = { numbMarche: '', numbLot: '', description: '', numbContrat: '' };
     } catch (error) {
       this.message = (error as Error).message;
     }
@@ -201,10 +205,11 @@ export class TransformationComponent {
         numbLot: this.analyseInput.numbLot || '',
         idAttributairePrev: this.analyseInput.idAttributairePrev || '',
         dateEffecReception: this.analyseInput.dateEffecReception || '',
+        datePresentationRapport: this.analyseInput.datePresentationRapport || '',
         observation: this.analyseInput.observation || ''
       });
       this.message = `Analyse enregistrée pour le lot ${this.analyseInput.numbLot}.`;
-      this.analyseInput = { numbLot: '', idAttributairePrev: '', dateEffecReception: '', observation: '' };
+      this.analyseInput = { numbLot: '', idAttributairePrev: '', dateEffecReception: '', datePresentationRapport: '', observation: '' };
     } catch (error) {
       this.message = (error as Error).message;
     }
@@ -229,11 +234,12 @@ export class TransformationComponent {
         contrat: this.docValidation.contrat ? 'Oui' : 'Non',
         fed: this.docValidation.fed ? 'Oui' : 'Non',
         bonCommande: this.docValidation.bonCommande ? 'Oui' : 'Non',
-        ordreService: this.docValidation.ordreService ? 'Oui' : 'Non'
+        ordreService: this.docValidation.ordreService ? 'Oui' : 'Non',
+        liasseContractuelle: this.docValidation.liasseContractuelle ? 'Oui' : 'Non'
       };
       this.transformation.validateDocuments(this.docValidation.numbLot, values);
       this.message = `Documents administratifs actualisés pour le lot ${this.docValidation.numbLot}.`;
-      this.docValidation = { numbLot: '', notification: false, contrat: false, fed: false, bonCommande: false, ordreService: false };
+      this.docValidation = { numbLot: '', notification: false, contrat: false, fed: false, bonCommande: false, ordreService: false, liasseContractuelle: false };
     } catch (error) {
       this.message = (error as Error).message;
     }

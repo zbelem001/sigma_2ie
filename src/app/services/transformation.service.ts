@@ -5,6 +5,7 @@ export interface Marche {
   description: string;
   nombreLot: number;
   natureOuverture: string;
+  dateEnregistrement: string;
   financement: string;
   modePassation: string;
   demandeur: string;
@@ -19,12 +20,14 @@ export interface Lot {
   numbLot: string;
   numbMarche: string;
   description: string;
+  numbContrat?: string;
 }
 
 export interface Document {
   numbLot: string;
   pvOuverture: 'Oui' | 'Non';
   rapportAnalyse: 'Oui' | 'Non';
+  liasseContractuelle: 'Oui' | 'Non';
   notification: 'Oui' | 'Non';
   contrat: 'Oui' | 'Non';
   fed: 'Oui' | 'Non';
@@ -67,6 +70,7 @@ export interface Analyse {
   numbLot: string;
   idAttributairePrev: string;
   dateEffecReception: string;
+  datePresentationRapport?: string;
   observation: string;
 }
 
@@ -80,6 +84,7 @@ export interface Attributaire {
 }
 
 export interface Avenant {
+  idAvenant?: string;
   idSoumissionAttribuee: string;
   numbAvenant: string;
   montantAvenant: string;
@@ -115,6 +120,7 @@ export class TransformationService {
       description: 'Fourniture et installation d\'équipements solaires pour le campus principal',
       nombreLot: 3,
       natureOuverture: 'Ouverte',
+      dateEnregistrement: '2023-12-15',
       financement: 'Budget interne',
       modePassation: 'Appel d\'offres',
       demandeur: 'Direction Générale',
@@ -201,6 +207,7 @@ export class TransformationService {
       description: 'Audit financier et comptable des exercices 2021-2023',
       nombreLot: 1,
       natureOuverture: 'Restreinte',
+      dateEnregistrement: '2024-01-05',
       financement: 'Budget 2iE',
       modePassation: 'Appel d\'offres restreint',
       demandeur: 'DAF',
@@ -216,6 +223,7 @@ export class TransformationService {
       description: 'Réfection de la toiture du bâtiment administratif bloc B',
       nombreLot: 2,
       natureOuverture: 'Publique',
+      dateEnregistrement: '2024-01-10',
       financement: 'Projet campus',
       modePassation: 'Appel d\'offres ouvert',
       demandeur: 'Service Technique',
@@ -253,6 +261,7 @@ export class TransformationService {
     this.marcheList.push({
       ...marche,
       numbMarche: marche.numbMarche.trim(),
+      dateEnregistrement: marche.dateEnregistrement?.trim() || this.today(),
       statut: 'À lancer',
       category: marche.category ?? 'Autre'
     });
@@ -272,12 +281,14 @@ export class TransformationService {
     this.lotList.push({
       numbLot: effectiveNumbLot,
       numbMarche: lot.numbMarche,
-      description: lot.description.trim()
+      description: lot.description.trim(),
+      numbContrat: lot.numbContrat?.trim() || undefined
     });
     this.documentList.push({
       numbLot: effectiveNumbLot,
       pvOuverture: 'Non',
       rapportAnalyse: 'Non',
+      liasseContractuelle: 'Non',
       notification: 'Non',
       contrat: 'Non',
       fed: 'Non',
@@ -405,7 +416,10 @@ export class TransformationService {
     if (!soumission) {
       throw new Error(`Soumission ${analyse.idAttributairePrev} introuvable.`);
     }
-    this.analyseList.push(analyse);
+    this.analyseList.push({
+      ...analyse,
+      datePresentationRapport: analyse.datePresentationRapport || ''
+    });
     const lotSoumissions = this.soumissionList.filter((item) => item.numbLot === analyse.numbLot);
     lotSoumissions.forEach((item, index) => {
       item.rangClassement = item.idSoumission === analyse.idAttributairePrev ? 1 : index + 2;
@@ -460,7 +474,10 @@ export class TransformationService {
     if (!soumission) {
       throw new Error(`Soumission ${data.idSoumissionAttribuee} introuvable.`);
     }
-    this.avenantList.push(data);
+    this.avenantList.push({
+      ...data,
+      idAvenant: data.idAvenant || `AV-${this.avenantList.length + 1}`
+    });
     this.logAction(data.idSoumissionAttribuee, `Avenant ajouté : ${data.numbAvenant}`, 'Avenant');
   }
 
