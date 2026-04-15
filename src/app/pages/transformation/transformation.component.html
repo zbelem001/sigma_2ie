@@ -4,38 +4,39 @@
   <div class="w-full">
     <div class="mb-10">
       <h1 class="text-heading-2 font-headline text-primary tracking-tight mb-2">Transformer BDD</h1>
-      <p class="text-on-surface-variant max-w-2xl">Module d'orchestration des données de passation des marchés. Suivez les étapes séquentielles pour la mise à jour du registre institutionnel.</p>
+      <p class="text-on-surface-variant max-w-2xl">Module d'orchestration des données de passation des marchés. Choisissez une étape et complétez le formulaire correspondant.</p>
     </div>
 
     <div class="grid grid-cols-12 gap-8">
       <div class="col-span-12 lg:col-span-3">
-        <div class="bg-surface-container-low rounded-xl p-2 sticky top-24">
-          <div class="space-y-1">
-            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+        <div class="bg-surface-container-low rounded-xl p-4 sticky top-24">
+          <div class="space-y-2">
+            <div class="text-xs uppercase tracking-[0.22em] text-slate-500 font-semibold mb-3">Étapes</div>
+            <button type="button" (click)="activeStep='ajouterMarche'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all" [ngClass]="{'bg-white shadow-sm text-primary': activeStep==='ajouterMarche', 'text-slate-600 hover:bg-surface-container-high': activeStep!=='ajouterMarche'}">
               <span class="material-symbols-outlined text-lg">add_circle</span>
               Ajouter marché
             </button>
-            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+            <button type="button" (click)="activeStep='ajouterLot'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all" [ngClass]="{'bg-white shadow-sm text-primary': activeStep==='ajouterLot', 'text-slate-600 hover:bg-surface-container-high': activeStep!=='ajouterLot'}">
               <span class="material-symbols-outlined text-lg">view_module</span>
               Ajouter lot
             </button>
-            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+            <button type="button" (click)="activeStep='consultation'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all" [ngClass]="{'bg-white shadow-sm text-primary': activeStep==='consultation', 'text-slate-600 hover:bg-surface-container-high': activeStep!=='consultation'}">
               <span class="material-symbols-outlined text-lg">visibility</span>
-              Consulter
+              Consultation
             </button>
-            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-500 hover:bg-surface-container-high transition-all rounded-lg text-left text-sm font-medium">
+            <button type="button" (click)="activeStep='reception'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all" [ngClass]="{'bg-white shadow-sm text-primary': activeStep==='reception', 'text-slate-600 hover:bg-surface-container-high': activeStep!=='reception'}">
               <span class="material-symbols-outlined text-lg">inventory_2</span>
               Réception
             </button>
-            <button class="w-full flex items-center gap-3 px-4 py-4 bg-white shadow-sm text-primary step-active rounded-lg text-left text-sm font-semibold">
-              <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">send</span>
+            <button type="button" (click)="activeStep='soumission'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all" [ngClass]="{'bg-white shadow-sm text-primary': activeStep==='soumission', 'text-slate-600 hover:bg-surface-container-high': activeStep!=='soumission'}">
+              <span class="material-symbols-outlined text-lg">send</span>
               Soumission
             </button>
-            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-400 cursor-not-allowed text-left text-sm font-medium">
+            <button type="button" (click)="activeStep='analyse'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all" [ngClass]="{'bg-white shadow-sm text-primary': activeStep==='analyse', 'text-slate-600 hover:bg-surface-container-high': activeStep!=='analyse'}">
               <span class="material-symbols-outlined text-lg">analytics</span>
               Analyse
             </button>
-            <button class="w-full flex items-center gap-3 px-4 py-4 text-slate-400 cursor-not-allowed text-left text-sm font-medium">
+            <button type="button" (click)="activeStep='attribution'" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left text-sm font-medium transition-all" [ngClass]="{'bg-white shadow-sm text-primary': activeStep==='attribution', 'text-slate-600 hover:bg-surface-container-high': activeStep!=='attribution'}">
               <span class="material-symbols-outlined text-lg">verified_user</span>
               Attribution
             </button>
@@ -44,75 +45,203 @@
       </div>
 
       <div class="col-span-12 lg:col-span-9 space-y-8">
-        <section class="bg-error-container/30 border-l-4 border-error p-6 rounded-r-xl flex items-start gap-5">
-          <div class="bg-error-container text-on-error-container w-10 h-10 rounded-full flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined">warning</span>
+        <div *ngIf="message" class="rounded-xl border border-primary/20 bg-primary/5 p-6 text-primary text-sm font-medium">
+          {{ message }}
+        </div>
+
+        <section *ngIf="activeStep==='ajouterMarche'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-6 border-b border-surface-container pb-4">
+            <h2 class="text-xl font-bold text-primary">Ajouter un marché</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Créez un nouveau marché avant d’ajouter des lots ou des consultations.</p>
           </div>
-          <div>
-            <h3 class="text-on-error-container font-bold text-lg">Action impossible</h3>
-            <p class="text-on-error-container/80 text-sm mt-1">Veuillez d'abord valider le PV d'ouverture avant de procéder à l'enregistrement de nouvelles soumissions pour ce marché.</p>
-            <button class="mt-4 text-sm font-bold text-error flex items-center gap-2 hover:underline">
-              Voir le statut du PV d'ouverture
-              <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </button>
+          <form class="grid gap-6" (ngSubmit)="submitMarche()">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <input name="numbMarche" [(ngModel)]="newMarche.numbMarche" required placeholder="Numéro marché" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+              <input name="datePrevReception" type="date" [(ngModel)]="newMarche.datePrevReception" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            </div>
+            <textarea name="description" [(ngModel)]="newMarche.description" rows="3" placeholder="Description" class="w-full rounded-lg border border-surface-container p-3 text-sm"></textarea>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <input name="nombreLot" type="number" [(ngModel)]="newMarche.nombreLot" min="1" placeholder="Nombre de lots" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+              <input name="natureOuverture" [(ngModel)]="newMarche.natureOuverture" placeholder="Nature ouverture" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <input name="financement" [(ngModel)]="newMarche.financement" placeholder="Financement" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+              <input name="modePassation" [(ngModel)]="newMarche.modePassation" placeholder="Mode de passation" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              <input name="demandeur" [(ngModel)]="newMarche.demandeur" placeholder="Demandeur" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+              <input name="responsableSuivi" [(ngModel)]="newMarche.responsableSuivi" placeholder="Responsable suivi" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            </div>
+            <input name="sctPerson" [(ngModel)]="newMarche.sctPersons[0]" placeholder="SCT person 1" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Créer marché</button>
+          </form>
+        </section>
+
+        <section *ngIf="activeStep==='ajouterLot'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-6 border-b border-surface-container pb-4">
+            <h2 class="text-xl font-bold text-primary">Ajouter un lot</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Rattachez un lot à un marché existant et initialisez les documents associés.</p>
+          </div>
+          <form class="grid gap-6" (ngSubmit)="submitLot()">
+            <select name="numbMarcheLot" [(ngModel)]="newLot.numbMarche" required class="w-full rounded-lg border border-surface-container p-3 text-sm">
+              <option value="">Marché parent</option>
+              <option *ngFor="let marche of markets" [value]="marche.numbMarche">{{ marche.numbMarche }}</option>
+            </select>
+            <input name="numbLot" [(ngModel)]="newLot.numbLot" placeholder="Référence du lot (optionnel)" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <textarea name="descriptionLot" [(ngModel)]="newLot.description" rows="3" placeholder="Description du lot" class="w-full rounded-lg border border-surface-container p-3 text-sm"></textarea>
+            <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Créer lot</button>
+          </form>
+        </section>
+
+        <section *ngIf="activeStep==='consultation'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-6 border-b border-surface-container pb-4">
+            <h2 class="text-xl font-bold text-primary">Enregistrer une consultation</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Renseignez les fournisseurs consultés pour un lot donné.</p>
+          </div>
+          <form class="grid gap-6" (ngSubmit)="submitConsultation()">
+            <select name="numbLotConsult" [(ngModel)]="newConsultation.numbLot" required class="w-full rounded-lg border border-surface-container p-3 text-sm">
+              <option value="">Lot concerné</option>
+              <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }}</option>
+            </select>
+            <textarea name="consultFournisseurs" [(ngModel)]="consultationFournisseurs" rows="3" placeholder="Fournisseurs (séparés par virgule)" class="w-full rounded-lg border border-surface-container p-3 text-sm"></textarea>
+            <input name="dateConsultationForm" type="date" [(ngModel)]="newConsultation.dateConsultation" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Enregistrer consultation</button>
+          </form>
+        </section>
+
+        <section *ngIf="activeStep==='reception'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-6 border-b border-surface-container pb-4">
+            <h2 class="text-xl font-bold text-primary">Réception</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Ouvrez la réception du marché puis validez le PV d'ouverture sur le lot.</p>
+          </div>
+          <div class="grid gap-6 lg:grid-cols-2">
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitReception()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Ouvrir réception</h3>
+              <select name="receptionMarketForm" [(ngModel)]="receptionMarket" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Marché</option>
+                <option *ngFor="let marche of markets" [value]="marche.numbMarche">{{ marche.numbMarche }}</option>
+              </select>
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Ouvrir réception</button>
+            </form>
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitPV()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Valider PV</h3>
+              <select name="pvLotForm" [(ngModel)]="pvLot" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Lot</option>
+                <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }}</option>
+              </select>
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Valider PV</button>
+            </form>
           </div>
         </section>
 
-        <section class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-8 border-b border-surface-container pb-6">
-            <h2 class="text-2xl font-bold text-primary">Ajouter Soumission</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Saisissez les détails de l'offre technique et financière du soumissionnaire.</p>
+        <section *ngIf="activeStep==='soumission'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-6 border-b border-surface-container pb-4">
+            <h2 class="text-xl font-bold text-primary">Soumission</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Ajoutez une soumission après la consultation et l'ouverture du lot.</p>
           </div>
-          <form class="space-y-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-              <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Sélectionner le Lot</label>
-                <div class="relative">
-                  <select class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary appearance-none transition-all">
-                    <option value="">Choisir un lot...</option>
-                    <option value="1">Lot 01 - Acquisition de matériel informatique</option>
-                    <option value="2">Lot 02 - Mobilier de bureau et accessoires</option>
-                  </select>
-                </div>
-              </div>
-              <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Référence marché</label>
-                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="text" placeholder="M-2024-0012" />
-              </div>
+          <form class="grid gap-6" (ngSubmit)="submitSoumission()">
+            <select name="numbLotSoum" [(ngModel)]="newSoumission.numbLot" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+              <option value="">Lot</option>
+              <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }}</option>
+            </select>
+            <input name="idFournisseurSoum" [(ngModel)]="newSoumission.idFournisseur" placeholder="Fournisseur" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input name="dateDepotSoum" type="date" [(ngModel)]="newSoumission.dateDepot" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+              <input name="heureSoum" type="time" [(ngModel)]="newSoumission.heure" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Montant retenu</label>
-                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="text" placeholder="1 245 000 F CFA" />
-              </div>
-              <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Date de soumission</label>
-                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="date" />
-              </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Statut</label>
-                <select class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary appearance-none transition-all">
-                  <option>Soumis</option>
-                  <option>En attente</option>
-                  <option>Rejeté</option>
-                </select>
-              </div>
-              <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Offrant</label>
-                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="text" placeholder="Nom du fournisseur" />
-              </div>
-              <div class="space-y-2">
-                <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant">Score technique</label>
-                <input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-sm focus:ring-0 focus:border-b-2 focus:border-primary" type="number" placeholder="0–100" />
-              </div>
-            </div>
-            <div class="flex justify-end gap-3">
-              <button class="px-6 py-3 rounded-lg border border-outline-variant text-on-surface-variant text-sm font-semibold hover:bg-surface-container transition-colors">Annuler</button>
-              <button class="px-6 py-3 rounded-lg bg-primary text-white text-sm font-semibold hover:opacity-90 transition-opacity">Enregistrer</button>
-            </div>
+            <input name="montantPrevSoum" [(ngModel)]="newSoumission.montantPrev" placeholder="Montant" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <input name="delaiExecSoum" [(ngModel)]="newSoumission.delaiExecutionPrev" placeholder="Délai exécution prévu" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <input name="nbExemplaireSoum" type="number" [(ngModel)]="newSoumission.nbExemplaire" min="1" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <textarea name="observationSoum" [(ngModel)]="newSoumission.observation" rows="3" placeholder="Observation" class="w-full rounded-lg border border-surface-container p-3 text-sm"></textarea>
+            <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Ajouter soumission</button>
           </form>
+        </section>
+
+        <section *ngIf="activeStep==='analyse'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-6 border-b border-surface-container pb-4">
+            <h2 class="text-xl font-bold text-primary">Analyse</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Lancez l’analyse, enregistrez le résultat, puis validez les documents.</p>
+          </div>
+          <div class="grid gap-6 xl:grid-cols-3">
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="launchAnalysePhase()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Lancer l'analyse</h3>
+              <select name="analysemarche" [(ngModel)]="receptionMarket" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Marché</option>
+                <option *ngFor="let marche of markets" [value]="marche.numbMarche">{{ marche.numbMarche }}</option>
+              </select>
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Lancer</button>
+            </form>
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitAnalyse()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Enregistrer l'analyse</h3>
+              <select name="analyseLot" [(ngModel)]="analyseInput.numbLot" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Lot</option>
+                <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }}</option>
+              </select>
+              <select name="analyseFournisseur" [(ngModel)]="analyseInput.idAttributairePrev" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Soumission</option>
+                <option *ngFor="let soum of soumissions" [value]="soum.idSoumission">{{ soum.idSoumission }}</option>
+              </select>
+              <input name="dateReceptionAnalyse" type="date" [(ngModel)]="analyseInput.dateEffecReception" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Enregistrer analyse</button>
+            </form>
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitRapportAnalyse()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Valider rapport</h3>
+              <select name="rapportLotForm" [(ngModel)]="rapportLot" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Lot</option>
+                <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }}</option>
+              </select>
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Valider</button>
+            </form>
+          </div>
+          <div class="mt-6 rounded-xl border border-surface-container p-4">
+            <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500 mb-3">Valider documents</h3>
+            <form class="grid gap-4 lg:grid-cols-2" (ngSubmit)="submitDocumentValidation()">
+              <select name="documentLot" [(ngModel)]="docValidation.numbLot" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Lot</option>
+                <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }}</option>
+              </select>
+              <label class="flex items-center gap-2"><input type="checkbox" [(ngModel)]="docValidation.notification" name="notification" /> Notification</label>
+              <label class="flex items-center gap-2"><input type="checkbox" [(ngModel)]="docValidation.contrat" name="contrat" /> Contrat</label>
+              <label class="flex items-center gap-2"><input type="checkbox" [(ngModel)]="docValidation.fed" name="fed" /> FED</label>
+              <label class="flex items-center gap-2"><input type="checkbox" [(ngModel)]="docValidation.bonCommande" name="bonCommande" /> Bon de commande</label>
+              <label class="flex items-center gap-2"><input type="checkbox" [(ngModel)]="docValidation.ordreService" name="ordreService" /> Ordre de service</label>
+              <button class="w-full lg:col-span-2 rounded-lg bg-primary text-white py-3 text-sm font-semibold">Enregistrer documents</button>
+            </form>
+          </div>
+        </section>
+
+        <section *ngIf="activeStep==='attribution'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+          <div class="mb-6 border-b border-surface-container pb-4">
+            <h2 class="text-xl font-bold text-primary">Attribution & exécution</h2>
+            <p class="text-sm text-on-surface-variant mt-1">Attribuez la soumission gagnante, démarrez l'exécution et clôturez le marché.</p>
+          </div>
+          <div class="grid gap-6 xl:grid-cols-3">
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitAttribution()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Attribuer</h3>
+              <select name="soumissionAttribuee" [(ngModel)]="attributionInput.idSoumissionAttribuee" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Soumission gagnante</option>
+                <option *ngFor="let soum of soumissions" [value]="soum.idSoumission">{{ soum.idSoumission }}</option>
+              </select>
+              <input name="montantEffecAttribution" [(ngModel)]="attributionInput.montantEffec" placeholder="Montant effectué" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Attribuer</button>
+            </form>
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitExecution()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Démarrer exécution</h3>
+              <select name="executionMarketForm" [(ngModel)]="executionMarket" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Marché</option>
+                <option *ngFor="let marche of markets" [value]="marche.numbMarche">{{ marche.numbMarche }}</option>
+              </select>
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Démarrer</button>
+            </form>
+            <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitClosure()">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Clôture finale</h3>
+              <select name="closureMarketForm" [(ngModel)]="closureMarket" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+                <option value="">Marché</option>
+                <option *ngFor="let marche of markets" [value]="marche.numbMarche">{{ marche.numbMarche }}</option>
+              </select>
+              <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Clôturer</button>
+            </form>
+          </div>
         </section>
       </div>
     </div>
