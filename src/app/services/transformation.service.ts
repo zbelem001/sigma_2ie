@@ -41,7 +41,13 @@ export interface Consultation {
 
 export interface Fournisseur {
   idFournisseur: string;
-  statut: 'Interne' | 'Externe';
+  raisonSociale: string;
+  domaineActivite: string;
+  disposeIFU_RCCM: boolean;
+  numIFU_RCCM?: string;
+  emailTel: string;
+  nomPrenomRepr: string;
+  statutFourn: 'Classique' | 'Externe';
 }
 
 export interface Soumission {
@@ -120,6 +126,26 @@ export class TransformationService {
     this.addLot({numbMarche: 'M-2023-0045', numbLot: 'M-2023-0045_LOT1', description: 'Installation panneaux solaires bâtiments administratifs'});
     this.addLot({numbMarche: 'M-2023-0045', numbLot: 'M-2023-0045_LOT2', description: 'Installation panneaux solaires résidence étudiante'});
     this.addLot({numbMarche: 'M-2023-0045', numbLot: 'M-2023-0045_LOT3', description: 'Raccordement et mise en service'});
+    this.addFournisseur({
+      idFournisseur: 'F-001',
+      raisonSociale: 'Sotuba Architecture',
+      domaineActivite: 'Génie Civil',
+      disposeIFU_RCCM: true,
+      numIFU_RCCM: 'IFU22300456',
+      emailTel: 'm.traore@sotuba-arch.com • +223 70 00 00 01',
+      nomPrenomRepr: 'Moussa Traoré',
+      statutFourn: 'Classique'
+    });
+    this.addFournisseur({
+      idFournisseur: 'F-002',
+      raisonSociale: 'LaboPro Services',
+      domaineActivite: 'Fournitures IT',
+      disposeIFU_RCCM: false,
+      numIFU_RCCM: 'IFU22600789',
+      emailTel: 'a.diallo@labopro.com • +226 70 00 00 02',
+      nomPrenomRepr: 'Adama Diallo',
+      statutFourn: 'Externe'
+    });
     this.addConsultation({numbLot: 'M-2023-0045_LOT1', idFournisseurs: ['F-001', 'F-002'], dateConsultation: '2024-01-12'});
     this.addConsultation({numbLot: 'M-2023-0045_LOT2', idFournisseurs: ['F-001', 'F-003'], dateConsultation: '2024-01-14'});
     this.openReception('M-2023-0045');
@@ -275,7 +301,16 @@ export class TransformationService {
     }
     ids.forEach((id) => {
       if (!this.fournisseurList.some((f) => f.idFournisseur === id)) {
-        this.fournisseurList.push({ idFournisseur: id, statut: 'Externe' });
+        this.fournisseurList.push({
+          idFournisseur: id,
+          raisonSociale: 'Fournisseur externe',
+          domaineActivite: 'Autre',
+          disposeIFU_RCCM: false,
+          numIFU_RCCM: 'N/A',
+          emailTel: 'N/A',
+          nomPrenomRepr: 'N/A',
+          statutFourn: 'Externe'
+        });
       }
     });
     const existing = this.consultationList.find((item) => item.numbLot === cons.numbLot);
@@ -304,6 +339,23 @@ export class TransformationService {
     }
     doc.pvOuverture = 'Oui';
     this.logAction(numbLot, `PV d'ouverture validé pour ${numbLot}`, 'PV');
+  }
+
+  addFournisseur(fournisseur: Fournisseur): void {
+    if (this.fournisseurList.some((item) => item.idFournisseur === fournisseur.idFournisseur)) {
+      throw new Error(`Le fournisseur ${fournisseur.idFournisseur} existe déjà.`);
+    }
+    this.fournisseurList.push({
+      ...fournisseur,
+      raisonSociale: fournisseur.raisonSociale || 'N/A',
+      domaineActivite: fournisseur.domaineActivite || 'Autre',
+      disposeIFU_RCCM: fournisseur.disposeIFU_RCCM ?? false,
+      numIFU_RCCM: fournisseur.numIFU_RCCM || 'N/A',
+      emailTel: fournisseur.emailTel || 'N/A',
+      nomPrenomRepr: fournisseur.nomPrenomRepr || 'N/A',
+      statutFourn: fournisseur.statutFourn || 'Externe'
+    });
+    this.logAction(fournisseur.idFournisseur, `Ajout de fournisseur ${fournisseur.raisonSociale}`, 'Fournisseur');
   }
 
   addSoumission(data: Omit<Soumission, 'idSoumission' | 'rangClassement'>): void {

@@ -1,0 +1,284 @@
+1. INTRODUCTION
+1.1 CONTEXTE
+L'Institut 2iE (Institut International d’Ingénierie de l’Eau et de l’Environnement) lance
+régulièrement de nombreux marchés pour recruter des consultants, acquérir du
+matériel, ou réaliser des travaux. Actuellement, le suivi de ces marchés, de la
+consultation des fournisseurs jusqu'à l'exécution des contrats, est probablement géré
+de manière manuelle ou via des outils dispersés (fichiers Excel, dossiers papier), ce
+qui peut entraîner des risques d'erreurs, une perte de temps et un manque de
+visibilité sur l'état d'avancement des dossiers.
+La présente application web a pour but de fournir au service des services généraux
+de 2iE un outil de gestion et de suivi de bout en bout du cycle de vie des marchés.
+L'objectif est de centraliser toutes les informations, de formaliser les processus, de
+garantir la traçabilité des étapes clés (consultation, soumission, analyse, attribution)
+et d'améliorer la communication et l'efficacité des équipes impliquées (services
+généraux, commission des marchés, sous-commission technique).
+L'application permettra un suivi clair et instantané de l'évolution de chaque marché,
+de son statut "À lancer" jusqu'à son état final "Exécuté".
+1.2 RÈGLES DE GESTION ET MODÉLISATION DES DONNÉES
+I. Structuration de base : Marchés, Lots et Fournisseurs L’institut 2iE gère un volume
+important de marchés publics (ex. : « Recrutement d’un consultant pour l’étude des
+besoins en qualification »). Le système repose sur une architecture hiérarchique à
+trois niveaux :
+Table Marche : Centralise les métadonnées du projet global. Lors de sa création, le
+statut par défaut est défini sur « À lancer ».
+Table Lot : Un marché étant souvent subdivisé en sous-projets, cette table
+enregistre les caractéristiques spécifiques de chaque lot. La liaison avec le marché
+parent se fait via la clé étrangère numbMarche. Pour une traçabilité optimale, la
+clé primaire du lot (numbLot) est générée à partir du numéro du marché parent.
+Table Fournisseur : Référentiel centralisant les données de tous les prestataires
+(coordonnées, domaine d'activité, statut classique/externe) sollicités par l'institut.
+II. Phase de Consultation Le processus de mise en concurrence débute lorsque le
+statut du marché passe de « À lancer » à « Réception ».
+Pour chaque lot, le service identifie et consulte officiellement les fournisseurs
+pertinents selon leur domaine d'expertise.
+3Table Consultation : Cette table de liaison archive l'historique des invitations. Elle
+utilise une clé primaire composite basée sur deux clés étrangères : le lot concerné
+et le fournisseur consulté.
+III. Réception des Offres (Soumissions) Les offres techniques et financières,
+déposées sous enveloppes scellées par les fournisseurs consultés, sont enregistrées
+dans le système.
+Règle d'unicité : Un fournisseur ne peut soumettre qu'une seule offre par lot. (Il
+peut néanmoins postuler à plusieurs lots distincts).
+Table Soumission : Stocke les détails de l'offre (montant prévisionnel, délai
+d'exécution, nombre d'exemplaires).
+Formatage de l'identifiant : La clé primaire est générée dynamiquement selon la
+nomenclature : [numbLot]_Fourn_[idFournisseur]. Ce format intelligent permet
+d'identifier instantanément le marché, le lot et le candidat.
+IV. Analyse des Offres par la SCT À l'issue de l'ouverture des plis, une Sous-
+Commission Technique (SCT), constituée spécifiquement pour le marché, évalue les
+offres pour désigner le prestataire le plus qualifié.
+Table Analyse : Liée directement à la table Lot via sa clé primaire (numbLot), elle
+archive l'attributaire prévisionnel proposé par la SCT.
+Cette phase se clôture par la validation du Conseil des marchés et la production d'un
+document obligatoire : le rapport d'analyse.
+V. Attribution et Contractualisation Une fois le choix de la SCT validé par les
+instances décisionnelles, le processus administratif est déclenché (génération du PV
+d'attribution, notification, contrat, Bon de commande, FED, Ordre de service).
+Table Attributaire : Enregistre le contrat définitif en se liant à la soumission
+gagnante (idSoumission en clé étrangère). Elle fige le montant et le délai
+d'exécution réels.
+Le statut de l'attribution est initialisé à « En cours » et devra être basculé
+manuellement à « Terminé » lors de la réception finale des travaux ou livrables.
+VI. Suivi de l'Exécution (Avenants) Pour gérer les aléas en cours d'exécution
+(ajustements budgétaires, extensions de délais), le système permet la modification
+encadrée du contrat initial.
+Table Avenant : Rattachée à la table Attribution, elle consigne les modifications
+(nouveau montant, date de prorogation) pour garantir un suivi financier et
+temporel rigoureux.
+
+
+2. PROCESSUS MÉTIER
+2.1 DIAGRAMME DE FLUX
+1. Phase d'Initialisation (En Rouge et Mauve)
+
+    Point de départ (Rouge) : Le processus débute par la Création de marché avec le statut par défaut "À lancer".
+
+    Étapes de configuration (Mauve) :
+
+        Ajouter un lot : Subdivision du marché en unités spécifiques.
+
+        Consulter fournisseurs : Identification des prestataires sollicités.
+
+2. Phase de Réception et d'Ouverture
+
+    Mise à jour du statut - Réception : Le marché passe en phase de collecte.
+
+    Dépendance cruciale : Cette étape est liée horizontalement à la validation du Pv_ouverture : oui (en bleu). L'enregistrement des soumissions dépend de la production de ce document.
+
+    Enregistrement soumission : Saisie des offres reçues des fournisseurs.
+
+3. Phase d'Analyse et de Validation (SCT et Conseil)
+
+    Statut : Analyse (SCT) : Phase d'évaluation technique par la sous-commission. Cette étape produit ou met à jour le Rapport d'analyse (en bleu).
+
+    Losange de décision - Validation du conseil (Jaune) :
+
+        Si Validé : On passe à l'attribution.
+
+        Si Rejeté : Le flux est dirigé vers une case Motif (bleu), qui renvoie le dossier à l'étape d'Analyse (SCT) pour révision.
+
+4. Phase de Contractualisation et Exécution
+
+    Attribution + Enregistrement : Formalisation du choix du prestataire.
+
+    Statut : En cours : Indique que les travaux ou prestations ont débuté.
+
+    Losange de décision - Avenant nécessaire ? (Jaune) :
+
+        Si Oui : Passage par la case Ajout Avenant (bleu) qui boucle ensuite vers le statut "En cours".
+
+        Si Non : Progression vers la clôture.
+
+5. Conclusion (En Vert)
+
+    Clôture (Exécuté/Terminé) : Étape finale marquant la fin du cycle de vie du marché et de l'attribution associée.
+
+
+
+2.1 CAS D’UTILISATION
+N° UCNom du Cas
+d'UtilisationActeur PrincipalDescription de l'action
+UC 01 Ajouter un
+MarchéAgent services
+générauxCréer la fiche initiale d'un marché
+avec le statut « À lancer ».
+UC 02 Ajouter un Lot Agent services
+générauxSubdiviser un marché existant en un
+ou plusieurs lots techniques.
+UC 03 Gérer la
+Consultation Agent services
+généraux Identifier et lister les fournisseurs
+sollicités pour un lot spécifique.
+UC 04 Ouvrir la
+Réception Agent services
+généraux Modifier le statut du marché en «
+Réception » pour autoriser le dépôt.
+UC 05 Valider le PV
+d'Ouverture Commission
+d'Ouverture Confirmer l'ouverture des plis (Passe
+le champ PV_ouverture à Oui).
+UC 06 Enregistrer une
+Soumission Agent services
+généraux Saisir les détails de l'offre (montant,
+délai) d'un fournisseur consulté.
+UC 07 Lancer l'Analyse Agent services
+généraux Basculer le marché en statut «
+Analyse » pour le travail de la SCT.
+UC 08 Enregistrer
+l'Analyse Membre SCT Désigner l'attributaire prévisionnel et
+fixer le rang de classement.
+UC 09 Mise à jour
+rapport
+d’analyseMembre SCT Confirmer la rédaction finale (Passe
+RapportAnalyse à Oui).
+UC 10 Valider les Docs
+Post-Attribution Agent services
+généraux Mettre à jour les statuts (Oui/Non) de
+la liasse (Contrat, FED, OS, etc.).
+UC 11 Enregistrer
+l'Attribution Agent services
+généraux Lier définitivement la soumission
+retenue au lot (Statut « En cours »).
+UC 12 Démarrer
+l'Exécution Agent services
+généraux Modifier le statut du marché en « En
+cours » pour le suivi des travaux.
+UC 13 Ajouter un
+Avenant Agent services
+généraux Enregistrer une modification
+(montant/délai) sur un contrat actif.
+UC 14 Clôturer le
+MarchéAgent services
+généraux Passer les statuts finaux à « Exécuté »
+et « Terminé ».
+
+
+62.1 DIAGRAMME DE CAS D’UTILISATION
+UML Use Case Diagram
+System
+Ajouter marché
+Ajouter lot
+Consulter fournisseurs
+Mise à jour statut : marché
+Mise à jour du PV d’ouverture
+Enregistrer analyse
+Mise à jour rapport d’analyse
+Agent service
+genéraux
+SCT
+Enregistrer soumissions
+Enregistrer attribution
+Mettre à jour document attribution
+Mise à jour statut : document
+Ajout d’un avenant
+Clôturer marché : attribution
+
+
+
+Voici une organisation propre et professionnelle de ton Dictionnaire de Données (MLD), prête à être copiée-collée dans ton document. J'ai harmonisé la mise en forme pour une lisibilité maximale.
+2.1 MODÈLE LOGIQUE DE DONNÉES (DICTIONNAIRE)
+
+1. Entité : Marche (Gestion des Marchés)
+Cette table centralise les informations générales et administratives de chaque projet.
+Nom du champ	Type	Contrainte	Description
+numbMarche	String	PK	Numéro unique d'identification du marché.
+Description	Text	Obligatoire	Objet ou titre complet du marché.
+NombreLot	Int	> 0	Nombre total de subdivisions (lots) prévues.
+NatureOuverture	String	-	Type d'ouverture (ex: Publique, Restreinte).
+DateEnregistrement	Date	-	Date de création du dossier dans le système.
+Financement	String	-	Source des fonds (ex: Budget 2iE, Banque Mondiale).
+ModePassation	String	-	Procédure utilisée (ex: Appel d'Offres Ouvert).
+Demandeur	String	-	Service ou département à l'origine du besoin.
+ResponsableSuivi	String	-	Agent chargé du dossier au service des marchés.
+SCT_person[1-4]	String	1=Obligatoire	Noms des membres de la Sous-Commission Technique.
+Statut	String	Default='À lancer'	État : Réception, Analyse, En cours, Exécuté.
+   
+
+2. Entité : Lot (Sous-projets)
+Un marché est divisé en un ou plusieurs lots techniques.
+Nom du champ	Type	Contrainte	Description
+numbLot	String	PK	Identifiant unique (ex: MAR001_LOT1).
+numbMarche	String	FK	Référence au marché parent.
+Description	Text	Obligatoire	Détail technique du lot.
+numbContrat	String	Optionnel	Numéro final du contrat une fois signé.
+
+3. Entité : Fournisseur (Référentiel Prestataires)
+Stocke les informations d'identité et de conformité des entreprises.
+Nom du champ	Type	Contrainte	Description
+idFournisseur	Int	PK	Identifiant numérique unique.
+RaisonSocial	String	Obligatoire	Nom officiel de l'entreprise.
+DomaineActivite	String	-	Secteur (ex: Informatique, BTP, etc.).
+DisposeIFU_RCCM	Bool	-	Statut de conformité administrative.
+numIFU_RCCM	String	Optionnel	Numéros fiscaux et commerciaux.
+Email_Tel	String	Obligatoire	Coordonnées de contact de l'entreprise.
+NomPrenomRepr	String	Obligatoire	Identité du représentant légal.
+Statut_Fourn	String	-	Distinction entre "Classique" et "Externe".
+
+4. Entité : Consultation (Mise en concurrence)
+Table de liaison identifiant les fournisseurs sollicités par lot.
+Nom du champ	Type	Contrainte	Description
+numbLot	String	PK / FK	Référence au lot concerné.
+idFournisseur	Int	PK / FK	Référence au fournisseur consulté.
+DateConsultation	Date	Obligatoire	Date d'envoi de l'invitation à soumissionner.
+
+5. Entité : Soumission (Offres Déposées)
+Enregistre les détails techniques et financiers des offres reçues.
+Nom du champ	Type	Contrainte	Description
+idSoumission	String	PK	Format : [numbLot]_Fourn_[idFournisseur].
+numbLot	String	FK	Référence au lot postulé.
+idFournisseur	Int	FK	Référence au fournisseur candidat.
+MontantPrev	Int	> 0	Montant proposé dans l'offre financière.
+DelaiExecutionPrev	Int	-	Délai de livraison proposé.
+rang_classement	Int	NULL / 1,2,3	Position obtenue après analyse SCT.
+
+6. Entité : Analyse (Évaluation SCT)
+Résultat du travail de la Sous-Commission Technique par lot.
+Nom du champ	Type	Contrainte	Description
+numbLot	String	PK / FK	Un rapport d'analyse unique par lot.
+DateEffecReception	Date	-	Date réelle de réception des dossiers.
+idAttributairePrev	Int	FK	Fournisseur recommandé par la SCT.
+DatePresentationRapport	Date	-	Date de passage devant le Conseil des marchés.
+
+7. Entité : Attributaire (Contrats signés)
+Formalisation de l'engagement définitif avec le prestataire retenu.
+Nom du champ	Type	Contrainte	Description
+idSoumissionAttribuee	String	PK / FK	Référence à la soumission retenue.
+MontantEffec	Int	> 0	Montant final arrêté dans le contrat.
+DelaiExecutionEffec	Int	-	Délai d'exécution contractuel.
+Statut	String	Default='En cours'	État du contrat (En cours, Terminé).
+
+8. Entité : Document (Suivi administratif)
+Contrôle de présence des pièces obligatoires par lot.
+Nom du champ	Type	Valeurs	Description
+PV_ouverture	String	'Oui' / 'Non'	Validation de l'ouverture des plis.
+RapportAnalyse	String	'Oui' / 'Non'	Validation de la fin du travail SCT.
+Liasse Contractuelle	String	'Oui' / 'Non'	Contrat, FED, OS, Notification, BDC.
+
+9. Entité : Avenant (Modifications contractuelles)
+Suivi des ajustements budgétaires ou temporels en cours d'exécution.
+Nom du champ	Type	Contrainte	Description
+idAvenant	Int	PK	Identifiant auto-incrémenté.
+idSoumissionAttribuee	String	FK	Lien avec l'attribution concernée.
+MontantAvenant	Int	-	Budget supplémentaire ou réduction.
+DateProrogation	Date	-	Nouvelle date de fin prévue.

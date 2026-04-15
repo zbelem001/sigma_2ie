@@ -19,30 +19,37 @@
       </div>
     </section>
 
-    <section *ngIf="showNewSupplierForm" class="bg-surface-container-lowest rounded-xl p-6 shadow-sm mb-10">
-      <div class="flex items-center justify-between mb-4">
-        <div>
-          <h3 class="text-lg font-bold text-primary">Ajouter un fournisseur</h3>
-          <p class="text-sm text-slate-500">Remplissez le formulaire pour enrichir l'annuaire des prestataires.</p>
-        </div>
-        <button type="button" class="text-xs text-slate-500 hover:text-primary" (click)="toggleNewSupplierForm()">Fermer</button>
-      </div>
-      <form class="grid gap-4 md:grid-cols-2" (ngSubmit)="addSupplier()">
-        <input name="idFournisseur" [(ngModel)]="newSupplier.idFournisseur" required placeholder="Code fournisseur" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-        <input name="raisonSociale" [(ngModel)]="newSupplier.raisonSociale" required placeholder="Raison sociale" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-        <input name="domaineActivite" [(ngModel)]="newSupplier.domaineActivite" placeholder="Domaine d'activité" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-        <input name="location" [(ngModel)]="newSupplier.location" placeholder="Ville, Pays" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-        <input name="email" type="email" [(ngModel)]="newSupplier.email" placeholder="Email" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-        <input name="telephone" [(ngModel)]="newSupplier.telephone" placeholder="Téléphone" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-        <select name="statut" [(ngModel)]="newSupplier.statut" class="w-full rounded-lg border border-surface-container p-3 text-sm">
-          <option value="Classique">Classique</option>
-          <option value="Externe">Externe</option>
-        </select>
-        <button class="md:col-span-2 w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Enregistrer le fournisseur</button>
-      </form>
-    </section>
-
     <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      <div *ngIf="showNewSupplierForm" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6">
+        <div class="w-full max-w-3xl rounded-3xl bg-white p-6 shadow-2xl ring-1 ring-slate-900/5">
+          <div class="flex items-start justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-xl font-bold text-primary">Ajouter un fournisseur</h3>
+              <p class="text-sm text-slate-500">Remplissez ce formulaire pour enrichir l'annuaire sans déformer la page.</p>
+            </div>
+            <button type="button" class="rounded-full p-2 text-slate-500 hover:bg-slate-100 hover:text-primary" (click)="toggleNewSupplierForm()">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+          <form class="grid gap-4 md:grid-cols-2" (ngSubmit)="addSupplier()">
+            <input name="idFournisseur" [(ngModel)]="newSupplier.idFournisseur" required placeholder="Code fournisseur" class="w-full rounded-lg border border-slate-200 p-3 text-sm" />
+            <input name="raisonSociale" [(ngModel)]="newSupplier.raisonSociale" required placeholder="Nom du fournisseur" class="w-full rounded-lg border border-slate-200 p-3 text-sm" />
+            <input name="domaineActivite" [(ngModel)]="newSupplier.domaineActivite" placeholder="Domaine d'activité" class="w-full rounded-lg border border-slate-200 p-3 text-sm" />
+            <input name="nomPrenomRepr" [(ngModel)]="newSupplier.nomPrenomRepr" placeholder="Nom et prénom du représentant" class="w-full rounded-lg border border-slate-200 p-3 text-sm" />
+            <input name="emailTel" [(ngModel)]="newSupplier.emailTel" placeholder="Email / Téléphone" class="w-full rounded-lg border border-slate-200 p-3 text-sm" />
+            <input name="numIFU_RCCM" [(ngModel)]="newSupplier.numIFU_RCCM" placeholder="Numéro IFU / RCCM" class="w-full rounded-lg border border-slate-200 p-3 text-sm" />
+            <label class="md:col-span-2 flex items-center gap-3 text-sm text-slate-700">
+              <input type="checkbox" name="disposeIFU_RCCM" [(ngModel)]="newSupplier.disposeIFU_RCCM" class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary" />
+              Dispose d'une attestation IFU/RCCM valide
+            </label>
+            <select name="statutFourn" [(ngModel)]="newSupplier.statutFourn" class="w-full rounded-lg border border-slate-200 p-3 text-sm">
+              <option value="Classique">Classique</option>
+              <option value="Externe">Externe</option>
+            </select>
+            <button type="submit" class="md:col-span-2 w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Enregistrer le fournisseur</button>
+          </form>
+        </div>
+      </div>
       <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm">
         <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Total Fournisseurs</p>
         <div class="flex items-baseline gap-2">
@@ -84,8 +91,10 @@
           <thead>
             <tr class="bg-surface-container border-b border-outline-variant/10">
               <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">ID</th>
-              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Raison Sociale</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Nom du fournisseur</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Représentant</th>
               <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Domaine</th>
+              <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">IFU / RCCM</th>
               <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant">Contact</th>
               <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant text-center">Statut</th>
               <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-on-surface-variant text-right">Actions</th>
@@ -99,13 +108,20 @@
                   <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">{{ initials(fournisseur) }}</div>
                   <div>
                     <p class="text-sm font-bold text-primary">{{ fournisseur.raisonSociale }}</p>
-                    <p class="text-[10px] text-slate-400">{{ fournisseur.location }}</p>
                   </div>
                 </div>
               </td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">{{ fournisseur.nomPrenomRepr }}</td>
               <td class="px-6 py-4 text-sm text-on-surface-variant">{{ fournisseur.domaineActivite }}</td>
-              <td class="px-6 py-4 text-sm text-on-surface-variant">{{ fournisseur.email }}</td>
-              <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter" [ngClass]="{ 'bg-slate-100 text-slate-500': fournisseur.statut === 'Classique', 'bg-blue-100 text-[#144685]': fournisseur.statut === 'Externe' }">{{ fournisseur.statut }}</span></td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">
+                <span class="inline-flex items-center gap-2 text-[11px] px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">
+                  <span class="h-2.5 w-2.5 rounded-full" [ngClass]="{ 'bg-emerald-500': fournisseur.disposeIFU_RCCM, 'bg-amber-500': !fournisseur.disposeIFU_RCCM }"></span>
+                  {{ fournisseur.disposeIFU_RCCM ? 'IFU/RCCM ok' : 'En attente' }}
+                </span>
+                <div class="text-[11px] text-slate-500 mt-1">{{ fournisseur.numIFU_RCCM }}</div>
+              </td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">{{ fournisseur.emailTel }}</td>
+              <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter" [ngClass]="{ 'bg-slate-100 text-slate-500': fournisseur.statutFourn === 'Classique', 'bg-blue-100 text-[#144685]': fournisseur.statutFourn === 'Externe' }">{{ fournisseur.statutFourn }}</span></td>
               <td class="px-6 py-4 text-right">
                 <button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
               </td>
