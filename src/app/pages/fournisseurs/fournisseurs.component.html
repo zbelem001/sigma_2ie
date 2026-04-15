@@ -12,28 +12,51 @@
           <span class="material-symbols-outlined text-sm">file_download</span>
           Exporter CSV
         </button>
-        <button class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary-container text-white font-semibold text-sm shadow-md hover:opacity-90 transition-opacity flex items-center gap-2">
+        <button type="button" (click)="toggleNewSupplierForm()" class="px-6 py-2.5 rounded-lg bg-gradient-to-r from-primary to-primary-container text-white font-semibold text-sm shadow-md hover:opacity-90 transition-opacity flex items-center gap-2">
           <span class="material-symbols-outlined text-sm">add_business</span>
           Nouveau Fournisseur
         </button>
       </div>
     </section>
 
+    <section *ngIf="showNewSupplierForm" class="bg-surface-container-lowest rounded-xl p-6 shadow-sm mb-10">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h3 class="text-lg font-bold text-primary">Ajouter un fournisseur</h3>
+          <p class="text-sm text-slate-500">Remplissez le formulaire pour enrichir l'annuaire des prestataires.</p>
+        </div>
+        <button type="button" class="text-xs text-slate-500 hover:text-primary" (click)="toggleNewSupplierForm()">Fermer</button>
+      </div>
+      <form class="grid gap-4 md:grid-cols-2" (ngSubmit)="addSupplier()">
+        <input name="idFournisseur" [(ngModel)]="newSupplier.idFournisseur" required placeholder="Code fournisseur" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+        <input name="raisonSociale" [(ngModel)]="newSupplier.raisonSociale" required placeholder="Raison sociale" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+        <input name="domaineActivite" [(ngModel)]="newSupplier.domaineActivite" placeholder="Domaine d'activité" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+        <input name="location" [(ngModel)]="newSupplier.location" placeholder="Ville, Pays" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+        <input name="email" type="email" [(ngModel)]="newSupplier.email" placeholder="Email" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+        <input name="telephone" [(ngModel)]="newSupplier.telephone" placeholder="Téléphone" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+        <select name="statut" [(ngModel)]="newSupplier.statut" class="w-full rounded-lg border border-surface-container p-3 text-sm">
+          <option value="Classique">Classique</option>
+          <option value="Externe">Externe</option>
+        </select>
+        <button class="md:col-span-2 w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Enregistrer le fournisseur</button>
+      </form>
+    </section>
+
     <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
       <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-primary shadow-sm">
         <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Total Fournisseurs</p>
         <div class="flex items-baseline gap-2">
-          <span class="text-2xl font-black text-primary">1 248</span>
+          <span class="text-2xl font-black text-primary">{{ totalSuppliers }}</span>
           <span class="text-[10px] text-green-600 font-bold bg-green-50 px-1.5 py-0.5 rounded">+12%</span>
         </div>
       </div>
       <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-on-primary-container shadow-sm">
         <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Domaines</p>
-        <span class="text-2xl font-black text-primary">42</span>
+        <span class="text-2xl font-black text-primary">{{ uniqueDomains }}</span>
       </div>
       <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-on-secondary-container shadow-sm">
         <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Actifs Externes</p>
-        <span class="text-2xl font-black text-primary">315</span>
+        <span class="text-2xl font-black text-primary">{{ activeExternal }}</span>
       </div>
       <div class="bg-surface-container-lowest p-6 rounded-xl border-l-4 border-surface-tint shadow-sm">
         <p class="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">Dernier Audit</p>
@@ -49,7 +72,7 @@
           <button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:bg-white rounded-lg transition-all">Externe</button>
         </div>
         <div class="flex items-center gap-4">
-          <span class="text-xs text-slate-400 font-medium">Affichage 1-10 sur 1 248</span>
+          <span class="text-xs text-slate-400 font-medium">Affichage 1-{{ totalSuppliers }} sur {{ totalSuppliers }}</span>
           <div class="flex gap-1">
             <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
             <button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
@@ -69,38 +92,20 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
-            <tr class="hover:bg-surface-container-low/50 transition-colors group">
-              <td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-001</td>
+            <tr *ngFor="let fournisseur of transformation.fournisseurList" class="hover:bg-surface-container-low/50 transition-colors group">
+              <td class="px-6 py-4 text-sm font-medium text-slate-400">{{ fournisseur.idFournisseur }}</td>
               <td class="px-6 py-4">
                 <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">SA</div>
+                  <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">{{ initials(fournisseur) }}</div>
                   <div>
-                    <p class="text-sm font-bold text-primary">Sotuba Architecture</p>
-                    <p class="text-[10px] text-slate-400">Bamako, Mali</p>
+                    <p class="text-sm font-bold text-primary">{{ fournisseur.raisonSociale }}</p>
+                    <p class="text-[10px] text-slate-400">{{ fournisseur.location }}</p>
                   </div>
                 </div>
               </td>
-              <td class="px-6 py-4 text-sm text-on-surface-variant">Génie Civil</td>
-              <td class="px-6 py-4 text-sm text-on-surface-variant">m.traore@sotuba-arch.com</td>
-              <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-500 uppercase tracking-tighter">Classique</span></td>
-              <td class="px-6 py-4 text-right">
-                <button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
-              </td>
-            </tr>
-            <tr class="hover:bg-surface-container-low/50 transition-colors">
-              <td class="px-6 py-4 text-sm font-medium text-slate-400">#2IE-FR-002</td>
-              <td class="px-6 py-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 rounded bg-secondary-fixed flex items-center justify-center text-secondary font-bold text-xs">LP</div>
-                  <div>
-                    <p class="text-sm font-bold text-primary">LaboPro Services</p>
-                    <p class="text-[10px] text-slate-400">Ouagadougou, BF</p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-6 py-4 text-sm text-on-surface-variant">Fournitures IT</td>
-              <td class="px-6 py-4 text-sm text-on-surface-variant">a.diallo@labopro.com</td>
-              <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-[#144685] uppercase tracking-tighter">À lancer</span></td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">{{ fournisseur.domaineActivite }}</td>
+              <td class="px-6 py-4 text-sm text-on-surface-variant">{{ fournisseur.email }}</td>
+              <td class="px-6 py-4 text-center"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-tighter" [ngClass]="{ 'bg-slate-100 text-slate-500': fournisseur.statut === 'Classique', 'bg-blue-100 text-[#144685]': fournisseur.statut === 'Externe' }">{{ fournisseur.statut }}</span></td>
               <td class="px-6 py-4 text-right">
                 <button class="p-2 text-slate-400 hover:text-primary transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined text-sm">visibility</span></button>
               </td>
