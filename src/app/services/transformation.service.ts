@@ -86,7 +86,6 @@ export interface Attributaire {
 export interface Avenant {
   idAvenant?: string;
   idSoumissionAttribuee: string;
-  numbAvenant: string;
   montantAvenant: string;
   dateProrogation: string;
 }
@@ -195,8 +194,8 @@ export class TransformationService {
     });
     this.startExecution('M-2023-0045');
     this.addAvenant({
+      idAvenant: 'AV-001',
       idSoumissionAttribuee: 'M-2023-0045_LOT1_Fourn_F-001',
-      numbAvenant: 'AV-001',
       montantAvenant: '15000000',
       dateProrogation: '2024-07-01'
     });
@@ -474,11 +473,12 @@ export class TransformationService {
     if (!soumission) {
       throw new Error(`Soumission ${data.idSoumissionAttribuee} introuvable.`);
     }
+    const idAvenant = data.idAvenant || `AV-${this.avenantList.length + 1}`;
     this.avenantList.push({
       ...data,
-      idAvenant: data.idAvenant || `AV-${this.avenantList.length + 1}`
+      idAvenant
     });
-    this.logAction(data.idSoumissionAttribuee, `Avenant ajouté : ${data.numbAvenant}`, 'Avenant');
+    this.logAction(data.idSoumissionAttribuee, `Avenant ajouté : ${idAvenant}`, 'Avenant');
   }
 
   closeContract(numbMarche: string): void {

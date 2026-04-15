@@ -80,7 +80,7 @@ export class TransformationComponent {
 
   newAvenant: Partial<Avenant> = {
     idSoumissionAttribuee: '',
-    numbAvenant: '',
+    idAvenant: '',
     montantAvenant: '',
     dateProrogation: ''
   };
@@ -279,12 +279,12 @@ export class TransformationComponent {
     try {
       this.transformation.addAvenant({
         idSoumissionAttribuee: this.newAvenant.idSoumissionAttribuee || '',
-        numbAvenant: this.newAvenant.numbAvenant || '',
+        idAvenant: this.newAvenant.idAvenant || undefined,
         montantAvenant: this.newAvenant.montantAvenant || '',
         dateProrogation: this.newAvenant.dateProrogation || ''
       });
-      this.message = `Avenant ${this.newAvenant.numbAvenant} ajouté.`;
-      this.newAvenant = { idSoumissionAttribuee: '', numbAvenant: '', montantAvenant: '', dateProrogation: '' };
+      this.message = `Avenant ${this.newAvenant.idAvenant || 'généré'} ajouté.`;
+      this.newAvenant = { idSoumissionAttribuee: '', idAvenant: '', montantAvenant: '', dateProrogation: '' };
     } catch (error) {
       this.message = (error as Error).message;
     }

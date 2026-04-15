@@ -266,7 +266,7 @@
               <option value="">Soumission attribuée</option>
               <option *ngFor="let soum of soumissions" [value]="soum.idSoumission">{{ soum.idSoumission }}</option>
             </select>
-            <input name="numbAvenant" [(ngModel)]="newAvenant.numbAvenant" placeholder="Numéro avenant" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+            <input name="idAvenant" [(ngModel)]="newAvenant.idAvenant" placeholder="ID avenant" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
             <input name="montantAvenant" [(ngModel)]="newAvenant.montantAvenant" placeholder="Montant avenant" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
             <input name="dateProrogation" type="date" [(ngModel)]="newAvenant.dateProrogation" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
             <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Ajouter avenant</button>
