@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ajouter un lot - Sovereign Archive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#335e9e",
+                        "on-primary-container": "#8babe2",
+                        "surface-bright": "#f7f9fc",
+                        "on-secondary-fixed-variant": "#144685",
+                        "on-secondary-fixed": "#001b3d",
+                        "secondary-container": "#8fb7fd",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#a8c8ff",
+                        "surface": "#f7f9fc",
+                        "on-background": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdcc0",
+                        "tertiary-fixed-dim": "#fdb87a",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fc",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#412100",
+                        "on-tertiary-fixed": "#2d1600",
+                        "inverse-on-surface": "#eff1f4",
+                        "surface-variant": "#e0e3e6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#43474f",
+                        "on-tertiary-fixed-variant": "#693c06",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#603400",
+                        "surface-container-low": "#f2f4f7",
+                        "secondary-fixed": "#d6e3ff",
+                        "surface-container-highest": "#e0e3e6",
+                        "primary-container": "#1a3f6f",
+                        "surface-container": "#eceef1",
+                        "primary": "#002954",
+                        "on-secondary-container": "#154785",
+                        "primary-fixed-dim": "#a8c8ff",
+                        "primary-fixed": "#d5e3ff",
+                        "outline-variant": "#c3c6d0",
+                        "on-primary-fixed-variant": "#244778",
+                        "surface-tint": "#3e5f91",
+                        "on-primary-fixed": "#001b3c",
+                        "surface-container-high": "#e6e8eb",
+                        "on-surface": "#191c1e",
+                        "outline": "#737780",
+                        "inverse-surface": "#2d3133",
+                        "surface-dim": "#d8dadd",
+                        "on-tertiary-container": "#dd9d61",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-gradient {
+            background: linear-gradient(135deg, #1A3F6F 0%, #1E4D8C 100%);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F4F6F9;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="sidebar-gradient fixed left-0 h-screen w-64 flex flex-col overflow-y-auto shadow-2xl shadow-[#1A3F6F]/20 z-50">
+<div class="p-6">
+<div class="text-xl font-bold tracking-tight text-white mb-1">Sovereign Archive</div>
+<div class="text-xs text-white/60 font-medium uppercase tracking-widest">Gestion des Marchés Publics</div>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full py-3 px-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold rounded-lg flex items-center justify-center gap-2 transition-all duration-200 hover:bg-white/20 active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span>
+                Nouveau Marché
+            </button>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">start</span>
+<span class="text-sm font-['Inter'] tracking-wide">Initialisation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-sm font-['Inter'] tracking-wide">Consultation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-white/10 backdrop-blur-md border-r-4 border-white font-semibold text-white transition-all duration-200" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-sm font-['Inter'] tracking-wide">Offres</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm font-['Inter'] tracking-wide">Attribution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="text-sm font-['Inter'] tracking-wide">Exécution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-['Inter'] tracking-wide">Suivi Budgétaire</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="text-sm font-['Inter'] tracking-wide">Modifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-sm font-['Inter'] tracking-wide">Réception</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="text-sm font-['Inter'] tracking-wide">Litiges</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">lock</span>
+<span class="text-sm font-['Inter'] tracking-wide">Clôture</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-['Inter'] tracking-wide">Archivage</span>
+</a>
+</nav>
+<div class="mt-auto p-4 border-t border-white/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="Utilisateur Admin" class="w-full h-full object-cover" data-alt="professional headshot of a middle-aged man with short hair wearing a suit, neutral grey background, studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD00d50woWIPihrCbfb00IngjqmC3yV6GZCwStKo3-aVufBJu2VpdKUVHvGeljY2OBg-ZyvgLS54k09afw2Yu2HPwriQz3qY3E007ePVFbiRkLyiB-l_BQ8xzU58TBQTAJJfPbZlGE_v9DXfQQ8kLue6BLw2jk1wIne_oGDVLnGWk1s9crLgTDuV19pT_FS3di22NWieOvxsKmG5wiKFba1tgcNZ3KMhR9zfyNa3K4L6n1jcEVNh3hYgTk3wbM1mAUq1SrQPcT7cE0"/>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-white">Utilisateur Admin</span>
+<span class="text-[10px] text-white/50 uppercase">Superviseur Marchés</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 flex flex-col">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center px-8 py-4 w-full sticky top-0 z-40 bg-white/70 backdrop-blur-xl surface-container-low transition-all duration-150">
+<div class="flex items-center gap-8">
+<span class="text-lg font-black text-[#1A3F6F] uppercase tracking-wider">Module Transformer BDD</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-slate-500 hover:text-[#1A3F6F] font-['Inter'] text-sm font-medium uppercase tracking-wider transition-colors" href="#">Tableau de bord</a>
+<a class="text-[#1A3F6F] border-b-2 border-[#1A3F6F] pb-1 font-['Inter'] text-sm font-medium uppercase tracking-wider" href="#">Registres</a>
+<a class="text-slate-500 hover:text-[#1A3F6F] font-['Inter'] text-sm font-medium uppercase tracking-wider transition-colors" href="#">Statistiques</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-outline text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface" placeholder="Rechercher un dossier..." type="text"/>
+</div>
+<button class="p-2 hover:bg-slate-50 text-slate-500 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="px-4 py-2 bg-[#1A3F6F] text-white text-xs font-bold uppercase rounded-md shadow-sm active:scale-95 transition-all">
+                    Exporter
+                </button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-8 max-w-4xl mx-auto w-full">
+<!-- Breadcrumb / Task Title -->
+<div class="mb-10 flex flex-col gap-2">
+<h1 class="text-[2.75rem] font-black text-[#191C1E] tracking-tight leading-tight">
+                    Ajouter un lot
+                </h1>
+<p class="text-slate-500 font-medium">Configuration technique de la structure du marché parent</p>
+</div>
+<!-- Form Card: Central White Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-[0px_12px_32px_rgba(26,63,111,0.06)] overflow-hidden border border-white">
+<div class="p-10 space-y-8">
+<!-- Selection Marché Parent -->
+<div class="space-y-2">
+<label class="text-[0.75rem] font-bold text-on-surface-variant uppercase tracking-[0.05em]">Sélection du Marché Parent (numbMarche)</label>
+<div class="relative group">
+<select class="w-full h-10 px-4 bg-surface-container-low border-none rounded-sm text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all appearance-none">
+<option disabled="" selected="" value="">Sélectionner un marché non exécuté...</option>
+<option value="M-2023-AB-042">M-2023-AB-042 - Construction Bâtiment C</option>
+<option value="M-2024-DF-011">M-2024-DF-011 - Maintenance Réseau Nord</option>
+<option value="M-2024-GH-005">M-2024-GH-005 - Fourniture Équipements Labo</option>
+</select>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+<!-- Info read-only box -->
+<div class="mt-4 p-4 bg-surface-container rounded-lg border-l-4 border-secondary/40">
+<div class="grid grid-cols-2 gap-4 text-xs">
+<div>
+<p class="text-slate-400 uppercase font-bold tracking-tighter mb-1">Type de procédure</p>
+<p class="text-[#1A3F6F] font-semibold">Appel d'Offres Ouvert</p>
+</div>
+<div>
+<p class="text-slate-400 uppercase font-bold tracking-tighter mb-1">Montant Estimé</p>
+<p class="text-[#1A3F6F] font-semibold">45,000,000 FCFA</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Identification du Lot -->
+<div class="space-y-2">
+<label class="text-[0.75rem] font-bold text-on-surface-variant uppercase tracking-[0.05em]">Identification du Lot (numbLot)</label>
+<input class="w-full h-10 px-4 bg-surface-container-low border-none rounded-sm text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all" placeholder="Ex: M-2024-DF-011_LOT_01" type="text"/>
+<p class="text-[10px] text-slate-400 font-medium">Format suggéré : [numbMarche]_LOT_XX</p>
+</div>
+<!-- Rappel informationnel -->
+<div class="flex flex-col justify-end">
+<div class="p-4 bg-[#1A3F6F]/5 rounded-lg border border-[#1A3F6F]/10 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#1A3F6F] text-white flex items-center justify-center font-black text-lg">
+                                    04
+                                </div>
+<div>
+<p class="text-xs font-bold text-[#1A3F6F] uppercase">Nombre de lots prévus</p>
+<p class="text-[11px] text-slate-500">Configuration définie lors de l'initialisation</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Détail Technique -->
+<div class="space-y-2">
+<label class="text-[0.75rem] font-bold text-on-surface-variant uppercase tracking-[0.05em]">Détail Technique du Lot (Description)</label>
+<textarea class="w-full p-4 bg-surface-container-low border-none rounded-sm text-sm focus:ring-2 focus:ring-primary focus:bg-white transition-all resize-none" placeholder="Décrivez les spécificités techniques et les livrables attendus pour ce lot..." rows="4"></textarea>
+</div>
+<!-- Action Area -->
+<div class="pt-6 flex justify-between items-center">
+<button class="px-6 py-2.5 border border-primary/20 text-primary text-xs font-bold uppercase rounded-md hover:bg-primary/5 transition-colors">
+                            Annuler
+                        </button>
+<button class="px-8 py-2.5 bg-[#7B42BC] hover:bg-[#6836a3] text-white text-xs font-bold uppercase rounded-md shadow-md shadow-[#7B42BC]/20 transition-all active:scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">save</span>
+                            Enregistrer le lot
+                        </button>
+</div>
+</div>
+</section>
+<!-- Status Indicator / Metadata -->
+<div class="mt-8 flex justify-center">
+<div class="inline-flex items-center px-4 py-2 bg-white rounded-full text-[10px] font-bold text-slate-400 uppercase tracking-widest gap-2 shadow-sm border border-surface-container">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    Serveur Connecté : Session Archive-2024-X
+                </div>
+</div>
+</div>
+<!-- Wizard Footer Indicator -->
+<footer class="mt-auto bg-surface-container-low px-8 py-4 border-t border-surface-variant/20">
+<div class="flex items-center justify-between gap-4">
+<div class="flex-1 flex gap-1 h-1.5">
+<!-- Progress Bar for 14 Steps -->
+<div class="flex-1 bg-[#1A3F6F] rounded-full"></div>
+<div class="flex-1 bg-[#1A3F6F] rounded-full"></div>
+<div class="flex-1 bg-[#1A3F6F] rounded-full"></div> <!-- Active Step 3 -->
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+<div class="flex-1 bg-slate-300 rounded-full"></div>
+</div>
+<div class="text-[10px] font-bold text-on-surface-variant uppercase whitespace-nowrap">
+                    Étape 3 sur 14 : Gestion des Lots
+                </div>
+</div>
+</footer>
+</main>
+</body></html>

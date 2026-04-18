@@ -86,7 +86,10 @@ export class TransformationComponent {
 
   showAvenantModal = false;
   avenantMarket = '';
-  avenantType: 'Augmentation de budget' | 'Prolongation de délai' | 'Les deux' = 'Augmentation de budget';
+  avenantType: 'Montant' | 'Délai' | 'Autre' = 'Montant';
+  avenantInitialMontant = '124500000';
+  avenantVariation = '';
+  avenantJustification = '';
   newAvenant: Partial<Avenant> = {
     idSoumissionAttribuee: '',
     idAvenant: '',
@@ -95,6 +98,19 @@ export class TransformationComponent {
   };
 
   closureMarket = '';
+
+  get parsedAvenantInitialMontant(): number {
+    return Number(this.avenantInitialMontant) || 0;
+  }
+
+  get computedAvenantMontant(): number {
+    const variation = Number(this.avenantVariation) || 0;
+    return this.parsedAvenantInitialMontant + variation;
+  }
+
+  get formattedComputedAvenantMontant(): string {
+    return new Intl.NumberFormat('fr-FR').format(this.computedAvenantMontant);
+  }
 
   constructor(public transformation: TransformationService) {}
 

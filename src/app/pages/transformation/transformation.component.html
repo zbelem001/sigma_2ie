@@ -2,10 +2,6 @@
 <app-header [breadcrumb]="['Accueil', 'Transformer BDD']" searchPlaceholder="Rechercher un dossier..."></app-header>
 <main class="ml-[240px] w-[calc(100%-240px)] pt-20 min-h-screen bg-surface px-6 pb-8">
   <div class="w-full">
-    <div class="mb-10">
-      <h1 class="text-heading-2 font-headline text-primary tracking-tight mb-2">Transformer BDD</h1>
-      <p class="text-on-surface-variant max-w-2xl">Module d'orchestration des données de passation des marchés. Choisissez une étape et complétez le formulaire correspondant.</p>
-    </div>
     <div class="mb-6 rounded-3xl bg-surface-container-low p-4 shadow-sm">
       <div class="text-xs uppercase tracking-[0.22em] text-slate-500 font-semibold mb-3">Étapes</div>
       <div class="flex flex-wrap gap-3">
@@ -147,26 +143,104 @@
         </section>
 
         <section *ngIf="activeStep==='soumission'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-6 border-b border-surface-container pb-4">
-            <h2 class="text-xl font-bold text-primary">Soumission</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Ajoutez une soumission après la consultation et l'ouverture du lot.</p>
-          </div>
-          <form class="grid gap-6" (ngSubmit)="submitSoumission()">
-            <select name="numbLotSoum" [(ngModel)]="newSoumission.numbLot" class="w-full rounded-lg border border-surface-container p-3 text-sm">
-              <option value="">Lot</option>
-              <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }}</option>
-            </select>
-            <input name="idFournisseurSoum" [(ngModel)]="newSoumission.idFournisseur" placeholder="Fournisseur" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input name="dateDepotSoum" type="date" [(ngModel)]="newSoumission.dateDepot" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="heureSoum" type="time" [(ngModel)]="newSoumission.heure" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
+          <div class="grid gap-8 lg:grid-cols-12">
+            <div class="col-span-12 lg:col-span-7">
+              <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+                <div>
+                  <h2 class="text-2xl font-bold text-primary">Saisir une soumission</h2>
+                  <p class="text-sm text-on-surface-variant mt-2">Formulaire d'enregistrement des offres reçues pour les lots du marché.</p>
+                </div>
+                <div class="bg-primary-container/10 border-l-4 border-primary p-4 rounded-r-lg shadow-sm bg-white max-w-md">
+                  <label class="block text-[0.75rem] font-bold text-primary uppercase tracking-[0.1em] mb-2">ID Soumission</label>
+                  <p class="text-sm font-medium text-on-surface">{{ newSoumission.numbLot && newSoumission.idFournisseur ? (newSoumission.numbLot + '_Fourn_' + newSoumission.idFournisseur) : '[Lot]_[Fournisseur]' }}</p>
+                </div>
+              </div>
+              <form class="space-y-8" (ngSubmit)="submitSoumission()">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Numéro de lot</label>
+                    <div class="relative">
+                      <select name="numbLotSoum" [(ngModel)]="newSoumission.numbLot" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all appearance-none">
+                        <option value="">Sélectionner un lot</option>
+                        <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }} - {{ lot.description }}</option>
+                      </select>
+                      <span class="material-symbols-outlined absolute right-4 top-3 text-slate-400">expand_more</span>
+                    </div>
+                    <p class="text-[0.75rem] text-slate-500">Lots disponibles après ouverture de réception.</p>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Fournisseur</label>
+                    <input name="idFournisseurSoum" [(ngModel)]="newSoumission.idFournisseur" required placeholder="ID du fournisseur" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
+                    <p class="text-[0.75rem] text-slate-500">Utilisez l'ID du fournisseur consulté (numérique ou code interne).</p>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Date de dépôt</label>
+                    <input name="dateDepotSoum" type="date" [(ngModel)]="newSoumission.dateDepot" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Heure</label>
+                    <input name="heureSoum" type="time" [(ngModel)]="newSoumission.heure" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Montant proposé</label>
+                    <input name="montantPrevSoum" [(ngModel)]="newSoumission.montantPrev" required placeholder="Montant proposé" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Délai d'exécution prévu</label>
+                    <input name="delaiExecSoum" [(ngModel)]="newSoumission.delaiExecutionPrev" required placeholder="Délai prévu" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Nombre d'exemplaires</label>
+                    <input name="nbExemplaireSoum" type="number" [(ngModel)]="newSoumission.nbExemplaire" min="1" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
+                  </div>
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">ID Soumission généré</label>
+                    <div class="h-12 flex items-center px-4 rounded-lg border border-surface-container bg-surface-container text-sm text-slate-500">
+                      {{ newSoumission.numbLot && newSoumission.idFournisseur ? (newSoumission.numbLot + '_Fourn_' + newSoumission.idFournisseur) : '-' }}
+                    </div>
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Observations</label>
+                  <textarea name="observationSoum" [(ngModel)]="newSoumission.observation" rows="4" placeholder="Saisissez les remarques ou conditions de l'offre" class="w-full rounded-lg border border-surface-container p-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all"></textarea>
+                </div>
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="text-sm text-slate-500">Un fournisseur ne peut déposer qu’une seule offre par lot.</div>
+                  <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white py-3 px-6 text-sm font-semibold hover:bg-primary-focus transition-all">Ajouter soumission</button>
+                </div>
+              </form>
             </div>
-            <input name="montantPrevSoum" [(ngModel)]="newSoumission.montantPrev" placeholder="Montant" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            <input name="delaiExecSoum" [(ngModel)]="newSoumission.delaiExecutionPrev" placeholder="Délai exécution prévu" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            <input name="nbExemplaireSoum" type="number" [(ngModel)]="newSoumission.nbExemplaire" min="1" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            <textarea name="observationSoum" [(ngModel)]="newSoumission.observation" rows="3" placeholder="Observation" class="w-full rounded-lg border border-surface-container p-3 text-sm"></textarea>
-            <button class="w-full rounded-lg bg-primary text-white py-3 text-sm font-semibold">Ajouter soumission</button>
-          </form>
+            <div class="col-span-12 lg:col-span-5 space-y-6">
+              <div class="bg-white rounded-xl border border-surface-container p-6 shadow-sm">
+                <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-slate-500 mb-4">Instructions rapides</h3>
+                <ul class="space-y-3 text-sm text-slate-600">
+                  <li class="flex gap-2"><span class="material-symbols-outlined text-primary">check_circle</span> Saisissez les dates et heures de dépôt avec précision.</li>
+                  <li class="flex gap-2"><span class="material-symbols-outlined text-primary">check_circle</span> Utilisez l’identifiant fournisseur existant du répertoire.</li>
+                  <li class="flex gap-2"><span class="material-symbols-outlined text-primary">check_circle</span> L’offre doit être unique par lot et fournisseur.</li>
+                </ul>
+              </div>
+              <div class="bg-surface-container-low rounded-xl border border-surface-container p-6">
+                <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-slate-500 mb-4">Statut du lot</h3>
+                <p class="text-sm text-slate-600 mb-4">Sélectionnez un lot ouvert à réception pour enregistrer des soumissions valides.</p>
+                <div class="grid gap-3">
+                  <div class="flex items-center gap-3 rounded-lg bg-primary/10 p-3 text-primary">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span class="text-sm font-medium">Lots disponibles : {{ lots.length }}</span>
+                  </div>
+                  <div class="flex items-center gap-3 rounded-lg bg-surface-container p-3 text-slate-600">
+                    <span class="material-symbols-outlined">visibility</span>
+                    <span class="text-sm">Soumissions existantes : {{ soumissions.length }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section *ngIf="activeStep==='analyse'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
@@ -266,30 +340,159 @@
             </form>
           </div>
         </section>
-        <section *ngIf="activeStep==='avenant'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-6 border-b border-surface-container pb-4">
-            <h2 class="text-xl font-bold text-primary">Ajouter un avenant</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Enregistrez une modification contractuelle pour le marché en cours.</p>
+        <section *ngIf="activeStep==='avenant'" class="grid grid-cols-12 gap-8">
+          <div class="col-span-12 lg:col-span-7">
+            <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm">
+              <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-white">
+                  <span class="material-symbols-outlined">history_edu</span>
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-primary">Créer un Avenant</h2>
+                  <p class="text-sm text-slate-500">Modification contractuelle officielle</p>
+                </div>
+              </div>
+              <form class="space-y-8" (ngSubmit)="submitAvenant()">
+                <div>
+                  <label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Nature de l'avenant</label>
+                  <div class="grid grid-cols-3 gap-4">
+                    <label class="cursor-pointer">
+                      <input class="hidden peer" type="radio" name="avenantType" value="Montant" [(ngModel)]="avenantType" />
+                      <div class="flex items-center justify-center gap-2 p-3 border-2 border-slate-100 rounded-lg peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                        <span class="material-symbols-outlined text-lg">payments</span>
+                        <span class="text-sm font-bold">Montant</span>
+                      </div>
+                    </label>
+                    <label class="cursor-pointer">
+                      <input class="hidden peer" type="radio" name="avenantType" value="Délai" [(ngModel)]="avenantType" />
+                      <div class="flex items-center justify-center gap-2 p-3 border-2 border-slate-100 rounded-lg peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                        <span class="material-symbols-outlined text-lg">calendar_today</span>
+                        <span class="text-sm font-bold">Délai</span>
+                      </div>
+                    </label>
+                    <label class="cursor-pointer">
+                      <input class="hidden peer" type="radio" name="avenantType" value="Autre" [(ngModel)]="avenantType" />
+                      <div class="flex items-center justify-center gap-2 p-3 border-2 border-slate-100 rounded-lg peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                        <span class="material-symbols-outlined text-lg">more_horiz</span>
+                        <span class="text-sm font-bold">Autre</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Montant initial (XOF)</label>
+                    <div class="h-10 flex items-center px-4 bg-surface-container-low rounded-sm font-bold text-slate-500">
+                      {{ formattedComputedAvenantMontant }}
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Augmentation / Diminution</label>
+                    <input name="avenantVariation" [(ngModel)]="avenantVariation" placeholder="+ 15,000,000" type="number" class="w-full h-10 px-4 bg-surface-container-low rounded-sm border-0 focus:ring-2 focus:ring-primary focus:bg-surface font-bold text-primary transition-all" />
+                  </div>
+                </div>
+                <div class="bg-blue-50/50 p-6 rounded-lg border border-blue-100">
+                  <label class="block text-[0.75rem] font-bold uppercase tracking-widest text-blue-800 mb-1">Nouveau montant calculé</label>
+                  <span class="text-3xl font-black text-primary tracking-tight">{{ formattedComputedAvenantMontant }} <span class="text-lg font-normal">XOF</span></span>
+                  <div class="mt-2 text-xs text-blue-600 font-medium">Variation de {{ avenantVariation || '+0' }} par rapport au contrat de base</div>
+                </div>
+                <div>
+                  <label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Justificatif de la modification</label>
+                  <textarea name="avenantJustification" [(ngModel)]="avenantJustification" class="w-full p-4 bg-surface-container-low rounded-sm border-0 focus:ring-2 focus:ring-primary focus:bg-surface transition-all" placeholder="Veuillez détailler les raisons techniques ou administratives justifiant cet avenant..." rows="4"></textarea>
+                </div>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                  <button type="button" class="px-6 h-10 rounded-md border-2 border-primary/20 text-primary font-bold hover:bg-primary/5 transition-all">Enregistrer brouillon</button>
+                  <button type="submit" class="px-8 h-10 rounded-md bg-primary text-white font-bold shadow-[0_4px_12px_rgba(26,63,111,0.2)] hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">send</span>
+                    Soumettre l'avenant
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          <form class="grid gap-6 lg:grid-cols-2" (ngSubmit)="submitAvenant()">
-            <select name="avenantMarket" [(ngModel)]="avenantMarket" (change)="newAvenant.idSoumissionAttribuee=''" required class="w-full rounded-lg border border-surface-container p-3 text-sm">
-              <option value="">Sélectionnez le marché</option>
-              <option *ngFor="let marche of markets" [value]="marche.numbMarche">{{ marche.numbMarche }} - {{ marche.description }}</option>
-            </select>
-            <select name="idSoumissionAttribuee" [(ngModel)]="newAvenant.idSoumissionAttribuee" required class="w-full rounded-lg border border-surface-container p-3 text-sm">
-              <option value="">Sélectionnez la soumission attribuée</option>
-              <option *ngFor="let soum of avenantSoumissions" [value]="soum.idSoumission">{{ soum.idSoumission }} - Lot {{ soum.numbLot }} - {{ soum.idFournisseur }}</option>
-            </select>
-            <select name="avenantType" [(ngModel)]="avenantType" class="w-full rounded-lg border border-surface-container p-3 text-sm">
-              <option value="Augmentation de budget">Augmentation de budget</option>
-              <option value="Prolongation de délai">Prolongation de délai</option>
-              <option value="Les deux">Les deux</option>
-            </select>
-            <input name="idAvenant" [(ngModel)]="newAvenant.idAvenant" placeholder="{{ nextAvenantId }}" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            <input name="montantAvenant" [(ngModel)]="newAvenant.montantAvenant" placeholder="Montant avenant" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            <input name="dateProrogation" type="date" [(ngModel)]="newAvenant.dateProrogation" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            <button type="submit" class="w-full lg:col-span-2 rounded-lg bg-primary text-white py-3 text-sm font-semibold">Ajouter avenant</button>
-          </form>
+          <div class="col-span-12 lg:col-span-5 space-y-8">
+            <div class="bg-[#1A3F6F] text-white p-6 rounded-xl shadow-lg relative overflow-hidden">
+              <div class="relative z-10">
+                <h3 class="text-[0.65rem] font-bold uppercase tracking-[0.2em] opacity-60 mb-4">Résumé contractuel</h3>
+                <div class="flex justify-between items-end">
+                  <div>
+                    <p class="text-3xl font-black mb-1">94.2%</p>
+                    <p class="text-xs opacity-80">Budget consommé</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-xl font-bold">Avenant N°3</p>
+                    <p class="text-xs opacity-80">En préparation</p>
+                  </div>
+                </div>
+                <div class="mt-6 w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-secondary-container h-full w-[94.2%]"></div>
+                </div>
+              </div>
+              <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+            </div>
+            <div class="bg-surface-container-low p-8 rounded-xl">
+              <h3 class="text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-8 flex items-center justify-between">
+                Historique des modifications
+                <span class="material-symbols-outlined text-lg">history</span>
+              </h3>
+              <div class="space-y-0 relative">
+                <div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-slate-200"></div>
+                <div class="relative pl-10 pb-10">
+                  <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-white border-2 border-primary flex items-center justify-center z-10">
+                    <span class="w-2 h-2 rounded-full bg-primary"></span>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1">
+                      <h4 class="font-bold text-sm">Avenant N°2 : Prolongation</h4>
+                      <span class="text-[10px] bg-white px-2 py-1 rounded-full border border-slate-100 font-bold uppercase text-slate-400">02 Sep 2023</span>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mb-3">Extension de délai de 45 jours suite aux intempéries majeures sur le site de construction de Ouagadougou.</p>
+                    <div class="flex gap-2">
+                      <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded uppercase">+45 Jours</span>
+                      <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded uppercase">Approuvé</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative pl-10 pb-10">
+                  <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center z-10">
+                    <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                  </div>
+                  <div>
+                    <div class="flex items-center justify-between mb-1">
+                      <h4 class="font-bold text-sm">Avenant N°1 : Révision de prix</h4>
+                      <span class="text-[10px] bg-white px-2 py-1 rounded-full border border-slate-100 font-bold uppercase text-slate-400">14 Juin 2023</span>
+                    </div>
+                    <p class="text-xs text-on-surface-variant mb-3">Réajustement lié à l'augmentation du coût des matières premières (acier et béton).</p>
+                    <div class="flex gap-2">
+                      <span class="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded uppercase">+8,200,000 XOF</span>
+                      <span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded uppercase">Approuvé</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="relative pl-10">
+                  <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center z-10">
+                    <span class="material-symbols-outlined text-[12px]">start</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-sm text-slate-400">Contrat de base</h4>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-tighter">Signé le 10 Janvier 2023</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
+              <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Pièces jointes obligatoires</h3>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg hover:bg-primary/5 transition-all cursor-pointer group">
+                  <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary-container">description</span>
+                    <span class="text-sm font-medium">Modèle_Avenant_2024.docx</span>
+                  </div>
+                  <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>
