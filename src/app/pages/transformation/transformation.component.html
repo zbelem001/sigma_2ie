@@ -47,41 +47,111 @@
 
         <div class="transformation-scroll-area max-h-[calc(100vh-14rem)] overflow-y-auto pr-2 space-y-8">
           <section *ngIf="activeStep==='ajouterMarche'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-6 border-b border-surface-container pb-4">
-            <h2 class="text-xl font-bold text-primary">Ajouter un marché</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Créez un nouveau marché avant d’ajouter des lots ou des consultations.</p>
-          </div>
-          <form class="grid gap-6" (ngSubmit)="submitMarche()">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <input name="numbMarche" [(ngModel)]="newMarche.numbMarche" required placeholder="Numéro marché" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="dateEnregistrement" type="date" [(ngModel)]="newMarche.dateEnregistrement" class="w-full rounded-lg border border-surface-container p-3 text-sm" placeholder="Date d'enregistrement" />
-              <input name="datePrevReception" type="date" [(ngModel)]="newMarche.datePrevReception" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            </div>
-            <textarea name="description" [(ngModel)]="newMarche.description" rows="3" placeholder="Description" class="w-full rounded-lg border border-surface-container p-3 text-sm"></textarea>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <input name="nombreLot" type="number" [(ngModel)]="newMarche.nombreLot" min="1" placeholder="Nombre de lots" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="natureOuverture" [(ngModel)]="newMarche.natureOuverture" placeholder="Nature ouverture" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <input name="financement" [(ngModel)]="newMarche.financement" placeholder="Financement" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="modePassation" [(ngModel)]="newMarche.modePassation" placeholder="Mode de passation" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              <input name="demandeur" [(ngModel)]="newMarche.demandeur" placeholder="Demandeur" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="responsableSuivi" [(ngModel)]="newMarche.responsableSuivi" placeholder="Responsable suivi" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input name="sctPerson1" [(ngModel)]="newMarche.sctPersons[0]" placeholder="SCT personne 1" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="sctPerson2" [(ngModel)]="newMarche.sctPersons[1]" placeholder="SCT personne 2" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="sctPerson3" [(ngModel)]="newMarche.sctPersons[2]" placeholder="SCT personne 3" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-              <input name="sctPerson4" [(ngModel)]="newMarche.sctPersons[3]" placeholder="SCT personne 4" class="w-full rounded-lg border border-surface-container p-3 text-sm" />
-            </div>
-            <button class="w-full rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white py-3 text-sm font-semibold">Créer marché</button>
-          </form>
-        </section>
-
-        <section *ngIf="activeStep==='ajouterLot'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="grid gap-8 lg:grid-cols-12">
+            <form class="grid gap-6" (ngSubmit)="submitMarche()">
+              <div class="grid gap-8 lg:grid-cols-12">
+                <div class="col-span-12 lg:col-span-4 space-y-8">
+                  <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-black/[0.02]">
+                    <div class="flex items-center gap-3 mb-6">
+                      <div class="h-8 w-1 bg-primary rounded-full"></div>
+                      <h3 class="text-sm font-black uppercase tracking-widest text-primary">Identité du marché</h3>
+                    </div>
+                    <div class="space-y-6">
+                      <div class="group">
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1" for="numbMarche">N° Marché <span class="text-error">*</span></label>
+                        <input id="numbMarche" name="numbMarche" [(ngModel)]="newMarche.numbMarche" required placeholder="M-2024-001" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                      <div class="group">
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1" for="description">Objet du marché <span class="text-error">*</span></label>
+                        <textarea id="description" name="description" [(ngModel)]="newMarche.description" rows="5" required placeholder="Décrivez l'objet du marché..." class="w-full rounded-lg border border-surface-container px-4 py-3 text-sm focus:ring-2 focus:ring-primary transition-all resize-none"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-surface-container-low p-8 rounded-xl border border-black/[0.01]">
+                    <div class="flex items-center gap-3 mb-6">
+                      <div class="h-8 w-1 bg-secondary rounded-full"></div>
+                      <h3 class="text-sm font-black uppercase tracking-widest text-primary">Cadre procédural</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2">Type d'ouverture</label>
+                        <select name="natureOuverture" [(ngModel)]="newMarche.natureOuverture" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all">
+                          <option value="">Sélectionner</option>
+                          <option value="Publique">Publique</option>
+                          <option value="Restreinte">Restreinte</option>
+                          <option value="Gré à gré">Gré à gré</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2">Mode de passation</label>
+                        <select name="modePassation" [(ngModel)]="newMarche.modePassation" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all">
+                          <option value="">Sélectionner</option>
+                          <option value="AOO">AOO</option>
+                          <option value="AOOR">AOOR</option>
+                          <option value="Demande de cotation">Demande de cotation</option>
+                        </select>
+                      </div>
+                      <div class="md:col-span-2">
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2">Source de financement</label>
+                        <input name="financement" [(ngModel)]="newMarche.financement" placeholder="Ex: Budget National, Banque Mondiale..." class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-12 lg:col-span-8 space-y-8">
+                  <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-black/[0.02]">
+                    <div class="flex items-center gap-3 mb-6">
+                      <div class="h-8 w-1 bg-secondary rounded-full"></div>
+                      <h3 class="text-sm font-black uppercase tracking-widest text-primary">Responsabilités & planning</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <div>
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2">Service demandeur</label>
+                        <input name="demandeur" [(ngModel)]="newMarche.demandeur" placeholder="Direction Régionale..." class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                      <div>
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2">Responsable du dossier</label>
+                        <input name="responsableSuivi" [(ngModel)]="newMarche.responsableSuivi" placeholder="Nom du responsable..." class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                      <div>
+                        <label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2">Date prévue réception</label>
+                        <input name="datePrevReception" type="date" [(ngModel)]="newMarche.datePrevReception" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-black/[0.02]">
+                    <div class="flex items-center gap-3 mb-6">
+                      <div class="h-8 w-1 bg-tertiary-fixed-dim rounded-full"></div>
+                      <h3 class="text-sm font-black uppercase tracking-widest text-primary">Comité Technique (SCT)</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      <div class="space-y-2">
+                        <label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 1</label>
+                        <input name="sctPerson1" [(ngModel)]="newMarche.sctPersons[0]" placeholder="Président" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                      <div class="space-y-2">
+                        <label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 2</label>
+                        <input name="sctPerson2" [(ngModel)]="newMarche.sctPersons[1]" placeholder="Nom complet" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                      <div class="space-y-2">
+                        <label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 3</label>
+                        <input name="sctPerson3" [(ngModel)]="newMarche.sctPersons[2]" placeholder="Nom complet" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                      <div class="space-y-2">
+                        <label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 4</label>
+                        <input name="sctPerson4" [(ngModel)]="newMarche.sctPersons[3]" placeholder="Nom complet" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-between gap-4 py-8 border-t border-slate-200">
+                    <button type="reset" class="px-8 py-3 rounded-lg text-secondary border border-secondary/20 hover:bg-secondary/5 transition-all">Réinitialiser</button>
+                    <button type="submit" class="px-10 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-sm transition-all">Créer le dossier</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </section>
+          <section *ngIf="activeStep==='ajouterLot'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+            <div class="grid gap-8 lg:grid-cols-12">
             <div class="col-span-12 lg:col-span-8">
               <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-8">
                 <div>
