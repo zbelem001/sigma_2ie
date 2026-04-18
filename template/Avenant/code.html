@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdcc0",
+                        "inverse-on-surface": "#eff1f4",
+                        "surface-container-highest": "#e0e3e6",
+                        "surface-dim": "#d8dadd",
+                        "on-secondary-fixed": "#001b3d",
+                        "on-primary-container": "#8babe2",
+                        "on-tertiary-container": "#dd9d61",
+                        "on-secondary-fixed-variant": "#144685",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e3e6",
+                        "on-secondary-container": "#154785",
+                        "surface-container": "#eceef1",
+                        "surface": "#f7f9fc",
+                        "secondary-container": "#8fb7fd",
+                        "on-surface": "#191c1e",
+                        "secondary": "#335e9e",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#a8c8ff",
+                        "on-surface-variant": "#43474f",
+                        "on-tertiary-fixed-variant": "#693c06",
+                        "inverse-surface": "#2d3133",
+                        "inverse-primary": "#a8c8ff",
+                        "primary": "#002954",
+                        "outline": "#737780",
+                        "primary-container": "#1a3f6f",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#3e5f91",
+                        "surface-bright": "#f7f9fc",
+                        "outline-variant": "#c3c6d0",
+                        "secondary-fixed": "#d6e3ff",
+                        "background": "#f7f9fc",
+                        "tertiary": "#412100",
+                        "on-tertiary-fixed": "#2d1600",
+                        "on-primary-fixed-variant": "#244778",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#d5e3ff",
+                        "tertiary-container": "#603400",
+                        "surface-container-high": "#e6e8eb",
+                        "on-primary-fixed": "#001b3c",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#fdb87a",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f2f4f7",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-pill-shadow {
+            box-shadow: 0px 12px 32px rgba(26, 63, 111, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-8 py-3 font-['Inter'] antialiased tracking-tight">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tighter text-blue-900 dark:text-blue-100">The Sovereign Archive</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors duration-200 ease-in-out" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors duration-200 ease-in-out" href="#">Tenders</a>
+<a class="text-blue-700 dark:text-blue-300 border-b-2 border-blue-700 dark:border-blue-300 pb-1 hover:text-blue-800 dark:hover:text-blue-200 transition-colors duration-200 ease-in-out" href="#">Contracts</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-blue-800 dark:hover:text-blue-200 transition-colors duration-200 ease-in-out" href="#">Compliance</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-blue-900"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-2 text-slate-500 hover:text-blue-900"><span class="material-symbols-outlined">settings</span></button>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full border border-slate-200" data-alt="professional headshot of a senior administrator in a formal suit with a neutral office background, soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN0ozt4kA5yuCKoPWbT8DPRtjoNwH_n6ZaFYSP_E0rWXTMdU6x6a-xoQ7EmH1Aofg9WqVHjk8pONJwXTQczSmQ7hTv5-APh4LMSrZNAJ5eRh8IVXSOGGJSY2UgQLK_VgVkDSlO40zmErax5vaSEmRVsVXGp3-NW2tR1LnLcNdgr_n9pliLzV7dNfBrif4NDBy6VJETd3JRqb8NgZDEb7CaJgjUYWezGZoiVzfXIB9pF-WPYIc0WNU0JFyLrJ68zZLX3HkxIq2hb1k"/>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#1A3F6F] dark:bg-slate-950 flex flex-col p-4 gap-2 shadow-xl z-40 bg-gradient-to-br from-[#1A3F6F] to-[#1E4D8C] text-white font-['Inter'] font-medium text-sm pt-20">
+<div class="mb-6 px-2">
+<h2 class="text-xs uppercase tracking-widest opacity-60 mb-1">Orchestration</h2>
+<p class="text-lg font-bold">Management Cycle</p>
+</div>
+<nav class="flex-grow space-y-1">
+<a class="flex items-center gap-3 p-3 text-slate-300 opacity-80 hover:bg-white/5 transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">edit_note</span> Drafting
+            </a>
+<a class="flex items-center gap-3 p-3 text-slate-300 opacity-80 hover:bg-white/5 transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">visibility</span> Review
+            </a>
+<a class="flex items-center gap-3 p-3 text-slate-300 opacity-80 hover:bg-white/5 transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">public</span> Publication
+            </a>
+<a class="flex items-center gap-3 p-3 text-slate-300 opacity-80 hover:bg-white/5 transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">fact_check</span> Selection
+            </a>
+<!-- Active State for Awarding/Contract Phase -->
+<a class="flex items-center gap-3 p-3 bg-white/10 backdrop-blur-md rounded-lg shadow-[inset_0_px_1px_rgba(255,255,255,0.1)] transition-all scale-95 active:scale-100" href="#">
+<span class="material-symbols-outlined">verified</span> Awarding
+            </a>
+</nav>
+<button class="mt-4 w-full bg-white text-[#1A3F6F] py-2.5 rounded-lg font-bold shadow-lg hover:bg-slate-100 transition-colors">
+            New Procedure
+        </button>
+<div class="mt-auto border-t border-white/10 pt-4 space-y-1">
+<a class="flex items-center gap-3 p-3 text-slate-300 opacity-80 hover:bg-white/5 transition-all" href="#"><span class="material-symbols-outlined">help_outline</span> Help Center</a>
+<a class="flex items-center gap-3 p-3 text-slate-300 opacity-80 hover:bg-white/5 transition-all" href="#"><span class="material-symbols-outlined">inventory_2</span> Archive</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<!-- Header Section -->
+<div class="flex justify-between items-start mb-10">
+<div>
+<nav class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500 mb-2">
+<span>Marchés</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span>2iE-2024-C042</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary">Phase de Suivi &amp; Modification</span>
+</nav>
+<h1 class="text-[2.75rem] font-black tracking-tight leading-none text-on-surface mb-2">Gestion des Avenants</h1>
+<p class="text-on-surface-variant max-w-2xl">Ajustez les paramètres financiers et temporels du contrat en vigueur par la création d'avenants certifiés.</p>
+</div>
+<div class="flex flex-col items-end gap-3">
+<div class="flex items-center gap-2 px-4 py-2 bg-green-100 text-[#1E7A4E] rounded-full text-xs font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Statut: En cours
+                </div>
+<span class="text-[0.65rem] text-slate-400 font-bold uppercase tracking-widest">Dernière mise à jour: 12 Oct. 2023</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<!-- Left: Avenant Form (Creation) -->
+<div class="col-span-12 lg:col-span-7">
+<div class="bg-surface-container-lowest p-8 rounded-xl active-pill-shadow">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div>
+<h2 class="text-xl font-bold text-primary">Créer un Avenant</h2>
+<p class="text-sm text-slate-500">Modification contractuelle officielle</p>
+</div>
+</div>
+<form class="space-y-8">
+<div>
+<label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Nature de l'avenant</label>
+<div class="grid grid-cols-3 gap-4">
+<label class="cursor-pointer">
+<input checked="" class="hidden peer" name="nature" type="radio"/>
+<div class="flex items-center justify-center gap-2 p-3 border-2 border-slate-100 rounded-lg peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-lg">payments</span>
+<span class="text-sm font-bold">Montant</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="nature" type="radio"/>
+<div class="flex items-center justify-center gap-2 p-3 border-2 border-slate-100 rounded-lg peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span class="text-sm font-bold">Délai</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="nature" type="radio"/>
+<div class="flex items-center justify-center gap-2 p-3 border-2 border-slate-100 rounded-lg peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+<span class="text-sm font-bold">Autre</span>
+</div>
+</label>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div>
+<label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Montant Initial (XOF)</label>
+<div class="h-10 flex items-center px-4 bg-surface-container-low rounded-sm font-bold text-slate-500">
+                                    124,500,000
+                                </div>
+</div>
+<div>
+<label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Augmentation / Diminution</label>
+<input class="w-full h-10 px-4 bg-surface-container-low rounded-sm border-0 focus:ring-2 focus:ring-primary focus:bg-surface font-bold text-primary transition-all" placeholder="+ 15,000,000" type="number"/>
+</div>
+</div>
+<div class="bg-blue-50/50 p-6 rounded-lg border border-blue-100">
+<label class="block text-[0.75rem] font-bold uppercase tracking-widest text-blue-800 mb-1">Nouveau Montant Calculé</label>
+<span class="text-3xl font-black text-primary tracking-tight">139,500,000 <span class="text-lg font-normal">XOF</span></span>
+<div class="mt-2 text-xs text-blue-600 font-medium">Variation de +12.05% par rapport au contrat de base</div>
+</div>
+<div>
+<label class="block text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-2">Justificatif de la modification</label>
+<textarea class="w-full p-4 bg-surface-container-low rounded-sm border-0 focus:ring-2 focus:ring-primary focus:bg-surface transition-all" placeholder="Veuillez détailler les raisons techniques ou administratives justifiant cet avenant..." rows="4"></textarea>
+</div>
+<div class="pt-4 border-t border-slate-100 flex justify-end gap-4">
+<button class="px-6 h-10 rounded-md border-2 border-primary/20 text-primary font-bold hover:bg-primary/5 transition-all" type="button">Enregistrer Brouillon</button>
+<button class="px-8 h-10 rounded-md bg-primary text-white font-bold shadow-[0_4px_12px_rgba(26,63,111,0.2)] hover:scale-[1.02] transition-transform flex items-center gap-2" type="submit">
+<span class="material-symbols-outlined text-sm">send</span>
+                                Soumettre l'Avenant
+                            </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Right Side: Timeline & Status info -->
+<div class="col-span-12 lg:col-span-5 space-y-8">
+<!-- Status Context Check (Warning) -->
+<!-- Note: In this simulation, the status is 'En cours', but we show how the UI would behave if it were not -->
+<div class="hidden bg-red-50 border-l-4 border-error p-6 rounded-r-xl">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-error">warning</span>
+<div>
+<h3 class="font-bold text-error">Accès Restreint</h3>
+<p class="text-sm text-red-700 leading-relaxed">Les modifications contractuelles ne sont autorisées que pour les marchés avec le statut <strong>'En cours'</strong>. Ce marché est actuellement en phase d'<strong>Analyse</strong>.</p>
+</div>
+</div>
+</div>
+<!-- Financial Health Card -->
+<div class="bg-[#1A3F6F] text-white p-6 rounded-xl shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<h3 class="text-[0.65rem] font-bold uppercase tracking-[0.2em] opacity-60 mb-4">Résumé Contractuel</h3>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-3xl font-black mb-1">94.2%</p>
+<p class="text-xs opacity-80">Budget consommé</p>
+</div>
+<div class="text-right">
+<p class="text-xl font-bold">Avenant N°3</p>
+<p class="text-xs opacity-80">En préparation</p>
+</div>
+</div>
+<div class="mt-6 w-full bg-white/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full w-[94.2%]"></div>
+</div>
+</div>
+<!-- Decorative background glow -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+</div>
+<!-- Timeline of changes -->
+<div class="bg-surface-container-low p-8 rounded-xl">
+<h3 class="text-[0.75rem] font-bold uppercase tracking-widest text-slate-500 mb-8 flex items-center justify-between">
+                        Historique des Modifications
+                        <span class="material-symbols-outlined text-lg">history</span>
+</h3>
+<div class="space-y-0 relative">
+<!-- Vertical line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-slate-200"></div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-10 pb-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-white border-2 border-primary flex items-center justify-center z-10">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-bold text-sm">Avenant N°2 : Prolongation</h4>
+<span class="text-[10px] bg-white px-2 py-1 rounded-full border border-slate-100 font-bold uppercase text-slate-400">02 Sep 2023</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Extension de délai de 45 jours suite aux intempéries majeures sur le site de construction de Ouagadougou.</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded uppercase">+45 Jours</span>
+<span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded uppercase">Approuvé</span>
+</div>
+</div>
+</div>
+<!-- Timeline Item 1 -->
+<div class="relative pl-10 pb-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center z-10">
+<span class="w-2 h-2 rounded-full bg-slate-300"></span>
+</div>
+<div>
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-bold text-sm">Avenant N°1 : Révision de prix</h4>
+<span class="text-[10px] bg-white px-2 py-1 rounded-full border border-slate-100 font-bold uppercase text-slate-400">14 Juin 2023</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-3">Réajustement lié à l'augmentation du coût des matières premières (acier et béton).</p>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded uppercase">+8,200,000 XOF</span>
+<span class="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded uppercase">Approuvé</span>
+</div>
+</div>
+</div>
+<!-- Initial Contract -->
+<div class="relative pl-10">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[12px]">start</span>
+</div>
+<div>
+<h4 class="font-bold text-sm text-slate-400">Contrat de base</h4>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Signé le 10 Janvier 2023</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Document section -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-100">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Pièces Jointes Obligatoires</h3>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg hover:bg-primary/5 transition-all cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">description</span>
+<span class="text-sm font-medium">Modèle_Avenant_2024.docx</span>
+</div>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-lg hover:bg-primary/5 transition-all cursor-pointer group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container">file_present</span>
+<span class="text-sm font-medium">Note_Technique_Justificative.pdf</span>
+</div>
+<span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">download</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB Suppression Rule Applied (Task-focused modification screen) -->
+<!-- Navigation shell rules followed (Sidebar active, TopNavBar present) -->
+</body></html>

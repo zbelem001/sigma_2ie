@@ -42,6 +42,7 @@ export class TransformationComponent {
   consultationFournisseurs = '';
 
   receptionMarket = '';
+  receptionPV = false;
   pvLot = '';
 
   newSoumission: Partial<Soumission> = {
@@ -55,7 +56,9 @@ export class TransformationComponent {
     observation: ''
   };
 
+  analyseMarket = '';
   analyseInput: Partial<Analyse> = { numbLot: '', idAttributairePrev: '', dateEffecReception: '', datePresentationRapport: '', observation: '' };
+  analyseRanks: Record<string, number | null> = {};
   rapportLot = '';
 
   docValidation: { numbLot: string; notification: boolean; contrat: boolean; fed: boolean; bonCommande: boolean; ordreService: boolean; liasseContractuelle: boolean } = {
@@ -68,16 +71,22 @@ export class TransformationComponent {
     liasseContractuelle: false
   };
 
-  attributionInput: Partial<Attributaire> = {
+  attributionInput: Partial<Attributaire> & { contratConfirmed?: boolean; fedConfirmed?: boolean; bonCommandeConfirmed?: boolean } = {
     idSoumissionAttribuee: '',
     montantEffec: '',
     delaiExecutionEffec: '',
     dateDemarage: '',
-    datePrevFin: ''
+    datePrevFin: '',
+    contratConfirmed: false,
+    fedConfirmed: false,
+    bonCommandeConfirmed: false
   };
 
   executionMarket = '';
 
+  showAvenantModal = false;
+  avenantMarket = '';
+  avenantType: 'Augmentation de budget' | 'Prolongation de délai' | 'Les deux' = 'Augmentation de budget';
   newAvenant: Partial<Avenant> = {
     idSoumissionAttribuee: '',
     idAvenant: '',
@@ -160,8 +169,20 @@ export class TransformationComponent {
     this.clearMessage();
     try {
       this.transformation.openReception(this.receptionMarket);
-      this.message = `Réception ouverte pour le marché ${this.receptionMarket}.`;
+      if (this.receptionPV) {
+        this.lots
+          .filter((lot) => lot.numbMarche === this.receptionMarket)
+          .forEach((lot) => {
+            try {
+              this.transformation.validatePV(lot.numbLot);
+            } catch {
+              // ignore individual validation failures
+            }
+          });
+      }
+      this.message = `Marché ${this.receptionMarket} placé en réception${this.receptionPV ? ' et PV d\'ouverture validé' : ''}.`;
       this.receptionMarket = '';
+      this.receptionPV = false;
     } catch (error) {
       this.message = (error as Error).message;
     }
@@ -210,9 +231,31 @@ export class TransformationComponent {
       });
       this.message = `Analyse enregistrée pour le lot ${this.analyseInput.numbLot}.`;
       this.analyseInput = { numbLot: '', idAttributairePrev: '', dateEffecReception: '', datePresentationRapport: '', observation: '' };
+      this.analyseMarket = '';
+      this.analyseRanks = {};
     } catch (error) {
       this.message = (error as Error).message;
     }
+  }
+
+  onAnalyseMarketChange() {
+    this.analyseInput.numbLot = '';
+    this.analyseInput.idAttributairePrev = '';
+    this.analyseRanks = {};
+  }
+
+  onAnalyseLotChange() {
+    const soumissions = this.soumissionsForAnalyseLot;
+    this.analyseRanks = {};
+    soumissions.forEach((soumission) => {
+      this.analyseRanks[soumission.idSoumission] = this.analyseInput.idAttributairePrev === soumission.idSoumission ? 1 : null;
+    });
+  }
+
+  onAnalyseAttributaireChange() {
+    Object.keys(this.analyseRanks).forEach((id) => {
+      this.analyseRanks[id] = id === this.analyseInput.idAttributairePrev ? 1 : this.analyseRanks[id];
+    });
   }
 
   submitRapportAnalyse() {
@@ -248,16 +291,25 @@ export class TransformationComponent {
   submitAttribution() {
     this.clearMessage();
     try {
-      this.transformation.recordAttribution({
+      const attribution: Attributaire = {
         idSoumissionAttribuee: this.attributionInput.idSoumissionAttribuee || '',
         montantEffec: this.attributionInput.montantEffec || '',
         delaiExecutionEffec: this.attributionInput.delaiExecutionEffec || '',
         dateDemarage: this.attributionInput.dateDemarage || '',
         datePrevFin: this.attributionInput.datePrevFin || '',
         statut: 'En cours'
-      });
+      };
+      this.transformation.recordAttribution(attribution);
+      const soumission = this.soumissions.find((item) => item.idSoumission === this.attributionInput.idSoumissionAttribuee);
+      if (soumission) {
+        this.transformation.validateDocuments(soumission.numbLot, {
+          contrat: this.attributionInput.contratConfirmed ? 'Oui' : 'Non',
+          fed: this.attributionInput.fedConfirmed ? 'Oui' : 'Non',
+          bonCommande: this.attributionInput.bonCommandeConfirmed ? 'Oui' : 'Non'
+        });
+      }
       this.message = `Attribution enregistrée pour la soumission ${this.attributionInput.idSoumissionAttribuee}.`;
-      this.attributionInput = { idSoumissionAttribuee: '', montantEffec: '', delaiExecutionEffec: '', dateDemarage: '', datePrevFin: '' };
+      this.attributionInput = { idSoumissionAttribuee: '', montantEffec: '', delaiExecutionEffec: '', dateDemarage: '', datePrevFin: '', contratConfirmed: false, fedConfirmed: false, bonCommandeConfirmed: false };
     } catch (error) {
       this.message = (error as Error).message;
     }
@@ -304,12 +356,12 @@ export class TransformationComponent {
   launchAnalysePhase() {
     this.clearMessage();
     try {
-      if (!this.receptionMarket) {
+      if (!this.analyseMarket) {
         throw new Error('Sélectionnez d’abord un marché pour lancer l’analyse.');
       }
-      this.transformation.launchAnalyse(this.receptionMarket);
-      this.message = `Analyse lancée pour le marché ${this.receptionMarket}.`;
-      this.receptionMarket = '';
+      this.transformation.launchAnalyse(this.analyseMarket);
+      this.message = `Analyse lancée pour le marché ${this.analyseMarket}.`;
+      this.analyseMarket = '';
     } catch (error) {
       this.message = (error as Error).message;
     }
@@ -345,5 +397,28 @@ export class TransformationComponent {
 
   get avenants() {
     return this.transformation.avenantList;
+  }
+
+  get analyseLots() {
+    return this.lots.filter((lot) => lot.numbMarche === this.analyseMarket);
+  }
+
+  get soumissionsForAnalyseLot() {
+    return this.soumissions.filter((soumission) => soumission.numbLot === this.analyseInput.numbLot);
+  }
+
+  get inProgressMarkets() {
+    return this.markets.filter((marche) => marche.statut === 'En cours');
+  }
+
+  get avenantSoumissions() {
+    return this.soumissions.filter((soumission) =>
+      this.lots.some((lot) => lot.numbMarche === this.avenantMarket && lot.numbLot === soumission.numbLot)
+    );
+  }
+
+  get nextAvenantId() {
+    const count = this.avenants.length + 1;
+    return `Avenant ${count}`;
   }
 }
