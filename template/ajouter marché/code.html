@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sovereign Archive - Ajouter un Marché</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#335e9e",
+                        "on-primary-container": "#8babe2",
+                        "surface-bright": "#f7f9fc",
+                        "on-secondary-fixed-variant": "#144685",
+                        "on-secondary-fixed": "#001b3d",
+                        "secondary-container": "#8fb7fd",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#a8c8ff",
+                        "surface": "#f7f9fc",
+                        "on-background": "#191c1e",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffdcc0",
+                        "tertiary-fixed-dim": "#fdb87a",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fc",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#412100",
+                        "on-tertiary-fixed": "#2d1600",
+                        "inverse-on-surface": "#eff1f4",
+                        "surface-variant": "#e0e3e6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#43474f",
+                        "on-tertiary-fixed-variant": "#693c06",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#603400",
+                        "surface-container-low": "#f2f4f7",
+                        "secondary-fixed": "#d6e3ff",
+                        "surface-container-highest": "#e0e3e6",
+                        "primary-container": "#1a3f6f",
+                        "surface-container": "#eceef1",
+                        "primary": "#002954",
+                        "on-secondary-container": "#154785",
+                        "primary-fixed-dim": "#a8c8ff",
+                        "primary-fixed": "#d5e3ff",
+                        "outline-variant": "#c3c6d0",
+                        "on-primary-fixed-variant": "#244778",
+                        "surface-tint": "#3e5f91",
+                        "on-primary-fixed": "#001b3c",
+                        "surface-container-high": "#e6e8eb",
+                        "on-surface": "#191c1e",
+                        "outline": "#737780",
+                        "inverse-surface": "#2d3133",
+                        "surface-dim": "#d8dadd",
+                        "on-tertiary-container": "#dd9d61",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="h-full font-body text-on-surface overflow-hidden">
+<div class="flex h-full">
+<!-- Sidebar Navigation -->
+<aside class="flex flex-col h-full overflow-y-auto bg-[#1A3F6F] dark:bg-slate-900 docked left-0 h-screen w-64 shadow-2xl shadow-[#1A3F6F]/20 transition-all duration-200 ease-in-out bg-gradient-to-br from-[#1A3F6F] to-[#1E4D8C]">
+<div class="px-6 py-8">
+<h1 class="text-xl font-bold tracking-tight text-white mb-1">Sovereign Archive</h1>
+<p class="text-white/60 text-xs font-medium uppercase tracking-widest">Gestion des Marchés Publics</p>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg flex items-center justify-center gap-2 font-semibold transition-all duration-200 active:scale-95 shadow-lg shadow-black/10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span>Nouveau Marché</span>
+</button>
+</div>
+<nav class="flex-1 px-3 space-y-1">
+<!-- Initialisation is active for 'Add Market' context -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 backdrop-blur-md border-r-4 border-white font-semibold text-white transition-all duration-200" href="#">
+<span class="material-symbols-outlined">start</span>
+<span class="text-sm tracking-wide">Initialisation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-sm tracking-wide">Consultation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="text-sm tracking-wide">Offres</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm tracking-wide">Attribution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="text-sm tracking-wide">Exécution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm tracking-wide">Suivi Budgétaire</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="text-sm tracking-wide">Modifications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="text-sm tracking-wide">Réception</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="text-sm tracking-wide">Litiges</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">lock</span>
+<span class="text-sm tracking-wide">Clôture</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm tracking-wide">Archivage</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm tracking-wide">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto p-4 border-t border-white/5 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm tracking-wide">Configuration</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/5 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-sm tracking-wide">Aide</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden bg-surface">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-8 py-4 w-full sticky top-0 z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl transition-all duration-150">
+<div class="flex items-center gap-8">
+<span class="text-lg font-black text-[#1A3F6F] dark:text-white">Module Transformer BDD</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-500 hover:text-[#1A3F6F] dark:text-slate-400 font-['Inter'] text-sm font-medium uppercase tracking-wider" href="#">Tableau de bord</a>
+<a class="text-[#1A3F6F] border-b-2 border-[#1A3F6F] pb-1 font-['Inter'] text-sm font-medium uppercase tracking-wider" href="#">Registres</a>
+<a class="text-slate-500 hover:text-[#1A3F6F] dark:text-slate-400 font-['Inter'] text-sm font-medium uppercase tracking-wider" href="#">Statistiques</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200">
+<div class="text-right hidden lg:block">
+<p class="text-xs font-bold text-[#1A3F6F]">Expert Marchés</p>
+<p class="text-[10px] text-slate-400">ADMINISTRATEUR</p>
+</div>
+<img alt="Avatar Expert Marchés" class="h-10 w-10 rounded-full object-cover ring-2 ring-[#1A3F6F]/10" data-alt="professional portrait of a confident middle-aged man with short hair and business attire in a brightly lit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6lWdSNJ8pqlketN7e9DwRv1yIJq88EA5eaJnHfo3lwmNrfx9NMLdguxWTHzcoBFKiiH3ZfCvcXwaWUB6bt6dusKypvaX0SipbA-sacYTHQnxINYP8OcYrv8BHq8tamHXbuLTPxfmXwNu8u4L26xTnYtne4xM79Sf73P1z1NqkX0VXfXpljmq-Zi9oHkvTjBGCH4hCawcHsAtwoSoxxYFBLOtjqUZLOmzq19GC_2qLMHZH2hmmGESMKf84IyHCO5bScPCNxApuCsA"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-8 lg:p-12">
+<div class="max-w-5xl mx-auto">
+<!-- Page Header & Metadata -->
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="text-xs font-bold text-secondary uppercase tracking-[0.2em] block mb-2">Initialisation de dossier</span>
+<h2 class="text-4xl font-extrabold text-[#191C1E] tracking-tight">Ajouter un marché</h2>
+</div>
+<div class="flex flex-col items-end gap-3">
+<span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-bold bg-error-container text-error uppercase tracking-wider">
+                                Statut : À lancer
+                            </span>
+<p class="text-xs text-slate-500 font-medium italic">Enregistré par : <span class="text-[#1A3F6F]">User_Archive_04</span></p>
+</div>
+</div>
+<!-- Main Form Grid -->
+<form class="grid grid-cols-12 gap-8">
+<!-- Section 1: Identité -->
+<section class="col-span-12 lg:col-span-4 space-y-8">
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-black/[0.02]">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-8 w-1 bg-primary rounded-full"></div>
+<h3 class="text-sm font-black uppercase tracking-widest text-[#1A3F6F]">Identité du Marché</h3>
+</div>
+<div class="space-y-6">
+<div class="group">
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1" for="numbMarche">
+                                            N° Marché <span class="text-error">*</span>
+</label>
+<input class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container focus:bg-white text-sm transition-all duration-150" id="numbMarche" name="numbMarche" placeholder="M-2024-001" required="" type="text"/>
+</div>
+<div class="group">
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1" for="Description">
+                                            Objet du Marché <span class="text-error">*</span>
+</label>
+<textarea class="w-full px-4 py-3 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container focus:bg-white text-sm transition-all duration-150 resize-none" id="Description" name="Description" placeholder="Décrivez l'objet principal de cette passation..." required="" rows="6"></textarea>
+</div>
+</div>
+</div>
+<div class="bg-primary-container text-white p-8 rounded-xl relative overflow-hidden group">
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-white/5 text-9xl transform -rotate-12 group-hover:scale-110 transition-transform duration-500">description</span>
+<h4 class="text-sm font-bold uppercase tracking-widest mb-4">Documentation</h4>
+<p class="text-xs text-white/70 leading-relaxed mb-6">Tous les fichiers joints seront automatiquement indexés et archivés selon les protocoles Sovereign.</p>
+<button class="w-full py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-md text-xs font-bold tracking-widest uppercase transition-all" type="button">
+                                    Consulter les guides
+                                </button>
+</div>
+</section>
+<!-- Section 2 & 3: Procédure & Responsabilités -->
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<!-- Procedural Framework -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-black/[0.02]">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-8 w-1 bg-secondary rounded-full"></div>
+<h3 class="text-sm font-black uppercase tracking-widest text-[#1A3F6F]">Cadre Procédural</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+<div>
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Type d'Ouverture</label>
+<select class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container focus:bg-white text-sm transition-all" name="NatureOuverture">
+<option>Publique</option>
+<option>Restreinte</option>
+<option>Gré à gré</option>
+</select>
+</div>
+<div>
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Mode de Passation</label>
+<select class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container focus:bg-white text-sm transition-all" name="ModePassation">
+<option>AOO</option>
+<option>AOOR</option>
+<option>Demande de cotation</option>
+</select>
+</div>
+<div class="md:col-span-2">
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Source de Financement</label>
+<input class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container focus:bg-white text-sm transition-all" name="Financement" placeholder="Ex: Budget National, Banque Mondiale..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Responsibilities -->
+<div class="bg-surface-container-low p-8 rounded-xl border border-black/[0.01]">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-8 w-1 bg-on-secondary-container rounded-full"></div>
+<h3 class="text-sm font-black uppercase tracking-widest text-[#1A3F6F]">Responsabilités &amp; Planning</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div>
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Service Demandeur</label>
+<input class="w-full h-10 px-4 rounded bg-white border-none focus:ring-2 focus:ring-primary-container text-sm transition-all" name="Demandeur" placeholder="Direction Régionale..." type="text"/>
+</div>
+<div>
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Responsable du Dossier</label>
+<input class="w-full h-10 px-4 rounded bg-white border-none focus:ring-2 focus:ring-primary-container text-sm transition-all" name="ResponsableSuivi" placeholder="Nom du responsable..." type="text"/>
+</div>
+<div>
+<label class="block text-[0.75rem] font-bold text-slate-500 uppercase tracking-wider mb-2 ml-1">Date Prévue Réception</label>
+<input class="w-full h-10 px-4 rounded bg-white border-none focus:ring-2 focus:ring-primary-container text-sm transition-all" name="DatePrevReception" type="date"/>
+</div>
+</div>
+</div>
+<!-- Committee -->
+<div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-black/[0.02]">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-8 w-1 bg-tertiary-fixed-dim rounded-full"></div>
+<h3 class="text-sm font-black uppercase tracking-widest text-[#1A3F6F]">Comité Technique (SCT)</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="space-y-2">
+<label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 1 <span class="text-error">*</span></label>
+<input class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container text-sm transition-all" name="SCT_person1" placeholder="Président" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 2</label>
+<input class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container text-sm transition-all" name="SCT_person2" placeholder="Nom complet" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 3</label>
+<input class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container text-sm transition-all" name="SCT_person3" placeholder="Nom complet" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-[0.65rem] font-extrabold text-slate-400 uppercase tracking-widest">Membre 4</label>
+<input class="w-full h-10 px-4 rounded bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container text-sm transition-all" name="SCT_person4" placeholder="Nom complet" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="col-span-12 flex items-center justify-between py-12 border-t border-slate-200 mt-8">
+<button class="flex items-center gap-2 px-6 py-2 text-slate-500 hover:text-primary font-bold text-sm transition-colors group" type="button">
+<span class="material-symbols-outlined transition-transform group-hover:-translate-x-1">arrow_back</span>
+                                Retour au registre
+                            </button>
+<div class="flex items-center gap-4">
+<button class="px-8 py-3 rounded-lg text-[#1A3F6F] font-bold text-sm hover:bg-slate-100 transition-colors" type="reset">
+                                    Réinitialiser
+                                </button>
+<button class="px-10 py-3 bg-[#1A3F6F] text-white rounded-lg font-bold text-sm hover:shadow-xl hover:shadow-[#1A3F6F]/30 transition-all active:scale-95 flex items-center gap-3" type="submit">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
+                                    Créer le dossier
+                                </button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</main>
+</div>
+<!-- Notification Overlay (Subtle Toast) -->
+<div class="fixed bottom-8 right-8 z-[100] animate-bounce-in">
+<div class="glass-panel px-6 py-4 rounded-xl shadow-2xl border border-white/50 flex items-center gap-4">
+<div class="h-10 w-10 bg-[#1A3F6F] rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">info</span>
+</div>
+<div>
+<p class="text-sm font-black text-[#1A3F6F]">Auto-sauvegarde active</p>
+<p class="text-[10px] text-slate-500 font-medium">Brouillon mis à jour il y a 2 minutes</p>
+</div>
+</div>
+</div>
+</body></html>
