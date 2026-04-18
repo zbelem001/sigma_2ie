@@ -47,10 +47,6 @@
 
         <div class="transformation-scroll-area max-h-[calc(100vh-14rem)] overflow-y-auto pr-2 space-y-8">
           <section *ngIf="activeStep==='ajouterMarche'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-8">
-            <h2 class="text-2xl font-bold text-primary">Ajouter un marché</h2>
-            <p class="text-sm text-on-surface-variant mt-2">Enregistrez le dossier du marché et définissez les principales données de passation.</p>
-          </div>
           <form class="grid gap-8 lg:grid-cols-12" (ngSubmit)="submitMarche()">
             <section class="col-span-12 lg:col-span-4 space-y-8">
               <div class="bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-black/[0.02]">
@@ -152,17 +148,13 @@
                 </div>
               </div>
               <div class="flex items-center justify-between gap-4 py-8 border-t border-slate-200">
-                <button type="reset" class="px-8 py-3 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 transition-all">Réinitialiser</button>
-                <button type="submit" class="px-10 py-3 bg-[#7B42BC] hover:bg-[#6836a3] text-white rounded-lg font-bold text-sm transition-all">Créer le dossier</button>
+                <button type="reset" class="px-8 py-3 rounded-lg border border-amber-400 text-amber-700 hover:bg-amber-200 transition-all">Réinitialiser</button>
+                <button type="submit" class="px-10 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-sm transition-all">Créer le dossier</button>
               </div>
             </div>
           </form>
         </section>
           <section *ngIf="activeStep==='ajouterLot'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-            <div class="mb-8">
-              <h2 class="text-2xl font-bold text-primary">Ajouter un lot</h2>
-              <p class="text-sm text-on-surface-variant mt-2">Configuration technique de la structure du marché parent.</p>
-            </div>
             <form class="space-y-8" (ngSubmit)="submitLot()">
               <div class="space-y-4">
                 <label class="text-[0.75rem] font-bold uppercase tracking-[0.05em] text-slate-500">Sélection du Marché Parent</label>
@@ -200,8 +192,8 @@
                 <textarea name="descriptionLot" [(ngModel)]="newLot.description" rows="4" placeholder="Décrivez les spécificités techniques et les livrables attendus pour ce lot..." class="w-full p-4 rounded-lg border border-surface-container bg-white text-sm focus:ring-2 focus:ring-primary transition-all resize-none"></textarea>
               </div>
               <div class="pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <button type="button" class="px-6 py-3 border border-primary text-primary text-sm font-semibold uppercase rounded-lg hover:bg-primary/5 transition-all" (click)="newLot = { numbMarche: '', numbLot: '', description: '', numbContrat: '' }">Annuler</button>
-                <button type="submit" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-[#7B42BC] hover:bg-[#6836a3] text-white text-sm font-bold uppercase rounded-lg shadow-md shadow-[#7B42BC]/20 transition-all">
+                <button type="button" class="px-6 py-3 border border-primary text-primary text-sm font-semibold uppercase rounded-lg hover:bg-amber-200 transition-all" (click)="newLot = { numbMarche: '', numbLot: '', description: '', numbContrat: '' }">Annuler</button>
+                <button type="submit" class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold uppercase rounded-lg shadow-md shadow-emerald-500/20 transition-all">
                   <span class="material-symbols-outlined">add</span>
                   Ajouter le lot
                 </button>
@@ -210,10 +202,6 @@
           </section>
 
         <section *ngIf="activeStep==='consultation'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-6 border-b border-surface-container pb-4">
-            <h2 class="text-xl font-bold text-primary">Enregistrer une consultation</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Renseignez les fournisseurs consultés pour un lot donné.</p>
-          </div>
           <form class="grid gap-6" (ngSubmit)="submitConsultation()">
             <select name="numbLotConsult" [(ngModel)]="newConsultation.numbLot" required class="w-full rounded-lg border border-surface-container p-3 text-sm">
               <option value="">Lot concerné</option>
@@ -226,10 +214,6 @@
         </section>
 
         <section *ngIf="activeStep==='reception'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-6 border-b border-surface-container pb-4">
-            <h2 class="text-xl font-bold text-primary">Réception</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Ouvrez la réception d’un marché, puis validez le PV d’ouverture d’un lot.</p>
-          </div>
           <div class="grid gap-6 lg:grid-cols-2">
             <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitReception()">
               <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Ouvrir réception de marché</h3>
@@ -255,80 +239,124 @@
         </section>
 
         <section *ngIf="activeStep==='soumission'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="grid gap-8 lg:grid-cols-12">
-            <div class="col-span-12 lg:col-span-7">
-              <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-                <div>
-                  <h2 class="text-2xl font-bold text-primary">Saisir une soumission</h2>
-                  <p class="text-sm text-on-surface-variant mt-2">Formulaire d'enregistrement des offres reçues pour les lots du marché.</p>
-                </div>
-                <div class="bg-primary-container/10 border-l-4 border-primary p-4 rounded-r-lg shadow-sm bg-white max-w-md">
-                  <label class="block text-[0.75rem] font-bold text-primary uppercase tracking-[0.1em] mb-2">ID Soumission</label>
-                  <p class="text-sm font-medium text-on-surface">{{ newSoumission.numbLot && newSoumission.idFournisseur ? (newSoumission.numbLot + '_Fourn_' + newSoumission.idFournisseur) : '[Lot]_[Fournisseur]' }}</p>
-                </div>
+          <div class="mb-8">
+            <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 class="text-2xl font-bold text-primary">Saisir une soumission</h2>
+                <p class="text-sm text-on-surface-variant mt-2 max-w-2xl">Formulaire d'enregistrement des offres reçues pour les différents lots du marché. Assurez-vous de la conformité des dates de dépôt.</p>
               </div>
+              <div class="bg-primary-container/10 border-l-4 border-primary p-4 rounded-lg max-w-xs">
+                <label class="block text-[0.75rem] font-bold text-primary uppercase tracking-[0.05em] mb-1">ID Soumission</label>
+                <p class="text-sm font-medium text-on-surface">{{ newSoumission.numbLot && newSoumission.idFournisseur ? (newSoumission.numbLot + '_Fourn_' + newSoumission.idFournisseur) : '[Lot]_[Fournisseur]' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid gap-8 xl:grid-cols-12">
+            <div class="col-span-12 xl:col-span-7 space-y-8">
               <form class="space-y-8" (ngSubmit)="submitSoumission()">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Numéro de lot</label>
-                    <div class="relative">
-                      <select name="numbLotSoum" [(ngModel)]="newSoumission.numbLot" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all appearance-none">
-                        <option value="">Sélectionner un lot</option>
-                        <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }} - {{ lot.description }}</option>
-                      </select>
-                      <span class="material-symbols-outlined absolute right-4 top-3 text-slate-400">expand_more</span>
+                <div class="rounded-xl bg-white border border-surface-container p-8 shadow-sm">
+                  <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+                      <span class="material-symbols-outlined">fingerprint</span>
+                    </span>
+                    <h3 class="text-lg font-bold text-primary">Identification</h3>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                      <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Numéro de lot</label>
+                      <div class="relative">
+                        <select name="numbLotSoum" [(ngModel)]="newSoumission.numbLot" required class="w-full h-12 rounded-lg border border-surface-container bg-surface-container-low px-4 text-sm focus:ring-2 focus:ring-primary transition-all appearance-none">
+                          <option value="">Sélectionner un lot</option>
+                          <option *ngFor="let lot of lots" [value]="lot.numbLot">{{ lot.numbLot }} - {{ lot.description }}</option>
+                        </select>
+                        <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">expand_more</span>
+                      </div>
+                      <p class="text-[0.75rem] text-slate-500 italic flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">info</span>Lots filtrés sur statut Réception</p>
                     </div>
-                    <p class="text-[0.75rem] text-slate-500">Lots disponibles après ouverture de réception.</p>
-                  </div>
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Fournisseur</label>
-                    <input name="idFournisseurSoum" [(ngModel)]="newSoumission.idFournisseur" required placeholder="ID du fournisseur" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
-                    <p class="text-[0.75rem] text-slate-500">Utilisez l'ID du fournisseur consulté (numérique ou code interne).</p>
-                  </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Date de dépôt</label>
-                    <input name="dateDepotSoum" type="date" [(ngModel)]="newSoumission.dateDepot" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
-                  </div>
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Heure</label>
-                    <input name="heureSoum" type="time" [(ngModel)]="newSoumission.heure" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
-                  </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Montant proposé</label>
-                    <input name="montantPrevSoum" [(ngModel)]="newSoumission.montantPrev" required placeholder="Montant proposé" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
-                  </div>
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Délai d'exécution prévu</label>
-                    <input name="delaiExecSoum" [(ngModel)]="newSoumission.delaiExecutionPrev" required placeholder="Délai prévu" class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
-                  </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Nombre d'exemplaires</label>
-                    <input name="nbExemplaireSoum" type="number" [(ngModel)]="newSoumission.nbExemplaire" min="1" required class="w-full h-12 rounded-lg border border-surface-container px-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all" />
-                  </div>
-                  <div class="space-y-2">
-                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">ID Soumission généré</label>
-                    <div class="h-12 flex items-center px-4 rounded-lg border border-surface-container bg-surface-container text-sm text-slate-500">
-                      {{ newSoumission.numbLot && newSoumission.idFournisseur ? (newSoumission.numbLot + '_Fourn_' + newSoumission.idFournisseur) : '-' }}
+                    <div class="space-y-2">
+                      <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Fournisseur</label>
+                      <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                        <input name="idFournisseurSoum" [(ngModel)]="newSoumission.idFournisseur" required placeholder="ID du fournisseur" class="w-full h-12 rounded-lg border border-surface-container bg-surface-container-low pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                      <p class="text-[0.75rem] text-slate-500 italic flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">group_work</span>Fournisseurs consultés uniquement</p>
                     </div>
                   </div>
                 </div>
-                <div class="space-y-2">
-                  <label class="block text-[0.75rem] font-bold uppercase tracking-[0.08em] text-slate-500">Observations</label>
-                  <textarea name="observationSoum" [(ngModel)]="newSoumission.observation" rows="4" placeholder="Saisissez les remarques ou conditions de l'offre" class="w-full rounded-lg border border-surface-container p-4 text-sm bg-white focus:ring-2 focus:ring-primary transition-all"></textarea>
+
+                <div class="rounded-xl bg-white border border-surface-container p-8 shadow-sm">
+                  <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+                      <span class="material-symbols-outlined">event_available</span>
+                    </span>
+                    <h3 class="text-lg font-bold text-primary">Détails du dépôt</h3>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                      <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Date de dépôt</label>
+                      <input name="dateDepotSoum" type="date" [(ngModel)]="newSoumission.dateDepot" required class="w-full h-12 rounded-lg border border-surface-container bg-surface-container-low px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                    </div>
+                    <div class="space-y-2">
+                      <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Heure</label>
+                      <input name="heureSoum" type="time" [(ngModel)]="newSoumission.heure" required class="w-full h-12 rounded-lg border border-surface-container bg-surface-container-low px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                    </div>
+                  </div>
                 </div>
-                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div class="text-sm text-slate-500">Un fournisseur ne peut déposer qu’une seule offre par lot.</div>
-                  <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-6 text-sm font-semibold transition-all">Ajouter soumission</button>
+
+                <div class="bg-surface-container-low/30 rounded-xl border border-white/50 px-8 py-8">
+                  <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+                      <span class="material-symbols-outlined">payments</span>
+                    </span>
+                    <h3 class="text-lg font-bold text-primary">Données de l'offre</h3>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-2">
+                      <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Montant Proposé (FCFA)</label>
+                      <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-primary-container font-bold text-xs">FCFA</span>
+                        <input name="montantPrevSoum" [(ngModel)]="newSoumission.montantPrev" required type="number" placeholder="0" class="w-full h-12 rounded-lg border border-surface-container bg-white pl-14 pr-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Délai d'Exécution (jours)</label>
+                      <div class="relative">
+                        <input name="delaiExecSoum" [(ngModel)]="newSoumission.delaiExecutionPrev" required type="number" placeholder="30" class="w-full h-12 rounded-lg border border-surface-container bg-white px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                        <span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">jours</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Nombre d'Exemplaires</label>
+                      <input name="nbExemplaireSoum" type="number" [(ngModel)]="newSoumission.nbExemplaire" min="1" required class="w-full h-12 rounded-lg border border-surface-container bg-white px-4 text-sm focus:ring-2 focus:ring-primary transition-all" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rounded-xl bg-white border border-surface-container p-8 shadow-sm">
+                  <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+                      <span class="material-symbols-outlined">notes</span>
+                    </span>
+                    <h3 class="text-lg font-bold text-primary">Observations</h3>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="block text-[0.75rem] font-bold uppercase tracking-[0.05em] text-on-surface-variant">Notes &amp; détails complémentaires</label>
+                    <textarea name="observationSoum" [(ngModel)]="newSoumission.observation" rows="4" placeholder="Saisir vos notes ici..." class="w-full rounded-lg border border-surface-container bg-white p-4 text-sm focus:ring-2 focus:ring-primary transition-all"></textarea>
+                  </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-8 border-t border-surface-container">
+                  <button type="button" class="px-6 py-3 rounded-lg border border-amber-400 text-amber-700 hover:bg-amber-200 transition-all" (click)="newSoumission = { numbLot:'', idFournisseur:'', dateDepot:'', heure:'', montantPrev:'', delaiExecutionPrev:'', nbExemplaire:1, observation:'' }">Annuler</button>
+                  <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 text-white px-8 py-3 font-semibold transition-all hover:bg-emerald-700">
+                    <span class="material-symbols-outlined">send</span>
+                    Ajouter la soumission
+                  </button>
                 </div>
               </form>
             </div>
-            <div class="col-span-12 lg:col-span-5 space-y-6">
+
+            <aside class="col-span-12 xl:col-span-5 space-y-6">
               <div class="bg-white rounded-xl border border-surface-container p-6 shadow-sm">
                 <h3 class="text-sm font-bold uppercase tracking-[0.18em] text-slate-500 mb-4">Instructions rapides</h3>
                 <ul class="space-y-3 text-sm text-slate-600">
@@ -351,15 +379,11 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         </section>
 
         <section *ngIf="activeStep==='analyse'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-6 border-b border-surface-container pb-4">
-            <h2 class="text-xl font-bold text-primary">Analyse</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Lancez l’analyse du marché, enregistrez le résultat, puis validez les documents.</p>
-          </div>
           <div class="grid gap-6 xl:grid-cols-3">
             <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="launchAnalysePhase()">
               <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Lancer l'analyse</h3>
@@ -412,10 +436,6 @@
         </section>
 
         <section *ngIf="activeStep==='attribution'" class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
-          <div class="mb-6 border-b border-surface-container pb-4">
-            <h2 class="text-xl font-bold text-primary">Attribution & exécution</h2>
-            <p class="text-sm text-on-surface-variant mt-1">Attribuez la soumission gagnante et gérez l'exécution puis la clôture du marché.</p>
-          </div>
           <div class="grid gap-6 xl:grid-cols-3">
             <form class="space-y-4 rounded-xl border border-surface-container p-4" (ngSubmit)="submitAttribution()">
               <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-500">Attribuer</h3>
